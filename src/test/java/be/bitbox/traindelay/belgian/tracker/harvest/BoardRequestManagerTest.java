@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.belgian.tracker.BelgianTrainDelayTracker;
+package be.bitbox.traindelay.belgian.tracker.harvest;
 
+import be.bitbox.traindelay.belgian.tracker.Board;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class BelgianTrainDelayTrackerApplicationTests {
+import static be.bitbox.traindelay.belgian.tracker.station.StationId.aStationId;
+import static org.junit.Assert.*;
 
-	@Test
-	public void contextLoads() {
-	}
+public class BoardRequestManagerTest {
 
+    @Test
+    public void name() throws Exception {
+        BoardRequestManager requestManager = new BoardRequestManager();
+        Board board = requestManager.requestBoard(aStationId("BE.NMBS.008892106"));
+        assertNull(board);
+    }
 }

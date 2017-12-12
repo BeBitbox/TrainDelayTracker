@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.belgian.tracker.BelgianTrainDelayTracker;
+package be.bitbox.traindelay.belgian.tracker.harvest;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+public class BoardHarvester {
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class BelgianTrainDelayTrackerApplicationTests {
+    private final BoardRequestManager boardRequestManager;
 
-	@Test
-	public void contextLoads() {
-	}
+    public BoardHarvester(BoardRequestManager boardRequestManager) {
+        this.boardRequestManager = boardRequestManager;
+    }
+
+
 
 }
