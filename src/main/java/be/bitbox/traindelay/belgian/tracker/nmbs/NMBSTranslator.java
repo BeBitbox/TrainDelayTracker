@@ -17,31 +17,70 @@ package be.bitbox.traindelay.belgian.tracker.nmbs;
 
 import be.bitbox.traindelay.belgian.tracker.Board;
 import be.bitbox.traindelay.belgian.tracker.BoardTranslationException;
+import be.bitbox.traindelay.belgian.tracker.TrainDeparture;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
 import org.springframework.util.StringUtils;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.temporal.TemporalAccessor;
-import java.util.Calendar;
-import java.util.Date;
 
 import static be.bitbox.traindelay.belgian.tracker.Board.aBoardForStation;
+import static be.bitbox.traindelay.belgian.tracker.TrainDeparture.aTrainDeparture;
 import static be.bitbox.traindelay.belgian.tracker.station.StationId.aStationId;
 import static org.springframework.util.StringUtils.isEmpty;
 
 public class NMBSTranslator {
 
     private static final ZoneId ZONE_ID = ZoneId.of("Europe/Paris");
+    private static final String UNKNOWN_VEHICULE = "UNKNOWN";
+    private static final String UNKNOWN_PLATFORM = "?";
 
-    Board translateFrom(LiveBoard liveBoard) {
+    Board translateToDateFrom(LiveBoard liveBoard) {
         if (liveBoard == null) {
             throw new BoardTranslationException("The liveboard can not be null!" );
         }
         StationId stationId = retrieveStationId(liveBoard.getStationinfo());
-        LocalDateTime localDateTime = Instant.ofEpochMilli(liveBoard.getTimestamp() * 1000).atZone(ZONE_ID).toLocalDateTime();
-        return aBoardForStation(stationId, localDateTime);
+        LocalDateTime localDateTime = translateToDateFrom(liveBoard.getTimestamp());
+        Board board = aBoardForStation(stationId, localDateTime);
+        addDeparturesIfPresent(board, liveBoard.getDepartures());
+        return board;
+    }
+
+    private void addDeparturesIfPresent(Board board, Departures departures) {
+        if (departures == null || departures.getDeparture() ==  null) {
+            return;
+        }
+        departures.getDeparture().forEach(departure -> board.addDeparture(translateFrom(departure)));
+    }
+
+    private TrainDeparture translateFrom(Departure departure) {
+        LocalDateTime time = translateToDateFrom(departure.getTime());
+        boolean canceled = departure.getCanceled() != 0;
+        String vehicule = getVehiculeFrom(departure.getVehiculeinfo());
+        Platforminfo platforminfo = departure.getPlatforminfo();
+        return aTrainDeparture(time, departure.getDelay(), canceled, vehicule, getPlatform(platforminfo), getPlatformNormal(platforminfo));
+    }
+
+    private String getVehiculeFrom(Vehiculeinfo vehiculeinfo) {
+        if (vehiculeinfo == null || StringUtils.isEmpty(vehiculeinfo.getName())) {
+            return UNKNOWN_VEHICULE;
+        }
+        return vehiculeinfo.getName();
+    }
+
+    private String getPlatform(Platforminfo platforminfo) {
+        if (platforminfo == null || StringUtils.isEmpty(platforminfo.getName())) {
+            return UNKNOWN_PLATFORM;
+        }
+        return platforminfo.getName();
+    }
+
+    private boolean getPlatformNormal(Platforminfo platforminfo) {
+        if (platforminfo == null) {
+            return false;
+        }
+        return platforminfo.getNormal() != 0;
     }
 
     private StationId retrieveStationId(Stationinfo stationinfo) {
@@ -52,4 +91,7 @@ public class NMBSTranslator {
         return aStationId(stationinfo.getId());
     }
 
+    private LocalDateTime translateToDateFrom(long timestamp) {
+        return Instant.ofEpochMilli(timestamp * 1000).atZone(ZONE_ID).toLocalDateTime();
+    }
 }

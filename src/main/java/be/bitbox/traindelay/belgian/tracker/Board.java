@@ -48,4 +48,37 @@ public class Board {
     public List<TrainDeparture> getDepartures() {
         return departures;
     }
+
+    public void addDeparture(TrainDeparture trainDeparture) {
+        departures.add(trainDeparture);
+    }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "stationId=" + stationId +
+                ", time=" + time +
+                ", departures=" + departures +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Board board = (Board) o;
+
+        if (!stationId.equals(board.stationId)) return false;
+        if (!time.equals(board.time)) return false;
+        return departures.equals(board.departures);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = stationId.hashCode();
+        result = 31 * result + time.hashCode();
+        result = 31 * result + departures.hashCode();
+        return result;
+    }
 }

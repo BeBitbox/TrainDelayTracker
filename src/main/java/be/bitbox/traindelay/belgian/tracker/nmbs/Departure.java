@@ -17,8 +17,6 @@ package be.bitbox.traindelay.belgian.tracker.nmbs;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Date;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Departure {
     private int id;
@@ -26,7 +24,8 @@ public class Departure {
     private int canceled;
     private int left;
     private Platforminfo platforminfo;
-    private Date time;
+    private Vehiculeinfo vehiculeinfo;
+    private long time;
 
     public Platforminfo getPlatforminfo() {
         return platforminfo;
@@ -68,12 +67,20 @@ public class Departure {
         this.left = left;
     }
 
-    public Date getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(long time) {
         this.time = time;
+    }
+
+    public Vehiculeinfo getVehiculeinfo() {
+        return vehiculeinfo;
+    }
+
+    public void setVehiculeinfo(Vehiculeinfo vehiculeinfo) {
+        this.vehiculeinfo = vehiculeinfo;
     }
 
     @Override
@@ -84,6 +91,7 @@ public class Departure {
                 ", canceled=" + canceled +
                 ", left=" + left +
                 ", platforminfo=" + platforminfo +
+                ", vehiculeinfo=" + vehiculeinfo +
                 ", time=" + time +
                 '}';
     }

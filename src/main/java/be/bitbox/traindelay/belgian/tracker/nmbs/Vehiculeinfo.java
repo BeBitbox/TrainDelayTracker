@@ -18,10 +18,9 @@ package be.bitbox.traindelay.belgian.tracker.nmbs;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Platforminfo {
-
+public class
+Vehiculeinfo {
     private String name;
-    private int normal;
 
     public String getName() {
         return name;
@@ -31,19 +30,10 @@ public class Platforminfo {
         this.name = name;
     }
 
-    public int getNormal() {
-        return normal;
-    }
-
-    public void setNormal(int normal) {
-        this.normal = normal;
-    }
-
     @Override
     public String toString() {
-        return "Platforminfo{" +
-                "name=" + name +
-                ", normal=" + normal +
+        return "Vehiculeinfo{" +
+                "name='" + name + '\'' +
                 '}';
     }
 }

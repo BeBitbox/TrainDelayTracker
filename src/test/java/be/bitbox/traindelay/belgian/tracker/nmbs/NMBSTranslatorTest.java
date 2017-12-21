@@ -25,7 +25,10 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+import static be.bitbox.traindelay.belgian.tracker.Board.aBoardForStation;
+import static be.bitbox.traindelay.belgian.tracker.TrainDeparture.aTrainDeparture;
 import static be.bitbox.traindelay.belgian.tracker.station.StationId.aStationId;
+import static java.time.Month.DECEMBER;
 import static java.time.Month.SEPTEMBER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -34,22 +37,24 @@ public class NMBSTranslatorTest {
 
     private static final String STATION_ID = "BE.NMBS.008892106";
     private NMBSTranslator nmbsTranslator = new NMBSTranslator();
+    public static final String VEHICULE = "BE.NMBS.IC3016";
+    public static final String PLATFORM = "4";
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromNull_ShouldThrowExceptions() {
-        nmbsTranslator.translateFrom(null);
+        nmbsTranslator.translateToDateFrom(null);
     }
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromEmptyBoard_ShouldThrowExceptions() {
-        nmbsTranslator.translateFrom(new LiveBoard());
+        nmbsTranslator.translateToDateFrom(new LiveBoard());
     }
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromBoardWithEmptyStationID_ShouldThrowExceptions() {
         LiveBoard liveBoard = new LiveBoard();
         liveBoard.setStationinfo(new Stationinfo());
-        nmbsTranslator.translateFrom(liveBoard);
+        nmbsTranslator.translateToDateFrom(liveBoard);
     }
 
     @Test
@@ -60,12 +65,12 @@ public class NMBSTranslatorTest {
         liveBoard.setStationinfo(stationinfo);
         liveBoard.setTimestamp(1220227200L);
 
-        Board board = nmbsTranslator.translateFrom(liveBoard);
+        Board board = nmbsTranslator.translateToDateFrom(liveBoard);
 
         StationId expectedStationId = aStationId(STATION_ID);
         LocalDateTime expectedTime = LocalDateTime.of(2008, SEPTEMBER, 1, 2, 0, 0);
-        assertThat(board.getTime(), is(expectedTime));
-        assertThat(board.getStationId(), is(expectedStationId));
+        Board expectedBoard = aBoardForStation(expectedStationId, expectedTime);
+        assertThat(board, is(expectedBoard));
     }
 
     @Test
@@ -77,16 +82,25 @@ public class NMBSTranslatorTest {
         Departures departures = new Departures();
         Departure departure = new Departure();
         departure.setCanceled(1);
-        departure.setDelay(220);
+        departure.setDelay(60);
+        departure.setTime(1513703280L);
+        Platforminfo platforminfo = new Platforminfo();
+        platforminfo.setNormal(0);
+        platforminfo.setName(PLATFORM);
+        departure.setPlatforminfo(platforminfo);
+        Vehiculeinfo vehiculeInfo = new Vehiculeinfo();
+        vehiculeInfo.setName(VEHICULE);
+        departure.setVehiculeinfo(vehiculeInfo);
         departures.setDeparture(Collections.singletonList(departure));
         liveBoard.setDepartures(departures);
 
-        Board board = nmbsTranslator.translateFrom(liveBoard);
+        Board board = nmbsTranslator.translateToDateFrom(liveBoard);
 
         List<TrainDeparture> trainDepartures = board.getDepartures();
         assertThat(trainDepartures.size(), is(1));
-        TrainDeparture expectedTrainDeparture = null;
+        LocalDateTime expectedTime = LocalDateTime.of(2017, DECEMBER, 19, 18, 8, 0);
+        int expectedDelay = 60;
+        TrainDeparture expectedTrainDeparture = aTrainDeparture(expectedTime, expectedDelay, true, VEHICULE, PLATFORM, false);
         assertThat(trainDepartures.get(0), is(expectedTrainDeparture));
     }
-
 }
