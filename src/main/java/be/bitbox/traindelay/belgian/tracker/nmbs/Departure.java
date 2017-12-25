@@ -24,7 +24,7 @@ public class Departure {
     private int canceled;
     private int left;
     private Platforminfo platforminfo;
-    private Vehiculeinfo vehiculeinfo;
+    private String vehicle;
     private long time;
 
     public Platforminfo getPlatforminfo() {
@@ -75,12 +75,12 @@ public class Departure {
         this.time = time;
     }
 
-    public Vehiculeinfo getVehiculeinfo() {
-        return vehiculeinfo;
+    public String getVehicle() {
+        return vehicle;
     }
 
-    public void setVehiculeinfo(Vehiculeinfo vehiculeinfo) {
-        this.vehiculeinfo = vehiculeinfo;
+    public void setVehicle(String vehicle) {
+        this.vehicle = vehicle;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class Departure {
                 ", canceled=" + canceled +
                 ", left=" + left +
                 ", platforminfo=" + platforminfo +
-                ", vehiculeinfo=" + vehiculeinfo +
+                ", vehicle='" + vehicle + '\'' +
                 ", time=" + time +
                 '}';
     }

@@ -36,7 +36,7 @@ public class NMBSTranslator {
     private static final String UNKNOWN_VEHICULE = "UNKNOWN";
     private static final String UNKNOWN_PLATFORM = "?";
 
-    Board translateToDateFrom(LiveBoard liveBoard) {
+    public Board translateFrom(LiveBoard liveBoard) {
         if (liveBoard == null) {
             throw new BoardTranslationException("The liveboard can not be null!" );
         }
@@ -57,16 +57,16 @@ public class NMBSTranslator {
     private TrainDeparture translateFrom(Departure departure) {
         LocalDateTime time = translateToDateFrom(departure.getTime());
         boolean canceled = departure.getCanceled() != 0;
-        String vehicule = getVehiculeFrom(departure.getVehiculeinfo());
+        String vehicule = getVehiculeFrom(departure.getVehicle());
         Platforminfo platforminfo = departure.getPlatforminfo();
-        return aTrainDeparture(time, departure.getDelay(), canceled, vehicule, getPlatform(platforminfo), getPlatformNormal(platforminfo));
+        return aTrainDeparture(time, departure.getDelay(), canceled, vehicule, getPlatform(platforminfo), getPlatformChanged(platforminfo));
     }
 
-    private String getVehiculeFrom(Vehiculeinfo vehiculeinfo) {
-        if (vehiculeinfo == null || StringUtils.isEmpty(vehiculeinfo.getName())) {
+    private String getVehiculeFrom(String vehicule) {
+        if (StringUtils.isEmpty(vehicule)) {
             return UNKNOWN_VEHICULE;
         }
-        return vehiculeinfo.getName();
+        return vehicule;
     }
 
     private String getPlatform(Platforminfo platforminfo) {
@@ -76,11 +76,11 @@ public class NMBSTranslator {
         return platforminfo.getName();
     }
 
-    private boolean getPlatformNormal(Platforminfo platforminfo) {
+    private boolean getPlatformChanged(Platforminfo platforminfo) {
         if (platforminfo == null) {
-            return false;
+            return true;
         }
-        return platforminfo.getNormal() != 0;
+        return platforminfo.getNormal() != 1;
     }
 
     private StationId retrieveStationId(Stationinfo stationinfo) {

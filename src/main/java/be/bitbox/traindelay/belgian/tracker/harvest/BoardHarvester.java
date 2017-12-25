@@ -15,12 +15,14 @@
  */
 package be.bitbox.traindelay.belgian.tracker.harvest;
 
+import be.bitbox.traindelay.belgian.tracker.nmbs.NMBSBoardRequester;
+
 public class BoardHarvester {
 
-    private final BoardRequestManager boardRequestManager;
+    private final NMBSBoardRequester NMBSBoardRequester;
 
-    public BoardHarvester(BoardRequestManager boardRequestManager) {
-        this.boardRequestManager = boardRequestManager;
+    public BoardHarvester(NMBSBoardRequester NMBSBoardRequester) {
+        this.NMBSBoardRequester = NMBSBoardRequester;
     }
 
 
