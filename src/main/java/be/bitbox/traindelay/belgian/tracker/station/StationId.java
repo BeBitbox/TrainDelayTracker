@@ -1,8 +1,6 @@
 package be.bitbox.traindelay.belgian.tracker.station;
 
-import org.springframework.util.StringUtils;
-
-import static org.springframework.util.StringUtils.isEmpty;
+import static be.bitbox.traindelay.belgian.tracker.ValidationUtils.checkNotEmpty;
 
 public class StationId {
 
@@ -13,9 +11,7 @@ public class StationId {
     }
 
     public static StationId aStationId(String id) {
-        if (isEmpty(id)) {
-            throw new IllegalArgumentException("Id cannot be null!");
-        }
+        checkNotEmpty(id ,"Id cannot be null!");
         return new StationId(id);
     }
 
@@ -36,5 +32,12 @@ public class StationId {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "StationId{" +
+                "id='" + id + '\'' +
+                '}';
     }
 }

@@ -128,17 +128,16 @@ public class NMBSTranslatorTest {
         TrainDeparture trainDeparture3 = aTrainDeparture(expectedTime3, 240, false, "BE.NMBS.S23688", "17", false);
         assertThat(board.getDepartures().get(2), is(trainDeparture3));
 
-        LocalDateTime expectedTime4 = LocalDateTime.of(2017, DECEMBER, 22, 17, 35, 0);
-        TrainDeparture trainDeparture4 = aTrainDeparture(expectedTime4, 120, false, "BE.NMBS.IC438", "9", false);
+        LocalDateTime expectedTime4 = LocalDateTime.of(2017, DECEMBER, 22, 17, 38, 0);
+        TrainDeparture trainDeparture4 = aTrainDeparture(expectedTime4, 720, false, "BE.NMBS.IC2340", "14", false);
         assertThat(board.getDepartures().get(3), is(trainDeparture4));
 
         LocalDateTime expectedTime5 = LocalDateTime.of(2017, DECEMBER, 22, 17, 38, 0);
-        TrainDeparture trainDeparture5 = aTrainDeparture(expectedTime5, 720, false, "BE.NMBS.IC2340", "14", false);
+        TrainDeparture trainDeparture5 = aTrainDeparture(expectedTime5, 180, false, "BE.NMBS.P8803", "18", true);
         assertThat(board.getDepartures().get(4), is(trainDeparture5));
 
-
-        LocalDateTime expectedTime6 = LocalDateTime.of(2017, DECEMBER, 22, 17, 38, 0);
-        TrainDeparture trainDeparture6 = aTrainDeparture(expectedTime6, 180, false, "BE.NMBS.P8803", "18", true);
-        assertThat(board.getDepartures().get(5), is(trainDeparture5));
+        LocalDateTime expectedTime6 = LocalDateTime.of(2017, DECEMBER, 22, 17, 39, 0);
+        TrainDeparture trainDeparture6 = aTrainDeparture(expectedTime6, 60, false, "BE.NMBS.IC1716", "16", false);
+        assertThat(board.getDepartures().get(5), is(trainDeparture6));
     }
 }

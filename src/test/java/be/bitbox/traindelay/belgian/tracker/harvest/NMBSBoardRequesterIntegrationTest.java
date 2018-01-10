@@ -18,22 +18,21 @@ package be.bitbox.traindelay.belgian.tracker.harvest;
 import be.bitbox.traindelay.belgian.tracker.Board;
 import be.bitbox.traindelay.belgian.tracker.nmbs.NMBSBoardRequester;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matcher;
 import org.junit.Test;
+import org.springframework.web.client.ResourceAccessException;
 
 import static be.bitbox.traindelay.belgian.tracker.station.StationId.aStationId;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class NMBSBoardRequesterIntegrationTest {
 
-    @Test
+    @Test (expected = ResourceAccessException.class)
     public void retrieveBoard_fakeUrl() throws Exception {
-        NMBSBoardRequester requestManager = new NMBSBoardRequester("https://api.irail.be/liveboard/?id=");
+        NMBSBoardRequester requestManager = new NMBSBoardRequester("https://fake/?id=");
         StationId expectedStationID = aStationId("BE.NMBS.008892106");
-        Board board = requestManager.requestBoard(expectedStationID);
-//        assertThat();
+        requestManager.requestBoard(expectedStationID);;
     }
 
     @Test
