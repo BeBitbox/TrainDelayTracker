@@ -38,6 +38,30 @@ public class TrainDeparture {
         return new TrainDeparture(time, delay, canceled, vehicule, platform, platformChange);
     }
 
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    public String getVehicule() {
+        return vehicule;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public boolean isPlatformChange() {
+        return platformChange;
+    }
+
     @Override
     public String toString() {
         return "TrainDeparture{" +
@@ -57,22 +81,14 @@ public class TrainDeparture {
 
         TrainDeparture that = (TrainDeparture) o;
 
-        if (delay != that.delay) return false;
-        if (canceled != that.canceled) return false;
-        if (platformChange != that.platformChange) return false;
-        if (!time.equals(that.time)) return false;
-        if (!vehicule.equals(that.vehicule)) return false;
-        return platform.equals(that.platform);
+        if (time != null ? !time.equals(that.time) : that.time != null) return false;
+        return vehicule != null ? vehicule.equals(that.vehicule) : that.vehicule == null;
     }
 
     @Override
     public int hashCode() {
-        int result = time.hashCode();
-        result = 31 * result + delay;
-        result = 31 * result + (canceled ? 1 : 0);
-        result = 31 * result + vehicule.hashCode();
-        result = 31 * result + platform.hashCode();
-        result = 31 * result + (platformChange ? 1 : 0);
+        int result = time != null ? time.hashCode() : 0;
+        result = 31 * result + (vehicule != null ? vehicule.hashCode() : 0);
         return result;
     }
 }
