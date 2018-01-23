@@ -16,11 +16,19 @@
 package be.bitbox.traindelay.belgian.tracker.harvest;
 
 import be.bitbox.traindelay.belgian.tracker.Board;
+import be.bitbox.traindelay.belgian.tracker.BoardRequestException;
 import be.bitbox.traindelay.belgian.tracker.TrainDeparture;
 import be.bitbox.traindelay.belgian.tracker.nmbs.NMBSBoardRequester;
+import be.bitbox.traindelay.belgian.tracker.nmbs.StationRetriever;
 import be.bitbox.traindelay.belgian.tracker.station.Station;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
 import com.google.common.eventbus.EventBus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,28 +37,43 @@ import java.util.Map;
 import static be.bitbox.traindelay.belgian.tracker.harvest.TrainDepartureEventBuilder.aTrainDepartureEvent;
 import static java.util.stream.Collectors.toList;
 
-public class BoardHarvester {
-
+@Component
+@EnableScheduling
+class BoardHarvester {
+    private final static Logger LOGGER = LoggerFactory.getLogger(BoardHarvester.class);
     private final NMBSBoardRequester nmbsBoardRequester;
     private final List<Station> stationList;
     private final EventBus eventBus;
     private final Map<StationId, Board> lastBoards;
 
-    public BoardHarvester(NMBSBoardRequester nmbsBoardRequester, List<Station> stationList, EventBus eventBus) {
+    @Autowired
+    BoardHarvester(NMBSBoardRequester nmbsBoardRequester,
+                   StationRetriever stationRetriever,
+                   EventBus eventBus) {
         this.nmbsBoardRequester = nmbsBoardRequester;
-        this.stationList = stationList;
+        this.stationList = stationRetriever.getBelgianStations();
         this.eventBus = eventBus;
         lastBoards = new HashMap<>();
     }
 
+    @Scheduled(fixedDelay = 10000L)
     void harvest() {
-        stationList.forEach(station -> {
-            Board board = nmbsBoardRequester.requestBoard(station.stationId());
-            if (lastBoards.containsKey(station.stationId())) {
-                compareBoards(lastBoards.get(station.stationId()), board);
-            }
-            lastBoards.put(station.stationId(), board);
-        });
+        LOGGER.info("Start Harvest");
+        stationList
+                .stream()
+                .parallel()
+                .forEach(station -> {
+                    try {
+                        Board board = nmbsBoardRequester.requestBoard(station.stationId());
+                        if (lastBoards.containsKey(station.stationId())) {
+                            compareBoards(lastBoards.get(station.stationId()), board);
+                        }
+                        lastBoards.put(station.stationId(), board);
+                    } catch (BoardRequestException ex) {
+                        LOGGER.error("Message occured during request", ex);
+                    }
+                });
+        LOGGER.info("Stop Harvest");
     }
 
     private void compareBoards(Board oldBoard, Board newBoard) {

@@ -20,11 +20,11 @@ public class StationRetrieverTest {
 
     @Test
     public void getBelgianStations() throws FileNotFoundException {
-        StationRetriever retriever = new StationRetriever();
+        StationRetriever retriever = new StationRetriever("https://api.irail.be/liveboard/?id=");
 
         List<Station> stations = retriever.getBelgianStations();
 
-        assertThat(stations, hasSize(557));
+        assertThat(stations, hasSize(551));
         StationId expectedFirstStationId = aStationId("BE.NMBS.008895000");
         Station expectedStation = aStation(expectedFirstStationId, "Aalst", BE)
                 .withAlternativeFrenchName("Alost")

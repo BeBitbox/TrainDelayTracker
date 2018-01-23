@@ -49,6 +49,11 @@
 			<artifactId>guava</artifactId>
 			<version>23.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-dynamodb</artifactId>
+			<version>1.11.265</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -67,6 +72,4 @@
             </plugin>
         </plugins>
 	</build>
-
-
 </project>

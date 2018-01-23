@@ -16,25 +16,34 @@
 package be.bitbox.traindelay.belgian.tracker.nmbs;
 
 import be.bitbox.traindelay.belgian.tracker.Board;
+import be.bitbox.traindelay.belgian.tracker.BoardRequestException;
 import be.bitbox.traindelay.belgian.tracker.BoardRequester;
-import be.bitbox.traindelay.belgian.tracker.nmbs.LiveBoard;
-import be.bitbox.traindelay.belgian.tracker.nmbs.NMBSTranslator;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+@Component
 public class NMBSBoardRequester implements BoardRequester {
 
     private final String nmbsBaseUrl;
     private final NMBSTranslator translator;
 
-    public NMBSBoardRequester(String nmbsBaseUrl) {
+    @Autowired
+    public NMBSBoardRequester(@Value("${tracker.base.url}") String nmbsBaseUrl) {
         this.translator = new NMBSTranslator();
         this.nmbsBaseUrl = nmbsBaseUrl;
     }
 
     public Board requestBoard(StationId stationId) {
         RestTemplate restTemplate = new RestTemplate();
-        LiveBoard liveBoard = restTemplate.getForObject(nmbsBaseUrl + stationId.getId() + "&format=json", LiveBoard.class);
-        return translator.translateFrom(liveBoard);
+        String url = nmbsBaseUrl + stationId.getId() + "&format=json";
+        try {
+            LiveBoard liveBoard = restTemplate.getForObject(url, LiveBoard.class);
+            return translator.translateFrom(liveBoard);
+        } catch (Exception ex) {
+            throw new BoardRequestException("Error during request " + url, ex);
+        }
     }
 }
