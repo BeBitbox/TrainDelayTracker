@@ -15,6 +15,8 @@
  */
 package be.bitbox.traindelay.belgian.tracker;
 
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.google.common.eventbus.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,5 +29,13 @@ public class ApplicationConfiguration {
     @Bean
     public EventBus getEventBus() {
         return new EventBus();
+    }
+
+    @Bean
+    public AmazonDynamoDB getAmazonDynamoDB() {
+        return AmazonDynamoDBClientBuilder
+                .standard()
+                .withRegion("eu-west-3")
+                .build();
     }
 }

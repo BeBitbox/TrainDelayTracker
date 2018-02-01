@@ -18,22 +18,29 @@ package be.bitbox.traindelay.belgian.tracker.persistance;
 import be.bitbox.traindelay.belgian.tracker.harvest.TrainDepartureEvent;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class TrainDepartureEventToDynamoDB {
+@Component
+class TrainDepartureEventToDynamoDB {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrainDepartureEventToDynamoDB.class);
     private final DynamoDBMapper dynamoDBMapper;
 
-    public TrainDepartureEventToDynamoDB(AmazonDynamoDB client) {
+    @Autowired
+    TrainDepartureEventToDynamoDB(AmazonDynamoDB client, EventBus eventBus) {
         dynamoDBMapper = new DynamoDBMapper(client);
+        eventBus.register(this);
     }
 
     @Subscribe
     void subscribeTrainDepartureEvent(TrainDepartureEvent trainDepartureEvent) {
         try {
             DynamoTrainDepartureEvent dynamoItem = new DynamoTrainDepartureEvent(trainDepartureEvent);
+            LOGGER.info("Saving dynamoItem " + dynamoItem);
             dynamoDBMapper.save(dynamoItem);
         }
         catch (Exception e) {

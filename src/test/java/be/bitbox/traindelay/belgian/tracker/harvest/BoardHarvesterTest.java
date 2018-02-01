@@ -37,7 +37,8 @@ import static be.bitbox.traindelay.belgian.tracker.station.StationId.aStationId;
 import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.of;
 import static java.time.Month.JANUARY;
-import static java.util.List.of;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -59,7 +60,7 @@ public class BoardHarvesterTest {
         Station station = aStation(id1, "name", Country.BE);
         StationId id2 = aStationId("id2");
         Station station2 = aStation(id2, "name2", Country.BE);
-        when(stationRetriever.getBelgianStations()).thenReturn(of(station, station2));
+        when(stationRetriever.getBelgianStations()).thenReturn(asList(station, station2));
 
         BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationRetriever, eventBus);
         boardHarvester.harvest();
@@ -74,7 +75,7 @@ public class BoardHarvesterTest {
         StationId id = aStationId("id");
         Station station = aStation(id, "name", Country.BE);
         when(nmbsBoardRequester.requestBoard(id)).thenReturn(aBoardForStation(id, now()));
-        when(stationRetriever.getBelgianStations()).thenReturn(of(station));
+        when(stationRetriever.getBelgianStations()).thenReturn(singletonList(station));
 
         BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationRetriever, eventBus);
         boardHarvester.harvest();
@@ -90,7 +91,7 @@ public class BoardHarvesterTest {
     public void checkBoardForOneTrain_OneTrainDeparted_TwoHarvest() {
         StationId id = aStationId("id");
         Station station = aStation(id, "name", Country.BE);
-        when(stationRetriever.getBelgianStations()).thenReturn(of(station));
+        when(stationRetriever.getBelgianStations()).thenReturn(singletonList(station));
 
         BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationRetriever, eventBus);
 
@@ -130,7 +131,7 @@ public class BoardHarvesterTest {
         Station station2 = aStation(id2, "name2", Country.BE);
         StationId id3 = aStationId("id3");
         Station station3 = aStation(id3, "name3", Country.BE);
-        when(stationRetriever.getBelgianStations()).thenReturn(of(station1, station2, station3));
+        when(stationRetriever.getBelgianStations()).thenReturn(asList(station1, station2, station3));
 
         BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationRetriever, eventBus);
 

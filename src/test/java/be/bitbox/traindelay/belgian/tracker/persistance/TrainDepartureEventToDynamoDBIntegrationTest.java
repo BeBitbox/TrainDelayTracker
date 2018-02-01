@@ -5,6 +5,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.google.common.eventbus.EventBus;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -41,7 +42,7 @@ public class TrainDepartureEventToDynamoDBIntegrationTest {
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withRegion(getRegion())
                 .build();
-        TrainDepartureEventToDynamoDB persistent = new TrainDepartureEventToDynamoDB(client);
+        TrainDepartureEventToDynamoDB persistent = new TrainDepartureEventToDynamoDB(client, new EventBus());
         persistent.subscribeTrainDepartureEvent(event);
     }
 

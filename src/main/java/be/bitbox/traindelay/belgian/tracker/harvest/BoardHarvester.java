@@ -96,6 +96,7 @@ class BoardHarvester {
                     .withPlatform(trainDeparture.getPlatform())
                     .withPlatformChange(trainDeparture.isPlatformChange())
                     .build();
+            LOGGER.info("Posting event " + event);
             eventBus.post(event);
         });
     }

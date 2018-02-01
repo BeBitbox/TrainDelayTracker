@@ -32,6 +32,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.function.Function;
 
@@ -48,14 +49,25 @@ import static org.springframework.util.StringUtils.isEmpty;
 @Component
 public class StationRetriever {
     private final static Logger LOGGER = LoggerFactory.getLogger(StationRetriever.class);
-    private final List<Station> stations;
     private final String nmbsBaseUrl;
+
+    private List<Station> stations;
 
     @Autowired
     StationRetriever(@Value("${tracker.base.url}") String nmbsBaseUrl) throws FileNotFoundException {
         this.nmbsBaseUrl = nmbsBaseUrl;
+    }
+
+    public List<Station> getBelgianStations() {
+        if (stations == null) {
+            readInBelgianStations();
+        }
+        return stations;
+    }
+
+    private void readInBelgianStations() {
         InputStream inputStream = StationRetriever.class.getResourceAsStream("stations.csv");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
         stations = reader.lines()
                 .skip(1)
                 .map(TranslateCSVStringToStation())
@@ -73,7 +85,7 @@ public class StationRetriever {
             restTemplate.getForObject(url, LiveBoard.class);
         } catch (HttpClientErrorException | HttpServerErrorException ex) {
             if (ex.getStatusCode() == NOT_FOUND || ex.getStatusCode() == INTERNAL_SERVER_ERROR) {
-                LOGGER.error("Did not find station with " + stationId);
+                LOGGER.error("Did not find station with " + stationId + " and code " + ex.getStatusText());
                 return false;
             }
         }
@@ -102,9 +114,6 @@ public class StationRetriever {
         };
     }
 
-    public List<Station> getBelgianStations() {
-        return stations;
-    }
 
     private class CSVStation {
         private String URI, name, alternativeFr, alternativeNl, alternativeDe, alternativeEn, countryCode, longitude, latitude;

@@ -16,10 +16,10 @@
 package be.bitbox.traindelay.belgian.tracker.harvest;
 
 import be.bitbox.traindelay.belgian.tracker.Board;
+import be.bitbox.traindelay.belgian.tracker.BoardRequestException;
 import be.bitbox.traindelay.belgian.tracker.nmbs.NMBSBoardRequester;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
 import org.junit.Test;
-import org.springframework.web.client.ResourceAccessException;
 
 import static be.bitbox.traindelay.belgian.tracker.station.StationId.aStationId;
 import static org.hamcrest.CoreMatchers.is;
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertTrue;
 
 public class NMBSBoardRequesterIntegrationTest {
 
-    @Test (expected = ResourceAccessException.class)
+    @Test (expected = BoardRequestException.class)
     public void retrieveBoard_fakeUrl() throws Exception {
         NMBSBoardRequester requestManager = new NMBSBoardRequester("https://fake/?id=");
         StationId expectedStationID = aStationId("BE.NMBS.008892106");
