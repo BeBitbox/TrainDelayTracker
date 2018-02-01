@@ -40,7 +40,7 @@ class TrainDepartureEventToDynamoDB {
     void subscribeTrainDepartureEvent(TrainDepartureEvent trainDepartureEvent) {
         try {
             DynamoTrainDepartureEvent dynamoItem = new DynamoTrainDepartureEvent(trainDepartureEvent);
-            LOGGER.info("Saving dynamoItem " + dynamoItem);
+            LOGGER.debug("Saving dynamoItem {}", dynamoItem);
             dynamoDBMapper.save(dynamoItem);
         }
         catch (Exception e) {

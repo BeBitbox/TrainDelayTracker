@@ -80,6 +80,7 @@ class BoardHarvester {
         List<TrainDeparture> trainDepartures = oldBoard.getDepartures()
                 .stream()
                 .filter(trainDeparture -> !newBoard.getDepartures().contains(trainDeparture))
+                .filter(trainDeparture -> trainDeparture.getTime().isBefore(newBoard.getTime().plusHours(1)))
                 .collect(toList());
         spawnEventsForNewTrainDepartures(newBoard, trainDepartures);
     }
@@ -96,7 +97,7 @@ class BoardHarvester {
                     .withPlatform(trainDeparture.getPlatform())
                     .withPlatformChange(trainDeparture.isPlatformChange())
                     .build();
-            LOGGER.info("Posting event " + event);
+            LOGGER.debug("Posting event {}", event);
             eventBus.post(event);
         });
     }

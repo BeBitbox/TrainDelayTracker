@@ -124,6 +124,34 @@ public class BoardHarvesterTest {
     }
 
     @Test
+    public void checkBoardForOneTrain_OneFutureTrainRemovedFromBoard_TwoHarvest() {
+        StationId id = aStationId("id");
+        Station station = aStation(id, "name", Country.BE);
+        when(stationRetriever.getBelgianStations()).thenReturn(singletonList(station));
+
+        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationRetriever, eventBus);
+
+        LocalDateTime now = now();
+        Board board = aBoardForStation(id, now);
+        LocalDateTime trainLeavingTime = now.plusHours(4);
+        int delay = 5;
+        boolean canceled = false;
+        String vehicule = "MyTrain";
+        String platform = "C";
+        boolean platformChange = false;
+        board.addDeparture(aTrainDeparture(trainLeavingTime, delay, canceled, vehicule, platform, platformChange));
+
+        when(nmbsBoardRequester.requestBoard(id)).thenReturn(board);
+        boardHarvester.harvest();
+        LocalDateTime boardTime = now();
+        when(nmbsBoardRequester.requestBoard(id)).thenReturn(aBoardForStation(id, boardTime));
+        boardHarvester.harvest();
+
+        verify(nmbsBoardRequester, times(2)).requestBoard(id);
+        verify(eventBus, never()).post(any());
+    }
+
+    @Test
     public void checkBoardForThreeTrain_TwoTrainDeparted_FourHarvest() {
         StationId id1 = aStationId("id1");
         Station station1 = aStation(id1, "name1", Country.BE);
