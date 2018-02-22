@@ -18,11 +18,15 @@ package be.bitbox.traindelay.belgian.tracker.persistance;
 import be.bitbox.traindelay.belgian.tracker.harvest.TrainDepartureEvent;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ThreadLocalRandom;
 
-@DynamoDBTable(tableName = "TrainDepartureEvents")
+@DynamoDBTable(tableName = "TrainDepartureEventStore")
 public class DynamoTrainDepartureEvent {
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     private final String id;
     private final LocalDateTime eventCreationTime;
     private final String stationId;
@@ -34,7 +38,7 @@ public class DynamoTrainDepartureEvent {
     private final boolean platformChange;
 
     DynamoTrainDepartureEvent(TrainDepartureEvent event) {
-        id = UUID.randomUUID().toString();
+        id = LocalDate.now().format(DATE_FORMATTER) + '.' + getNumberBetween1And200();
         this.eventCreationTime = event.getEventCreationTime();
         this.stationId = event.getStationId().getId();
         this.expectedDepartureTime = event.getExpectedDepartureTime();
@@ -45,13 +49,17 @@ public class DynamoTrainDepartureEvent {
         this.platformChange = event.isPlatformChange();
     }
 
+    private int getNumberBetween1And200() {
+        return ThreadLocalRandom.current().nextInt(200) + 1;
+    }
+
     @DynamoDBHashKey(attributeName = "id")
     public String getId() {
         return id;
     }
 
     @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
-    @DynamoDBAttribute(attributeName = "created")
+    @DynamoDBRangeKey(attributeName = "created")
     public LocalDateTime getEventCreationTime() {
         return eventCreationTime;
     }
