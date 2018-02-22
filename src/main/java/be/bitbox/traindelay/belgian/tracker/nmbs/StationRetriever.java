@@ -21,15 +21,9 @@ import be.bitbox.traindelay.belgian.tracker.station.Station;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -42,21 +36,13 @@ import static be.bitbox.traindelay.belgian.tracker.station.GeoCoordinates.aGeoCo
 import static be.bitbox.traindelay.belgian.tracker.station.Station.aStation;
 import static be.bitbox.traindelay.belgian.tracker.station.StationId.aStationId;
 import static java.util.stream.Collectors.toList;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.util.StringUtils.isEmpty;
 
 @Component
 public class StationRetriever {
     private final static Logger LOGGER = LoggerFactory.getLogger(StationRetriever.class);
-    private final String nmbsBaseUrl;
 
     private List<Station> stations;
-
-    @Autowired
-    StationRetriever(@Value("${tracker.base.url}") String nmbsBaseUrl) throws FileNotFoundException {
-        this.nmbsBaseUrl = nmbsBaseUrl;
-    }
 
     public List<Station> getBelgianStations() {
         if (stations == null) {
@@ -73,25 +59,9 @@ public class StationRetriever {
                 .map(TranslateCSVStringToStation())
                 .filter(csvStation -> "be".equals(csvStation.countryCode))
                 .map(CSVStation::translateToStation)
-                .parallel()
-                .filter(station -> isTrainStationKnown(station.stationId()))
                 .collect(toList());
+        LOGGER.info("Read in all Belgian stations : {} in total", stations.size());
     }
-
-    private boolean isTrainStationKnown(StationId stationId) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = nmbsBaseUrl + stationId.getId() + "&format=json";
-        try {
-            restTemplate.getForObject(url, LiveBoard.class);
-        } catch (HttpClientErrorException | HttpServerErrorException ex) {
-            if (ex.getStatusCode() == NOT_FOUND || ex.getStatusCode() == INTERNAL_SERVER_ERROR) {
-                LOGGER.error("Did not find station with " + stationId + " and code " + ex.getStatusText());
-                return false;
-            }
-        }
-        return true;
-    }
-
 
     private Function<String, CSVStation> TranslateCSVStringToStation() {
         return line -> {

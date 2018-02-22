@@ -16,10 +16,11 @@
 package be.bitbox.traindelay.belgian.tracker.harvest;
 
 import be.bitbox.traindelay.belgian.tracker.Board;
+import be.bitbox.traindelay.belgian.tracker.BoardNotFoundException;
 import be.bitbox.traindelay.belgian.tracker.BoardRequestException;
 import be.bitbox.traindelay.belgian.tracker.TrainDeparture;
 import be.bitbox.traindelay.belgian.tracker.nmbs.NMBSBoardRequester;
-import be.bitbox.traindelay.belgian.tracker.nmbs.StationRetriever;
+import be.bitbox.traindelay.belgian.tracker.nmbs.StationAvailabilityMonitor;
 import be.bitbox.traindelay.belgian.tracker.station.Station;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
 import com.google.common.eventbus.EventBus;
@@ -42,24 +43,26 @@ import static java.util.stream.Collectors.toList;
 class BoardHarvester {
     private final static Logger LOGGER = LoggerFactory.getLogger(BoardHarvester.class);
     private final NMBSBoardRequester nmbsBoardRequester;
-    private final List<Station> stationList;
+    private final StationAvailabilityMonitor stationAvailabilityMonitor;
     private final EventBus eventBus;
     private final Map<StationId, Board> lastBoards;
 
     @Autowired
     BoardHarvester(NMBSBoardRequester nmbsBoardRequester,
-                   StationRetriever stationRetriever,
+                   StationAvailabilityMonitor stationAvailabilityMonitor,
                    EventBus eventBus) {
         this.nmbsBoardRequester = nmbsBoardRequester;
-        this.stationList = stationRetriever.getBelgianStations();
+        this.stationAvailabilityMonitor = stationAvailabilityMonitor;
         this.eventBus = eventBus;
         lastBoards = new HashMap<>();
     }
 
     @Scheduled(fixedDelay = 10000L)
     void harvest() {
-        LOGGER.info("Start Harvest");
-        stationList
+        List<Station> trainStations = stationAvailabilityMonitor.getTrainStations();
+        LOGGER.info("Start Harvest for {} stations", trainStations.size());
+
+        trainStations
                 .stream()
                 .parallel()
                 .forEach(station -> {
@@ -69,7 +72,12 @@ class BoardHarvester {
                             compareBoards(lastBoards.get(station.stationId()), board);
                         }
                         lastBoards.put(station.stationId(), board);
+                        stationAvailabilityMonitor.positiveFeedbackFor(station);
+                    } catch (BoardNotFoundException ex) {
+                        stationAvailabilityMonitor.negativeFeedbackFor(station);
+                        LOGGER.warn(ex.getMessage());
                     } catch (BoardRequestException ex) {
+                        stationAvailabilityMonitor.negativeFeedbackFor(station);
                         LOGGER.error("Message occured during request", ex);
                     }
                 });

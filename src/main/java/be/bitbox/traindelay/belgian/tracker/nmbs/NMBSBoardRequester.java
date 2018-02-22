@@ -16,12 +16,15 @@
 package be.bitbox.traindelay.belgian.tracker.nmbs;
 
 import be.bitbox.traindelay.belgian.tracker.Board;
+import be.bitbox.traindelay.belgian.tracker.BoardNotFoundException;
 import be.bitbox.traindelay.belgian.tracker.BoardRequestException;
 import be.bitbox.traindelay.belgian.tracker.BoardRequester;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
@@ -42,6 +45,12 @@ public class NMBSBoardRequester implements BoardRequester {
         try {
             LiveBoard liveBoard = restTemplate.getForObject(url, LiveBoard.class);
             return translator.translateFrom(liveBoard);
+        } catch (HttpClientErrorException ex) {
+            if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
+                throw new BoardNotFoundException("Board not found for " + stationId);
+            } else {
+                throw new BoardRequestException("HttpClientError during request " + url, ex);
+            }
         } catch (Exception ex) {
             throw new BoardRequestException("Error during request " + url, ex);
         }

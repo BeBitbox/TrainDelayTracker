@@ -4,7 +4,6 @@ import be.bitbox.traindelay.belgian.tracker.station.Station;
 import be.bitbox.traindelay.belgian.tracker.station.StationId;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,12 +18,12 @@ import static org.junit.Assert.assertThat;
 public class StationRetrieverTest {
 
     @Test
-    public void getBelgianStations() throws FileNotFoundException {
-        StationRetriever retriever = new StationRetriever("https://api.irail.be/liveboard/?id=");
+    public void getBelgianStations() {
+        StationRetriever retriever = new StationRetriever();
 
         List<Station> stations = retriever.getBelgianStations();
 
-        assertThat(stations, hasSize(551));
+        assertThat(stations, hasSize(557));
         StationId expectedFirstStationId = aStationId("BE.NMBS.008895000");
         Station expectedStation = aStation(expectedFirstStationId, "Aalst", BE)
                 .withAlternativeFrenchName("Alost")
