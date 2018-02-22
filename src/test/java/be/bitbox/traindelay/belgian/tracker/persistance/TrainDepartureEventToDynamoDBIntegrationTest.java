@@ -24,7 +24,7 @@ public class TrainDepartureEventToDynamoDBIntegrationTest {
     public void subscribeTrainDepartureEvent() {
 
         LocalDateTime creationTime = now();
-        LocalDateTime expectedTime = of(2018, JANUARY, 12, 7, 49, 0);;
+        LocalDateTime expectedTime = of(2018, JANUARY, 12, 7, 49, 0);
 
         TrainDepartureEvent event = aTrainDepartureEvent()
                 .withEventCreationTime(creationTime)
