@@ -11,6 +11,7 @@ import static be.bitbox.traindelay.tracker.core.station.Station.aStation;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,7 +23,7 @@ public class StationAvailabilityMonitorTest {
     @Test
     public void testAlwaysAvailableTrainStation() {
         Station station = aStation(aStationId("MYStation"), "my", Country.BE);
-        when(stationRetriever.getBelgianStations()).thenReturn(singletonList(station));
+        when(stationRetriever.getStationsFor(any(Country.class))).thenReturn(singletonList(station));
 
         StationAvailabilityMonitor monitor = new StationAvailabilityMonitor(stationRetriever);
         for (int counter = 0; counter < 10; counter++) {
@@ -34,7 +35,7 @@ public class StationAvailabilityMonitorTest {
     @Test
     public void testAlwaysUnAvailableTrainStation() {
         Station station = aStation(aStationId("BadStation"), "bad", Country.BE);
-        when(stationRetriever.getBelgianStations()).thenReturn(singletonList(station));
+        when(stationRetriever.getStationsFor(any(Country.class))).thenReturn(singletonList(station));
 
         StationAvailabilityMonitor monitor = new StationAvailabilityMonitor(stationRetriever);
 
@@ -54,7 +55,7 @@ public class StationAvailabilityMonitorTest {
         Station goodStation = aStation(aStationId("GoodStation"), "good", Country.BE);
         Station badStation = aStation(aStationId("BadStation"), "bad", Country.BE);
         Station neutralStation = aStation(aStationId("NeutralStation"), "neu", Country.BE);
-        when(stationRetriever.getBelgianStations()).thenReturn(Arrays.asList(goodStation, badStation, neutralStation));
+        when(stationRetriever.getStationsFor(any(Country.class))).thenReturn(Arrays.asList(goodStation, badStation, neutralStation));
 
         StationAvailabilityMonitor monitor = new StationAvailabilityMonitor(stationRetriever);
 

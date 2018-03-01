@@ -33,7 +33,7 @@ public class StationAvailabilityMonitor {
     @Autowired
     public StationAvailabilityMonitor(StationRetriever stationRetriever) {
         stationFailList = new HashMap<>();
-        stationRetriever.getBelgianStations()
+        stationRetriever.getStationsFor(Country.BE)
                 .forEach(station -> stationFailList.put(station, 0));
     }
 

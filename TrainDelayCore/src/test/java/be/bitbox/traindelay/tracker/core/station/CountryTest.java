@@ -9,7 +9,7 @@ public class CountryTest {
 
     @Test
     public void translateFromBelgium() {
-        Country country = Country.translateFrom("src/main/resources/be");
+        Country country = Country.translateFrom("be");
         assertThat(country, is(Country.BE));
     }
 

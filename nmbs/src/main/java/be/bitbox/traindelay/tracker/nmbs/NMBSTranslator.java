@@ -15,7 +15,7 @@
  */
 package be.bitbox.traindelay.tracker.nmbs;
 
-import be.bitbox.traindelay.belgian.tracker.TrainDeparture;
+import be.bitbox.traindelay.tracker.core.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardTranslationException;
 import be.bitbox.traindelay.tracker.core.station.StationId;
