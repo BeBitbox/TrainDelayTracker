@@ -3,12 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>be.bitbox.traindelay.belgian.tracker</groupId>
-        <artifactId>TrainDelayTracker</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <groupId>be.bitbox.traindelay.tracker</groupId>
     <artifactId>TrainDelayTrackerApplication</artifactId>
     <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
     <name>TrainDelayTrackerApplication</name>
     <description>Application to farm the traindelay events</description>
     <dependencies>
@@ -16,18 +19,38 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>be.bitbox.traindelay.tracker.core</groupId>
+            <artifactId>TrainDelayCore</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>be.bitbox.traindelay.belgian.tracker</groupId>
+            <groupId>be.bitbox.traindelay.tracker</groupId>
             <artifactId>NMBSTrainDelayTracker</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>be.bitbox.traindelay.belgian.tracker</groupId>
-            <artifactId>Core</artifactId>
+            <groupId>be.bitbox.traindelay.tracker.persistence</groupId>
+            <artifactId>TrainDelayPersistance</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
