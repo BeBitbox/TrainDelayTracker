@@ -7,9 +7,9 @@
         <artifactId>TrainDelayTracker</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>NMBSTrainDelayTracker</artifactId>
+    <artifactId>TrainDelayTrackerNMBS</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>NMBSTrainDelayTracker</name>
+    <name>TrainDelayTrackerNMBS</name>
     <description>Farm the traindelay events of NMBS</description>
 
     <properties>
@@ -21,26 +21,6 @@
         <dependency>
             <groupId>be.bitbox.traindelay.tracker.core</groupId>
             <artifactId>TrainDelayCore</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
         </dependency>
 
         <dependency>

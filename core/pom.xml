@@ -9,7 +9,6 @@
     </parent>
     <groupId>be.bitbox.traindelay.tracker.core</groupId>
     <artifactId>TrainDelayCore</artifactId>
-    <packaging>jar</packaging>
     <name>TrainDelayCore</name>
     <description>Core to farm the traindelay events</description>
 

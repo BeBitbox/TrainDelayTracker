@@ -23,19 +23,43 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static be.bitbox.traindelay.tracker.core.harvest.TrainDepartureEventBuilder.aTrainDepartureEvent;
+import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
+
 @DynamoDBTable(tableName = "TrainDepartureEventStore")
 public class DynamoTrainDepartureEvent {
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    private final String id;
-    private final LocalDateTime eventCreationTime;
-    private final String stationId;
-    private final LocalDateTime expectedDepartureTime;
-    private final int delay;
-    private final boolean canceled;
-    private final String vehicule;
-    private final String platform;
-    private final boolean platformChange;
+    @DynamoDBHashKey(attributeName = "id")
+    private String id;
+
+    @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
+    @DynamoDBRangeKey(attributeName = "created")
+    private LocalDateTime eventCreationTime;
+
+    @DynamoDBAttribute(attributeName = "station")
+    private String stationId;
+
+    @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
+    @DynamoDBAttribute(attributeName = "expected")
+    private LocalDateTime expectedDepartureTime;
+
+    @DynamoDBAttribute(attributeName = "delay")
+    private int delay;
+
+    @DynamoDBAttribute(attributeName = "canceled")
+    private boolean canceled;
+
+    @DynamoDBAttribute(attributeName = "vehicule")
+    private String vehicule;
+
+    @DynamoDBAttribute(attributeName = "platform")
+    private String platform;
+
+    @DynamoDBAttribute(attributeName = "platformChange")
+    private boolean platformChange;
+
+    public DynamoTrainDepartureEvent() {}
 
     DynamoTrainDepartureEvent(TrainDepartureEvent event) {
         id = LocalDate.now().format(DATE_FORMATTER) + '.' + getNumberBetween1And200();
@@ -49,55 +73,93 @@ public class DynamoTrainDepartureEvent {
         this.platformChange = event.isPlatformChange();
     }
 
+    TrainDepartureEvent asTrainDepartureEvent() {
+        return aTrainDepartureEvent()
+                .withEventCreationTime(eventCreationTime)
+                .withStationId(aStationId(stationId))
+                .withExpectedDepartureTime(expectedDepartureTime)
+                .withDelay(delay)
+                .withCanceled(canceled)
+                .withVehicule(vehicule)
+                .withPlatform(platform)
+                .withPlatformChange(platformChange)
+                .build();
+    }
+
     private int getNumberBetween1And200() {
         return ThreadLocalRandom.current().nextInt(200) + 1;
     }
 
-    @DynamoDBHashKey(attributeName = "id")
     public String getId() {
         return id;
     }
 
-    @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
-    @DynamoDBRangeKey(attributeName = "created")
     public LocalDateTime getEventCreationTime() {
         return eventCreationTime;
     }
 
-    @DynamoDBAttribute(attributeName = "station")
     public String getStationId() {
         return stationId;
     }
 
-    @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
-    @DynamoDBAttribute(attributeName = "expected")
     public LocalDateTime getExpectedDepartureTime() {
         return expectedDepartureTime;
     }
 
-    @DynamoDBAttribute(attributeName = "delay")
     public int getDelay() {
         return delay;
     }
 
-    @DynamoDBAttribute(attributeName = "canceled")
     public boolean isCanceled() {
         return canceled;
     }
 
-    @DynamoDBAttribute(attributeName = "vehicule")
     public String getVehicule() {
         return vehicule;
     }
 
-    @DynamoDBAttribute(attributeName = "platform")
     public String getPlatform() {
         return platform;
     }
 
-    @DynamoDBAttribute(attributeName = "platformChange")
     public boolean isPlatformChange() {
         return platformChange;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEventCreationTime(LocalDateTime eventCreationTime) {
+        this.eventCreationTime = eventCreationTime;
+    }
+
+    public void setStationId(String stationId) {
+        this.stationId = stationId;
+    }
+
+    public void setExpectedDepartureTime(LocalDateTime expectedDepartureTime) {
+        this.expectedDepartureTime = expectedDepartureTime;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+    public void setVehicule(String vehicule) {
+        this.vehicule = vehicule;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public void setPlatformChange(boolean platformChange) {
+        this.platformChange = platformChange;
     }
 
     static public class LocalDateTimeConverter implements DynamoDBTypeConverter<String, LocalDateTime> {
