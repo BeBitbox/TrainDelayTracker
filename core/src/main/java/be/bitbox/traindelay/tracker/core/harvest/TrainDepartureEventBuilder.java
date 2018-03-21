@@ -77,7 +77,7 @@ public final class TrainDepartureEventBuilder {
     }
 
     public TrainDepartureEvent build() {
-        TrainDepartureEvent trainDepartureEvent = new TrainDepartureEvent();
+        TrainDepartureEvent trainDepartureEvent = TrainDepartureEvent.create();
         trainDepartureEvent.setEventCreationTime(eventCreationTime);
         trainDepartureEvent.setStationId(stationId);
         trainDepartureEvent.setExpectedDepartureTime(expectedDepartureTime);

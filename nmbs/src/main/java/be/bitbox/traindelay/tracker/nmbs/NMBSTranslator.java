@@ -17,7 +17,6 @@ package be.bitbox.traindelay.tracker.nmbs;
 
 import be.bitbox.traindelay.tracker.core.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.board.Board;
-import be.bitbox.traindelay.tracker.core.board.BoardTranslationException;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import org.springframework.util.StringUtils;
 
@@ -25,15 +24,24 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-public class NMBSTranslator {
+import static be.bitbox.traindelay.tracker.core.board.BoardTranslationException.aBoardTranslationException;
+import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
+
+class NMBSTranslator {
 
     private static final ZoneId ZONE_ID = ZoneId.of("Europe/Paris");
     private static final String UNKNOWN_VEHICULE = "UNKNOWN";
     private static final String UNKNOWN_PLATFORM = "?";
 
-    public Board translateFrom(LiveBoard liveBoard) {
+    private NMBSTranslator() { }
+
+    static NMBSTranslator aNMBSTranslator() {
+        return new NMBSTranslator();
+    }
+
+    Board translateFrom(LiveBoard liveBoard) {
         if (liveBoard == null) {
-            throw new BoardTranslationException("The liveboard can not be null!" );
+            throw aBoardTranslationException("The liveboard can not be null!" );
         }
         StationId stationId = retrieveStationId(liveBoard.getStationinfo());
         LocalDateTime localDateTime = translateToDateFrom(liveBoard.getTimestamp());
@@ -80,10 +88,10 @@ public class NMBSTranslator {
 
     private StationId retrieveStationId(Stationinfo stationinfo) {
         if (stationinfo == null || StringUtils.isEmpty(stationinfo.getId())) {
-            throw new BoardTranslationException("The stationInfo is missing a necessary ID : " + stationinfo);
+            throw aBoardTranslationException("The stationInfo is missing a necessary ID : " + stationinfo);
         }
 
-        return StationId.aStationId(stationinfo.getId());
+        return aStationId(stationinfo.getId());
     }
 
     private LocalDateTime translateToDateFrom(long timestamp) {

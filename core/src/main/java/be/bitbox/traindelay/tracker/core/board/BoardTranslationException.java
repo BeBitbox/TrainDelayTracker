@@ -16,7 +16,12 @@
 package be.bitbox.traindelay.tracker.core.board;
 
 public class BoardTranslationException extends RuntimeException {
-    public BoardTranslationException(String message) {
+
+    private BoardTranslationException(String message) {
         super(message);
+    }
+
+    public static BoardTranslationException aBoardTranslationException(String message) {
+        return new BoardTranslationException(message);
     }
 }

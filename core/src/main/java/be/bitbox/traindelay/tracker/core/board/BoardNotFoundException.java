@@ -16,7 +16,12 @@
 package be.bitbox.traindelay.tracker.core.board;
 
 public class BoardNotFoundException extends RuntimeException {
-    public BoardNotFoundException(String message) {
+
+    private BoardNotFoundException(String message) {
         super(message);
+    }
+
+    public static BoardNotFoundException aBoardNotFoundException(String message) {
+        return new BoardNotFoundException(message);
     }
 }

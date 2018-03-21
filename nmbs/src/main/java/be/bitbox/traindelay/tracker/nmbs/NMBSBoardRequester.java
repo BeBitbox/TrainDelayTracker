@@ -16,8 +16,6 @@
 package be.bitbox.traindelay.tracker.nmbs;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
-import be.bitbox.traindelay.tracker.core.board.BoardNotFoundException;
-import be.bitbox.traindelay.tracker.core.board.BoardRequestException;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import static be.bitbox.traindelay.tracker.core.board.BoardNotFoundException.aBoardNotFoundException;
+import static be.bitbox.traindelay.tracker.core.board.BoardRequestException.aBoardRequestException;
+import static be.bitbox.traindelay.tracker.nmbs.NMBSTranslator.aNMBSTranslator;
+
 @Component
 public class NMBSBoardRequester implements BoardRequester {
 
@@ -35,7 +37,7 @@ public class NMBSBoardRequester implements BoardRequester {
 
     @Autowired
     public NMBSBoardRequester(@Value("${tracker.base.url}") String nmbsBaseUrl) {
-        this.translator = new NMBSTranslator();
+        this.translator = aNMBSTranslator();
         this.nmbsBaseUrl = nmbsBaseUrl;
     }
 
@@ -47,12 +49,12 @@ public class NMBSBoardRequester implements BoardRequester {
             return translator.translateFrom(liveBoard);
         } catch (HttpClientErrorException ex) {
             if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
-                throw new BoardNotFoundException("Board not found for " + stationId);
+                throw aBoardNotFoundException("Board not found for " + stationId);
             } else {
-                throw new BoardRequestException("HttpClientError during request " + url, ex);
+                throw aBoardRequestException("HttpClientError during request " + url, ex);
             }
         } catch (Exception ex) {
-            throw new BoardRequestException("Error during request " + url, ex);
+            throw aBoardRequestException("Error during request " + url, ex);
         }
     }
 }

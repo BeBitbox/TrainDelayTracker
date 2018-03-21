@@ -29,6 +29,13 @@ public class TrainDepartureEvent {
     private String platform;
     private boolean platformChange;
 
+    private TrainDepartureEvent() {
+    }
+
+    static TrainDepartureEvent create() {
+        return new TrainDepartureEvent();
+    }
+
     public LocalDateTime getEventCreationTime() {
         return eventCreationTime;
     }

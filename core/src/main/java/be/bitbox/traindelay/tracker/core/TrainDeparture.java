@@ -25,7 +25,7 @@ public class TrainDeparture {
     private final String platform;
     private final boolean platformChange;
 
-    public TrainDeparture(LocalDateTime time, int delay, boolean canceled, String vehicule, String platform, boolean platformChange) {
+    private TrainDeparture(LocalDateTime time, int delay, boolean canceled, String vehicule, String platform, boolean platformChange) {
         this.time = time;
         this.delay = delay;
         this.canceled = canceled;

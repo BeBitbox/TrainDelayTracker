@@ -16,7 +16,12 @@
 package be.bitbox.traindelay.tracker.core.board;
 
 public class BoardRequestException extends RuntimeException {
-    public BoardRequestException(String message, Throwable ex) {
+
+    private BoardRequestException(String message, Throwable ex) {
         super(message, ex);
+    }
+
+    public static BoardRequestException aBoardRequestException(String message, Throwable ex) {
+        return new BoardRequestException(message, ex);
     }
 }
