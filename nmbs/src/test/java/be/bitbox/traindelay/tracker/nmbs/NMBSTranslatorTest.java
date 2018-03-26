@@ -24,9 +24,10 @@ import static org.junit.Assert.assertThat;
 public class NMBSTranslatorTest {
 
     private static final String STATION_ID = "BE.NMBS.008892106";
-    private NMBSTranslator nmbsTranslator = new NMBSTranslator();
     private static final String VEHICLE = "BE.NMBS.IC3016";
     private static final String PLATFORM = "4";
+
+    private NMBSTranslator nmbsTranslator = NMBSTranslator.INSTANCE;
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromNull_ShouldThrowExceptions() {

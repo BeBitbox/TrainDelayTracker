@@ -27,17 +27,13 @@ import java.time.ZoneId;
 import static be.bitbox.traindelay.tracker.core.board.BoardTranslationException.aBoardTranslationException;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 
-class NMBSTranslator {
+enum NMBSTranslator {
+
+    INSTANCE;
 
     private static final ZoneId ZONE_ID = ZoneId.of("Europe/Paris");
     private static final String UNKNOWN_VEHICULE = "UNKNOWN";
     private static final String UNKNOWN_PLATFORM = "?";
-
-    private NMBSTranslator() { }
-
-    static NMBSTranslator aNMBSTranslator() {
-        return new NMBSTranslator();
-    }
 
     Board translateFrom(LiveBoard liveBoard) {
         if (liveBoard == null) {

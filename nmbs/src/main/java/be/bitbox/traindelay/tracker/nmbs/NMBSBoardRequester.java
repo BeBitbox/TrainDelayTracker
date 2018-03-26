@@ -27,7 +27,6 @@ import org.springframework.web.client.RestTemplate;
 
 import static be.bitbox.traindelay.tracker.core.board.BoardNotFoundException.aBoardNotFoundException;
 import static be.bitbox.traindelay.tracker.core.board.BoardRequestException.aBoardRequestException;
-import static be.bitbox.traindelay.tracker.nmbs.NMBSTranslator.aNMBSTranslator;
 
 @Component
 public class NMBSBoardRequester implements BoardRequester {
@@ -37,7 +36,7 @@ public class NMBSBoardRequester implements BoardRequester {
 
     @Autowired
     public NMBSBoardRequester(@Value("${tracker.base.url}") String nmbsBaseUrl) {
-        this.translator = aNMBSTranslator();
+        this.translator = NMBSTranslator.INSTANCE;
         this.nmbsBaseUrl = nmbsBaseUrl;
     }
 
