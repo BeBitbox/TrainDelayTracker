@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static be.bitbox.traindelay.tracker.core.harvest.TrainDepartureEventBuilder.aTrainDepartureEvent;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 
 @DynamoDBTable(tableName = "TrainDepartureEventStore")
@@ -74,7 +73,7 @@ public class DynamoTrainDepartureEvent {
     }
 
     TrainDepartureEvent asTrainDepartureEvent() {
-        return aTrainDepartureEvent()
+        return TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(eventCreationTime)
                 .withStationId(aStationId(stationId))
                 .withExpectedDepartureTime(expectedDepartureTime)

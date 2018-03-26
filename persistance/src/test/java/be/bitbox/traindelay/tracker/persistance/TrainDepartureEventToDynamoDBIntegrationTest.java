@@ -1,7 +1,6 @@
 package be.bitbox.traindelay.tracker.persistance;
 
 import be.bitbox.traindelay.tracker.core.harvest.TrainDepartureEvent;
-import be.bitbox.traindelay.tracker.core.harvest.TrainDepartureEventBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.google.common.eventbus.EventBus;
 import org.junit.Ignore;
@@ -23,7 +22,7 @@ public class TrainDepartureEventToDynamoDBIntegrationTest {
         LocalDateTime creationTime = now();
         LocalDateTime expectedTime = of(2018, JANUARY, 12, 7, 49, 0);
 
-        TrainDepartureEvent event = TrainDepartureEventBuilder.aTrainDepartureEvent()
+        TrainDepartureEvent event = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(creationTime)
                 .withStationId(aStationId("myStation"))
                 .withDelay(5)

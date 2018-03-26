@@ -31,7 +31,6 @@ import java.time.LocalDateTime;
 
 import static be.bitbox.traindelay.tracker.core.TrainDeparture.aTrainDeparture;
 import static be.bitbox.traindelay.tracker.core.board.Board.aBoardForStation;
-import static be.bitbox.traindelay.tracker.core.harvest.TrainDepartureEventBuilder.aTrainDepartureEvent;
 import static be.bitbox.traindelay.tracker.core.station.Station.aStation;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static java.time.LocalDateTime.now;
@@ -111,7 +110,7 @@ public class BoardHarvesterTest {
         boardHarvester.harvest();
 
         verify(nmbsBoardRequester, times(2)).requestBoard(id);
-        TrainDepartureEventBuilder eventBuilder = aTrainDepartureEvent()
+        TrainDepartureEvent event = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(boardTime)
                 .withStationId(id)
                 .withDelay(delay)
@@ -119,8 +118,9 @@ public class BoardHarvesterTest {
                 .withExpectedDepartureTime(trainLeavingTime)
                 .withPlatform(platform)
                 .withPlatformChange(platformChange)
-                .withVehicule(vehicule);
-        verify(eventBus, only()).post(eventBuilder.build());
+                .withVehicule(vehicule)
+                .build();
+        verify(eventBus, only()).post(event);
     }
 
     @Test
@@ -198,7 +198,7 @@ public class BoardHarvesterTest {
         when(nmbsBoardRequester.requestBoard(id2)).thenReturn(board_2_2);
         when(nmbsBoardRequester.requestBoard(id3)).thenReturn(board_2_3);
         boardHarvester.harvest();
-        TrainDepartureEvent event1_1 = aTrainDepartureEvent()
+        TrainDepartureEvent event1_1 = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(time_2_2)
                 .withStationId(id2)
                 .withDelay(5)
@@ -208,7 +208,7 @@ public class BoardHarvesterTest {
                 .withPlatformChange(false)
                 .withVehicule("MyTrain1")
                 .build();
-        TrainDepartureEvent event1_2 = aTrainDepartureEvent()
+        TrainDepartureEvent event1_2 = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(time_2_2)
                 .withStationId(id2)
                 .withDelay(0)
@@ -259,7 +259,7 @@ public class BoardHarvesterTest {
         when(nmbsBoardRequester.requestBoard(id2)).thenReturn(board_4_2);
         when(nmbsBoardRequester.requestBoard(id3)).thenReturn(board_4_3);
         boardHarvester.harvest();
-        TrainDepartureEvent event4_3 = aTrainDepartureEvent()
+        TrainDepartureEvent event4_3 = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(time_4_3)
                 .withStationId(id3)
                 .withDelay(7)

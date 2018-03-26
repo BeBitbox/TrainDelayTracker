@@ -94,7 +94,7 @@ class BoardHarvester {
 
     private void spawnEventsForNewTrainDepartures(Board newBoard, List<TrainDeparture> trainDepartures) {
         trainDepartures.forEach(trainDeparture -> {
-            TrainDepartureEvent event = TrainDepartureEventBuilder.aTrainDepartureEvent()
+            TrainDepartureEvent event = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                     .withEventCreationTime(newBoard.getTime())
                     .withStationId(newBoard.getStationId())
                     .withExpectedDepartureTime(trainDeparture.getTime())

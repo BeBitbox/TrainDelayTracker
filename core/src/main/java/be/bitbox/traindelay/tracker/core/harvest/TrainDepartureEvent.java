@@ -29,75 +29,109 @@ public class TrainDepartureEvent {
     private String platform;
     private boolean platformChange;
 
-    private TrainDepartureEvent() {
-    }
-
-    static TrainDepartureEvent create() {
-        return new TrainDepartureEvent();
-    }
+    private TrainDepartureEvent() { }
 
     public LocalDateTime getEventCreationTime() {
         return eventCreationTime;
-    }
-
-    void setEventCreationTime(LocalDateTime eventCreationTime) {
-        this.eventCreationTime = eventCreationTime;
     }
 
     public StationId getStationId() {
         return stationId;
     }
 
-    public void setStationId(StationId stationId) {
-        this.stationId = stationId;
-    }
-
     public LocalDateTime getExpectedDepartureTime() {
         return expectedDepartureTime;
-    }
-
-    void setExpectedDepartureTime(LocalDateTime expectedDepartureTime) {
-        this.expectedDepartureTime = expectedDepartureTime;
     }
 
     public int getDelay() {
         return delay;
     }
 
-    void setDelay(int delay) {
-        this.delay = delay;
-    }
-
     public boolean isCanceled() {
         return canceled;
-    }
-
-    void setCanceled(boolean canceled) {
-        this.canceled = canceled;
     }
 
     public String getVehicule() {
         return vehicule;
     }
 
-    void setVehicule(String vehicule) {
-        this.vehicule = vehicule;
-    }
-
     public String getPlatform() {
         return platform;
-    }
-
-    void setPlatform(String platform) {
-        this.platform = platform;
     }
 
     public boolean isPlatformChange() {
         return platformChange;
     }
 
-    void setPlatformChange(boolean platformChange) {
-        this.platformChange = platformChange;
+    public static class Builder {
+        private LocalDateTime eventCreationTime;
+        private StationId stationId;
+        private LocalDateTime expectedDepartureTime;
+        private int delay;
+        private boolean canceled;
+        private String vehicule;
+        private String platform;
+        private boolean platformChange;
+
+        private Builder() {
+        }
+
+        public static Builder createTrainDepartureEvent() {
+            return new Builder();
+        }
+
+        public Builder withEventCreationTime(LocalDateTime eventCreationTime) {
+            this.eventCreationTime = eventCreationTime;
+            return this;
+        }
+
+        public Builder withStationId(StationId stationId) {
+            this.stationId = stationId;
+            return this;
+        }
+
+        public Builder withExpectedDepartureTime(LocalDateTime expectedDepartureTime) {
+            this.expectedDepartureTime = expectedDepartureTime;
+            return this;
+        }
+
+        public Builder withDelay(int delay) {
+            this.delay = delay;
+            return this;
+        }
+
+        public Builder withCanceled(boolean canceled) {
+            this.canceled = canceled;
+            return this;
+        }
+
+        public Builder withVehicule(String vehicule) {
+            this.vehicule = vehicule;
+            return this;
+        }
+
+        public Builder withPlatform(String platform) {
+            this.platform = platform;
+            return this;
+        }
+
+        public Builder withPlatformChange(boolean platformChange) {
+            this.platformChange = platformChange;
+            return this;
+        }
+
+        public TrainDepartureEvent build() {
+            TrainDepartureEvent trainDepartureEvent = new TrainDepartureEvent();
+            trainDepartureEvent.eventCreationTime = eventCreationTime;
+            trainDepartureEvent.stationId = stationId;
+            trainDepartureEvent.expectedDepartureTime = expectedDepartureTime;
+            trainDepartureEvent.delay = delay;
+            trainDepartureEvent.canceled = canceled;
+            trainDepartureEvent.vehicule = vehicule;
+            trainDepartureEvent.platform = platform;
+            trainDepartureEvent.platformChange = platformChange;
+            return trainDepartureEvent;
+        }
     }
 
     @Override
