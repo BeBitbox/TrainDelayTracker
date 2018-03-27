@@ -17,6 +17,8 @@ package be.bitbox.traindelay.tracker.core;
 
 public class ValidationUtils {
 
+    private ValidationUtils() {}
+
     public static void checkNotEmpty(String toBeValidated, String message) {
         if (toBeValidated == null || toBeValidated.isEmpty()) {
             throw new IllegalArgumentException(message);
