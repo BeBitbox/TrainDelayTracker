@@ -16,10 +16,7 @@
 package be.bitbox.traindelay.tracker.core.harvest;
 
 import be.bitbox.traindelay.tracker.core.TrainDeparture;
-import be.bitbox.traindelay.tracker.core.board.Board;
-import be.bitbox.traindelay.tracker.core.board.BoardNotFoundException;
-import be.bitbox.traindelay.tracker.core.board.BoardRequestException;
-import be.bitbox.traindelay.tracker.core.board.BoardRequester;
+import be.bitbox.traindelay.tracker.core.board.*;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationAvailabilityMonitor;
 import be.bitbox.traindelay.tracker.core.station.StationId;
@@ -45,14 +42,16 @@ class BoardHarvester {
     private final StationAvailabilityMonitor stationAvailabilityMonitor;
     private final EventBus eventBus;
     private final Map<StationId, Board> lastBoards;
+    private final BoardDao boardDao;
 
     @Autowired
     BoardHarvester(BoardRequester boardRequester,
                    StationAvailabilityMonitor stationAvailabilityMonitor,
-                   EventBus eventBus) {
+                   EventBus eventBus, BoardDao boardDao) {
         this.boardRequester = boardRequester;
         this.stationAvailabilityMonitor = stationAvailabilityMonitor;
         this.eventBus = eventBus;
+        this.boardDao = boardDao;
         lastBoards = new HashMap<>();
     }
 
@@ -67,9 +66,13 @@ class BoardHarvester {
                 .forEach(station -> {
                     try {
                         Board board = boardRequester.requestBoard(station.stationId());
-                        if (lastBoards.containsKey(station.stationId())) {
-                            compareBoards(lastBoards.get(station.stationId()), board);
+
+                        Board lastBoard = getLastBoard(station);
+                        if (lastBoard != null) {
+                            compareBoards(lastBoard, board);
                         }
+
+                        boardDao.saveBoard(board);
                         lastBoards.put(station.stationId(), board);
                         stationAvailabilityMonitor.positiveFeedbackFor(station);
                     } catch (BoardNotFoundException ex) {
@@ -81,6 +84,16 @@ class BoardHarvester {
                     }
                 });
         LOGGER.info("Stop Harvest");
+    }
+
+    private Board getLastBoard(Station station) {
+        Board lastBoard;
+        if (lastBoards.containsKey(station.stationId())) {
+            lastBoard = lastBoards.get(station.stationId());
+        } else {
+            lastBoard = boardDao.getLastBoardFor(station.stationId());
+        }
+        return lastBoard;
     }
 
     private void compareBoards(Board oldBoard, Board newBoard) {

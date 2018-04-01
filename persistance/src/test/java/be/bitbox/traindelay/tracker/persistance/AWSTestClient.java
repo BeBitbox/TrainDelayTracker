@@ -20,9 +20,9 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 
-class AWSTestClient {
+public class AWSTestClient {
 
-    static AmazonDynamoDB create() {
+    public static AmazonDynamoDB create() {
         AWSCredentials credentials = getAwsCredentials();
         return AmazonDynamoDBClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
