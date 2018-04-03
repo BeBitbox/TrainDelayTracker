@@ -60,29 +60,26 @@ class BoardHarvester {
         List<Station> trainStations = stationAvailabilityMonitor.getTrainStations();
         LOGGER.info("Start Harvest for {} stations", trainStations.size());
 
-        trainStations
-                .stream()
-                .parallel()
-                .forEach(station -> {
-                    try {
-                        Board board = boardRequester.requestBoard(station.stationId());
+        trainStations.forEach(station -> {
+            try {
+                Board board = boardRequester.requestBoard(station.stationId());
 
-                        Board lastBoard = getLastBoard(station);
-                        if (lastBoard != null) {
-                            compareBoards(lastBoard, board);
-                        }
+                Board lastBoard = getLastBoard(station);
+                if (lastBoard != null) {
+                    compareBoards(lastBoard, board);
+                }
 
-                        boardDao.saveBoard(board);
-                        lastBoards.put(station.stationId(), board);
-                        stationAvailabilityMonitor.positiveFeedbackFor(station);
-                    } catch (BoardNotFoundException ex) {
-                        stationAvailabilityMonitor.negativeFeedbackFor(station);
-                        LOGGER.warn(ex.getMessage());
-                    } catch (BoardRequestException ex) {
-                        stationAvailabilityMonitor.negativeFeedbackFor(station);
-                        LOGGER.error("Message occured during request", ex);
-                    }
-                });
+                boardDao.saveBoard(board);
+                lastBoards.put(station.stationId(), board);
+                stationAvailabilityMonitor.positiveFeedbackFor(station);
+            } catch (BoardNotFoundException ex) {
+                stationAvailabilityMonitor.negativeFeedbackFor(station);
+                LOGGER.warn(ex.getMessage());
+            } catch (BoardRequestException ex) {
+                stationAvailabilityMonitor.negativeFeedbackFor(station);
+                LOGGER.error("Message occured during request", ex);
+            }
+        });
         LOGGER.info("Stop Harvest");
     }
 
