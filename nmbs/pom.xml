@@ -22,6 +22,10 @@
             <groupId>be.bitbox.traindelay.tracker.core</groupId>
             <artifactId>TrainDelayCore</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
