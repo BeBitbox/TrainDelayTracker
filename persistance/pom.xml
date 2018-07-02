@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>be.bitbox.traindelay.tracker.persistence</groupId>
-    <artifactId>TrainDelayPersistance</artifactId>
+    <artifactId>persistance</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TrainDelayPersistance</name>
     <description>Store traindelay information</description>
@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>be.bitbox.traindelay.tracker.core</groupId>
-            <artifactId>TrainDelayCore</artifactId>
+            <artifactId>core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>

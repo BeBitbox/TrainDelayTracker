@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>be.bitbox.traindelay.tracker.core</groupId>
-    <artifactId>TrainDelayCore</artifactId>
+    <artifactId>core</artifactId>
     <name>TrainDelayCore</name>
     <description>Core to farm the traindelay events</description>
 

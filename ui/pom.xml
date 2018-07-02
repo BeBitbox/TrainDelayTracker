@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>be.bitbox.traindelay.tracker.ui</groupId>
-    <artifactId>TrainDelayTrackerUI</artifactId>
+    <artifactId>ui</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TrainDelayTrackerUI</name>
     <description>The UI for traindelay events</description>
@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>be.bitbox.traindelay.tracker.core</groupId>
-            <artifactId>TrainDelayCore</artifactId>
+            <artifactId>core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>

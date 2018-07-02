@@ -16,6 +16,14 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <modules>
+        <module>core</module>
+        <module>ui</module>
+        <module>persistance</module>
+        <module>nmbs</module>
+        <module>application</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -42,17 +50,17 @@
 
             <dependency>
                 <groupId>be.bitbox.traindelay.tracker.core</groupId>
-                <artifactId>TrainDelayCore</artifactId>
+                <artifactId>core</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>be.bitbox.traindelay.tracker</groupId>
-                <artifactId>TrainDelayTrackerNMBS</artifactId>
+                <artifactId>nmbs</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>be.bitbox.traindelay.tracker.ui</groupId>
-                <artifactId>TrainDelayTrackerUI</artifactId>
+                <artifactId>ui</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>be.bitbox.traindelay.tracker</groupId>
-    <artifactId>TrainDelayTrackerApplication</artifactId>
+    <artifactId>application</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>TrainDelayTrackerApplication</name>
@@ -21,22 +21,22 @@
         </dependency>
         <dependency>
             <groupId>be.bitbox.traindelay.tracker.core</groupId>
-            <artifactId>TrainDelayCore</artifactId>
+            <artifactId>core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>be.bitbox.traindelay.tracker</groupId>
-            <artifactId>TrainDelayTrackerNMBS</artifactId>
+            <artifactId>nmbs</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>be.bitbox.traindelay.tracker.persistence</groupId>
-            <artifactId>TrainDelayPersistance</artifactId>
+            <artifactId>persistance</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>be.bitbox.traindelay.tracker.ui</groupId>
-            <artifactId>TrainDelayTrackerUI</artifactId>
+            <artifactId>ui</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
