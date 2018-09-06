@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Bitbox : TrainDelayTracker
+ * Copyright 2018 Bitbox : TrainDelayTracker
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,38 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.nmbs.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Departures {
-    private int number;
-    private List<Departure> departure;
+public class ServiceResult {
+    private String err;
 
-    public int getNumber() {
-        return number;
+    private ResultDetails res;
+
+    public String getErr() {
+        return err;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setErr(String err) {
+        this.err = err;
     }
 
-    public List<Departure> getDeparture() {
-        return departure;
+    public ResultDetails getRes() {
+        return res;
     }
 
-    public void setDeparture(List<Departure> departure) {
-        this.departure = departure;
-    }
-
-    @Override
-    public String toString() {
-        return "Departures{" +
-                "number=" + number +
-                ", departure=" + departure +
-                '}';
+    public void setRes(ResultDetails res) {
+        this.res = res;
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Bitbox : TrainDelayTracker
+ * Copyright 2017 Bitbox : TrainDelayTracker
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,60 +13,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.irail;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.Station;
-import be.bitbox.traindelay.tracker.nmbs.response.Response;
-import be.bitbox.traindelay.tracker.nmbs.response.ResponseToBoardTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.time.LocalDate;
 
 import static be.bitbox.traindelay.tracker.core.board.BoardNotFoundException.aBoardNotFoundException;
 import static be.bitbox.traindelay.tracker.core.board.BoardRequestException.aBoardRequestException;
 
 @Component
-public class NMBSBoardRequester implements BoardRequester {
+public class IRailBoardRequester implements BoardRequester {
 
-    private final String nmbsBaseUrl;
-    private final ResponseToBoardTranslator translator;
+    private final String iRailBaseUrl;
+    private final IRailTranslator translator;
 
     @Autowired
-    public NMBSBoardRequester(String nmbsBaseUrl, ResponseToBoardTranslator translator) {
-        this.nmbsBaseUrl = nmbsBaseUrl;
-        this.translator = translator;
+    public IRailBoardRequester(@Value("${tracker.base.url}") String iRailBaseUrl) {
+        this.translator = IRailTranslator.INSTANCE;
+        this.iRailBaseUrl = iRailBaseUrl;
     }
 
     @Override
     public Board requestBoardFor(Station station) {
         RestTemplate restTemplate = new RestTemplate();
-        Request request = RequestFactory.aRequest()
-                .withStationId(station.stationId().getId())
-                .withStationName(station.name())
-                .withDate(LocalDate.now())
-                .build();
-
+        String stationId = station.stationId().getId();
+        String url = iRailBaseUrl + stationId + "&format=json";
         try {
-            ResponseEntity<Response> responseEntity = restTemplate.postForEntity(nmbsBaseUrl, request, Response.class);
-            if (!responseEntity.getStatusCode().is2xxSuccessful()) {
-                throw aBoardNotFoundException("Error finding board for " + station + " : " + responseEntity.getStatusCode().getReasonPhrase());
-            }
-            return translator.translateFrom(responseEntity.getBody());
+            LiveBoard liveBoard = restTemplate.getForObject(url, LiveBoard.class);
+            return translator.translateFrom(liveBoard);
         } catch (HttpClientErrorException ex) {
             if (ex.getStatusCode() == HttpStatus.NOT_FOUND) {
-                throw aBoardNotFoundException("Board not found for " + station);
+                throw aBoardNotFoundException("Board not found for " + stationId);
             } else {
-                throw aBoardRequestException("HttpClientError during request " + nmbsBaseUrl, ex);
+                throw aBoardRequestException("HttpClientError during request " + url, ex);
             }
         } catch (Exception ex) {
-            throw aBoardRequestException("Error during request " + nmbsBaseUrl, ex);
+            throw aBoardRequestException("Error during request " + url, ex);
         }
     }
 }

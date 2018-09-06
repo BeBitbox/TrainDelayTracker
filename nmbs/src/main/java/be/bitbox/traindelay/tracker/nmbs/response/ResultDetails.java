@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Bitbox : TrainDelayTracker
+ * Copyright 2018 Bitbox : TrainDelayTracker
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.core.board;
+package be.bitbox.traindelay.tracker.nmbs.response;
 
-import be.bitbox.traindelay.tracker.core.station.Station;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public interface BoardRequester {
-    Board requestBoardFor(Station station);
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ResultDetails {
+    private Detail[] jnyL;
+
+    private Common common;
+
+    public Detail[] getJnyL() {
+        return jnyL;
+    }
+
+    public Common getCommon() {
+        return common;
+    }
+
+    public void setCommon(Common common) {
+        this.common = common;
+    }
+
+    public void setJnyL(Detail[] jnyL) {
+        this.jnyL = jnyL;
+    }
 }

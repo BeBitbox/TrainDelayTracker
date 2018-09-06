@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.irail;
 
 import be.bitbox.traindelay.tracker.core.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.board.Board;
@@ -21,29 +21,29 @@ import static java.time.Month.SEPTEMBER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class NMBSTranslatorTest {
+public class IRailTranslatorTest {
 
     private static final String STATION_ID = "BE.NMBS.008892106";
     private static final String VEHICLE = "BE.NMBS.IC3016";
     private static final String PLATFORM = "4";
 
-    private NMBSTranslator nmbsTranslator = NMBSTranslator.INSTANCE;
+    private IRailTranslator IRailTranslator = be.bitbox.traindelay.tracker.irail.IRailTranslator.INSTANCE;
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromNull_ShouldThrowExceptions() {
-        nmbsTranslator.translateFrom(null);
+        IRailTranslator.translateFrom(null);
     }
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromEmptyBoard_ShouldThrowExceptions() {
-        nmbsTranslator.translateFrom(new LiveBoard());
+        IRailTranslator.translateFrom(new LiveBoard());
     }
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromBoardWithEmptyStationID_ShouldThrowExceptions() {
         LiveBoard liveBoard = new LiveBoard();
         liveBoard.setStationinfo(new Stationinfo());
-        nmbsTranslator.translateFrom(liveBoard);
+        IRailTranslator.translateFrom(liveBoard);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class NMBSTranslatorTest {
         liveBoard.setStationinfo(stationinfo);
         liveBoard.setTimestamp(1220227200L);
 
-        Board board = nmbsTranslator.translateFrom(liveBoard);
+        Board board = IRailTranslator.translateFrom(liveBoard);
 
         StationId expectedStationId = aStationId(STATION_ID);
         LocalDateTime expectedTime = LocalDateTime.of(2008, SEPTEMBER, 1, 2, 0, 0);
@@ -81,7 +81,7 @@ public class NMBSTranslatorTest {
         departures.setDeparture(Collections.singletonList(departure));
         liveBoard.setDepartures(departures);
 
-        Board board = nmbsTranslator.translateFrom(liveBoard);
+        Board board = IRailTranslator.translateFrom(liveBoard);
 
         List<TrainDeparture> trainDepartures = board.getDepartures();
         assertThat(trainDepartures.size(), is(1));
@@ -96,7 +96,7 @@ public class NMBSTranslatorTest {
         InputStream resourceAsStream = this.getClass().getResourceAsStream("liveboard.json");
         ObjectMapper objectMapper = new ObjectMapper();
         LiveBoard liveBoard = objectMapper.readValue(resourceAsStream, LiveBoard.class);
-        Board board = nmbsTranslator.translateFrom(liveBoard);
+        Board board = IRailTranslator.translateFrom(liveBoard);
 
         assertThat(board.getStationId(), is(aStationId("BE.NMBS.008814001")));
         assertThat(board.getTime(), is(LocalDateTime.of(2017, DECEMBER, 22, 17, 38, 46)));

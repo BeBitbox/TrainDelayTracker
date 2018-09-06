@@ -62,7 +62,7 @@ class BoardHarvester {
 
         trainStations.forEach(station -> {
             try {
-                Board board = boardRequester.requestBoard(station.stationId());
+                Board board = boardRequester.requestBoardFor(station);
 
                 Board lastBoard = getLastBoard(station);
                 if (lastBoard != null) {

@@ -13,33 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.irail;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardRequestException;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
+import be.bitbox.traindelay.tracker.core.station.Country;
+import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
+import static be.bitbox.traindelay.tracker.core.station.Station.aStation;
+import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class NMBSBoardRequesterIntegrationTest {
+public class IRailBoardRequesterIntegrationTest {
 
     @Test (expected = BoardRequestException.class)
     public void retrieveBoard_fakeUrl() throws Exception {
-        BoardRequester requestManager = new NMBSBoardRequester("https://fake/?id=");
-        StationId expectedStationID = StationId.aStationId("BE.NMBS.008892106");
-        requestManager.requestBoard(expectedStationID);
+        BoardRequester requestManager = new IRailBoardRequester("https://fake/?id=");
+        Station station = aStation(aStationId("BE.NMBS.008892106"), "fake", Country.BE);
+        requestManager.requestBoardFor(station);
     }
 
     @Test
     public void retrieveBoard_existingUrl() {
-        BoardRequester requestManager = new NMBSBoardRequester("https://api.irail.be/liveboard/?id=");
-        StationId expectedStationID = StationId.aStationId("BE.NMBS.008892106");
-        Board board = requestManager.requestBoard(expectedStationID);
-        assertThat(board.getStationId(), CoreMatchers.is(expectedStationID));
+        BoardRequester requestManager = new IRailBoardRequester("https://api.irail.be/liveboard/?id=");
+        Station station = aStation(aStationId("BE.NMBS.008892106"), "fake", Country.BE);
+        Board board = requestManager.requestBoardFor(station);
+        assertThat(board.getStationId(), CoreMatchers.is(station.stationId()));
         assertTrue(board.getDepartures().size() > 1);
     }
 }

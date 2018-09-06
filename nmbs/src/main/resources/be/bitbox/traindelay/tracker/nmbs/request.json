@@ -1,0 +1,37 @@
+{
+  "authentication": {
+    "type": "AID",
+    "aid": "sncb-mobi"
+  },
+  "client": {
+    "name": "NMBS",
+    "id": "SNCB",
+    "type": "AND",
+    "os": "Android 5.0.2",
+    "ua": "Android_5.0.2",
+    "v": 302132
+  },
+  "svcReqL": [
+    {
+      "req": {
+        "date": "20180822",
+        "stbLocation": {
+          "name": "Deinze",
+          "type": "S",
+          "lid": "A=1@O=Deinze@U=80@L=008892106@B=1@p=1429490515@"
+        },
+        "jnyFilter": [
+          {
+            "value": "11101111000111",
+            "type": "PROD",
+            "mode": "BIT"
+          }
+        ]
+      },
+      "meth": "StationBoard"
+    }
+  ],
+  "formatted": false,
+  "lang": "nld",
+  "ver": "1.21"
+}

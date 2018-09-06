@@ -1,9 +1,10 @@
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.irail;
 
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
+import be.bitbox.traindelay.tracker.nmbs.NMBSStationRetriever;
 import org.junit.Test;
 
 import java.util.List;

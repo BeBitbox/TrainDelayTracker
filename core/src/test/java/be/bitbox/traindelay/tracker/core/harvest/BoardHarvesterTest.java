@@ -68,8 +68,8 @@ public class BoardHarvesterTest {
         BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao);
         boardHarvester.harvest();
 
-        verify(nmbsBoardRequester, atLeastOnce()).requestBoard(id1);
-        verify(nmbsBoardRequester, atLeastOnce()).requestBoard(id2);
+        verify(nmbsBoardRequester, atLeastOnce()).requestBoardFor(station);
+        verify(nmbsBoardRequester, atLeastOnce()).requestBoardFor(station2);
         verify(eventBus, never()).post(any());
         verify(boardDao, times(2)).saveBoard(any());
         verify(boardDao).getLastBoardFor(id1);
@@ -80,7 +80,7 @@ public class BoardHarvesterTest {
     public void checkBoardForEveryTrain_NoChangesInBoard_MultipleHarvest() {
         StationId id = aStationId("id");
         Station station = aStation(id, "name", Country.BE);
-        when(nmbsBoardRequester.requestBoard(id)).thenReturn(aBoardForStation(id, now()));
+        when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(aBoardForStation(id, now()));
         when(stationAvailabilityMonitor.getTrainStations()).thenReturn(singletonList(station));
 
         BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao);
@@ -89,7 +89,7 @@ public class BoardHarvesterTest {
         boardHarvester.harvest();
         boardHarvester.harvest();
 
-        verify(nmbsBoardRequester, times(4)).requestBoard(id);
+        verify(nmbsBoardRequester, times(4)).requestBoardFor(station);
         verify(boardDao).getLastBoardFor(id);
         verify(eventBus, never()).post(any());
         verify(boardDao, times(4)).saveBoard(any());
@@ -112,13 +112,13 @@ public class BoardHarvesterTest {
         boolean platformChange = false;
         board.addDeparture(aTrainDeparture(trainLeavingTime, delay, canceled, vehicule, platform, platformChange));
 
-        when(nmbsBoardRequester.requestBoard(id)).thenReturn(board);
+        when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(board);
         boardHarvester.harvest();
         LocalDateTime boardTime = now();
-        when(nmbsBoardRequester.requestBoard(id)).thenReturn(aBoardForStation(id, boardTime));
+        when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(aBoardForStation(id, boardTime));
         boardHarvester.harvest();
 
-        verify(nmbsBoardRequester, times(2)).requestBoard(id);
+        verify(nmbsBoardRequester, times(2)).requestBoardFor(station);
         TrainDepartureEvent event = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(boardTime)
                 .withStationId(id)
@@ -151,13 +151,13 @@ public class BoardHarvesterTest {
         boolean platformChange = false;
         board.addDeparture(aTrainDeparture(trainLeavingTime, delay, canceled, vehicule, platform, platformChange));
 
-        when(nmbsBoardRequester.requestBoard(id)).thenReturn(board);
+        when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(board);
         boardHarvester.harvest();
         LocalDateTime boardTime = now();
-        when(nmbsBoardRequester.requestBoard(id)).thenReturn(aBoardForStation(id, boardTime));
+        when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(aBoardForStation(id, boardTime));
         boardHarvester.harvest();
 
-        verify(nmbsBoardRequester, times(2)).requestBoard(id);
+        verify(nmbsBoardRequester, times(2)).requestBoardFor(station);
         verify(boardDao).getLastBoardFor(id);
         verify(boardDao, times(2)).saveBoard(any());
         verify(eventBus, never()).post(any());
@@ -187,9 +187,9 @@ public class BoardHarvesterTest {
         board_1_3.addDeparture(aTrainDeparture(trainLeavingTime_1_2_3, 7, false, "MyTrain3", "1", false));
 
         //ASSERTIONS TICK 1
-        when(nmbsBoardRequester.requestBoard(id1)).thenReturn(board_1_1);
-        when(nmbsBoardRequester.requestBoard(id2)).thenReturn(board_1_2);
-        when(nmbsBoardRequester.requestBoard(id3)).thenReturn(board_1_3);
+        when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_1_1);
+        when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_1_2);
+        when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_1_3);
         boardHarvester.harvest();
         verify(eventBus, never()).post(any());
 
@@ -206,9 +206,9 @@ public class BoardHarvesterTest {
         board_2_3.addDeparture(aTrainDeparture(trainLeavingTime_2_3_2, 1, false, "MyTrain2", "4", false));
 
         //ASSERTIONS TICK 2
-        when(nmbsBoardRequester.requestBoard(id1)).thenReturn(board_2_1);
-        when(nmbsBoardRequester.requestBoard(id2)).thenReturn(board_2_2);
-        when(nmbsBoardRequester.requestBoard(id3)).thenReturn(board_2_3);
+        when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_2_1);
+        when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_2_2);
+        when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_2_3);
         boardHarvester.harvest();
         TrainDepartureEvent event1_1 = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(time_2_2)
@@ -247,9 +247,9 @@ public class BoardHarvesterTest {
         board_3_3.addDeparture(aTrainDeparture(trainLeavingTime_3_3_2, 1, false, "MyTrain2", "4", false));
 
         //ASSERTIONS TICK 3
-        when(nmbsBoardRequester.requestBoard(id1)).thenReturn(board_3_1);
-        when(nmbsBoardRequester.requestBoard(id2)).thenReturn(board_3_2);
-        when(nmbsBoardRequester.requestBoard(id3)).thenReturn(board_3_3);
+        when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_3_1);
+        when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_3_2);
+        when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_3_3);
         boardHarvester.harvest();
         verify(eventBus, never()).post(any());
 
@@ -267,9 +267,9 @@ public class BoardHarvesterTest {
         board_4_3.addDeparture(aTrainDeparture(trainLeavingTime_4_3_1, 10, false, "MyTrain2", "4", false));
 
         //ASSERTIONS TICK 4
-        when(nmbsBoardRequester.requestBoard(id1)).thenReturn(board_4_1);
-        when(nmbsBoardRequester.requestBoard(id2)).thenReturn(board_4_2);
-        when(nmbsBoardRequester.requestBoard(id3)).thenReturn(board_4_3);
+        when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_4_1);
+        when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_4_2);
+        when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_4_3);
         boardHarvester.harvest();
         TrainDepartureEvent event4_3 = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(time_4_3)

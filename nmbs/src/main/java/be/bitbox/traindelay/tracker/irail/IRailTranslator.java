@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.irail;
 
 import be.bitbox.traindelay.tracker.core.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.board.Board;
@@ -27,7 +27,7 @@ import java.time.ZoneId;
 import static be.bitbox.traindelay.tracker.core.board.BoardTranslationException.aBoardTranslationException;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 
-enum NMBSTranslator {
+enum IRailTranslator {
 
     INSTANCE;
 
