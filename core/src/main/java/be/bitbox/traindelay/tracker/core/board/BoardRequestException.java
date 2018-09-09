@@ -21,7 +21,15 @@ public class BoardRequestException extends RuntimeException {
         super(message, ex);
     }
 
+    private BoardRequestException(String message) {
+        super(message);
+    }
+
     public static BoardRequestException aBoardRequestException(String message, Throwable ex) {
         return new BoardRequestException(message, ex);
+    }
+
+    public static BoardRequestException aBoardRequestException(String message) {
+        return new BoardRequestException(message);
     }
 }

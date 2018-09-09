@@ -24,6 +24,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+import static be.bitbox.traindelay.tracker.core.TrainDeparture.aTrainDeparture;
+import static be.bitbox.traindelay.tracker.core.board.Board.*;
 import static be.bitbox.traindelay.tracker.core.board.BoardTranslationException.aBoardTranslationException;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 
@@ -41,7 +43,7 @@ enum IRailTranslator {
         }
         StationId stationId = retrieveStationId(liveBoard.getStationinfo());
         LocalDateTime localDateTime = translateToDateFrom(liveBoard.getTimestamp());
-        Board board = Board.aBoardForStation(stationId, localDateTime);
+        Board board = aBoardForStation(stationId, localDateTime);
         addDeparturesIfPresent(board, liveBoard.getDepartures());
         return board;
     }
@@ -58,7 +60,7 @@ enum IRailTranslator {
         boolean canceled = departure.getCanceled() != 0;
         String vehicule = getVehiculeFrom(departure.getVehicle());
         Platforminfo platforminfo = departure.getPlatforminfo();
-        return TrainDeparture.aTrainDeparture(time, departure.getDelay(), canceled, vehicule, getPlatform(platforminfo), getPlatformChanged(platforminfo));
+        return aTrainDeparture(time, departure.getDelay(), canceled, vehicule, getPlatform(platforminfo), getPlatformChanged(platforminfo));
     }
 
     private String getVehiculeFrom(String vehicule) {

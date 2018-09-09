@@ -28,6 +28,8 @@ public class StopInformation {
 
     private String dPlatfS;
 
+    private int dProdX;
+
     private boolean dCncl;
 
     public String getdTimeS() {
@@ -68,5 +70,13 @@ public class StopInformation {
 
     public void setdPlatfS(String dPlatfS) {
         this.dPlatfS = dPlatfS;
+    }
+
+    public int getdProdX() {
+        return dProdX;
+    }
+
+    public void setdProdX(int dProdX) {
+        this.dProdX = dProdX;
     }
 }

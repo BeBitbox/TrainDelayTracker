@@ -35,7 +35,7 @@ public class IRailBoardRequester implements BoardRequester {
     private final IRailTranslator translator;
 
     @Autowired
-    public IRailBoardRequester(@Value("${tracker.base.url}") String iRailBaseUrl) {
+    public IRailBoardRequester(@Value("${irail.base.url}") String iRailBaseUrl) {
         this.translator = IRailTranslator.INSTANCE;
         this.iRailBaseUrl = iRailBaseUrl;
     }

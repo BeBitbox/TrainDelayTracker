@@ -37,7 +37,11 @@ public class Request {
 
     Request(String stationName, String stationId, LocalDate localDate) {
         this.stationName = stationName;
-        this.stationId = stationId;
+        if (stationId.startsWith("BE.NMBS.00")) {
+            this.stationId = stationId.substring(10);
+        } else {
+            this.stationId = stationId;
+        }
         this.date = localDate;
     }
 
@@ -169,10 +173,6 @@ public class Request {
 
     private class StbLocation {
         private static final String TYPE = "S";
-
-        public String getName() {
-            return stationName;
-        }
 
         public String getType() {
             return TYPE;

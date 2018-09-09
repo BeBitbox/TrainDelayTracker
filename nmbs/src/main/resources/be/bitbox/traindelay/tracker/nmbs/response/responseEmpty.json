@@ -1,0 +1,31 @@
+{
+  "ver": "1.21",
+  "lang": "nld",
+  "id": "ewkegq3e4u8qgkw8",
+  "err": "OK",
+  "svcResL": [
+    {
+      "meth": "StationBoard",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [],
+          "prodL": [],
+          "polyL": [],
+          "layerL": [],
+          "crdSysL": [],
+          "opL": [],
+          "remL": [],
+          "icoL": []
+        },
+        "type": "DEP",
+        "jnyL": [],
+        "fpB": "20180902",
+        "fpE": "20191214",
+        "planrtTS": "1536482732",
+        "sD": "20180909",
+        "sT": "104600"
+      }
+    }
+  ]
+}

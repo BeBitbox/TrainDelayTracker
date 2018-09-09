@@ -16,8 +16,10 @@
 package be.bitbox.traindelay.tracker.nmbs.response;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
+import be.bitbox.traindelay.tracker.core.board.BoardNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -25,10 +27,12 @@ import java.util.stream.Stream;
 
 import static be.bitbox.traindelay.tracker.core.TrainDeparture.aTrainDeparture;
 import static be.bitbox.traindelay.tracker.core.board.Board.aBoardForStation;
+import static be.bitbox.traindelay.tracker.core.board.BoardNotFoundException.aBoardNotFoundException;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 
-@Component
-public class ResponseToBoardTranslator {
+public enum ResponseToBoardTranslator {
+    INSTANCE;
+
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     private static final String VEHICLE_PREFIX = "BE.NMBS.";
     private static final String STATION_PREFIX = "BE.NMBS.00";
@@ -37,22 +41,24 @@ public class ResponseToBoardTranslator {
     public Board translateFrom(Response response) {
         ResultDetails resultDetails = response.getSvcResL()[0].getRes();
 
+        if (resultDetails.getCommon().getLocL().length == 0) {
+            throw aBoardNotFoundException("Board not found");
+        }
         String extStationID = resultDetails.getCommon().getLocL()[0].getExtId();
         Board board = aBoardForStation(aStationId(STATION_PREFIX + extStationID), LocalDateTime.now());
 
         String[] vehicleNames = Stream.of(resultDetails.getCommon().getProdL())
-                .map(Vehicule::getName)
+                .map(vehicule -> vehicule.getName().replaceAll(" ", ""))
                 .toArray(String[]::new);
 
-        for (int i = 0; i < resultDetails.getJnyL().length; i++) {
-            Detail detail = resultDetails.getJnyL()[i];
+        for (Detail detail : resultDetails.getJnyL()) {
             StopInformation stop = detail.getStbStop();
             PlatformTranslator platformTranslator = new PlatformTranslator(stop);
 
-            LocalDateTime scheduledTime = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + stop.getdTimeS()));
+            LocalDateTime scheduledTime = getScheduledTime(detail, stop);
             int delay = getDelayFrom(detail, scheduledTime);
             boolean canceled = stop.isdCncl();
-            String vehicle = VEHICLE_PREFIX + vehicleNames[i];
+            String vehicle = VEHICLE_PREFIX + vehicleNames[stop.getdProdX()];
             String platform = platformTranslator.platform;
             boolean platformChange = platformTranslator.platformChange;
             board.addDeparture(aTrainDeparture(scheduledTime, delay, canceled, vehicle, platform, platformChange));
@@ -61,11 +67,23 @@ public class ResponseToBoardTranslator {
         return board;
     }
 
+    private LocalDateTime getScheduledTime(Detail detail, StopInformation stop) {
+        LocalDateTime scheduledTime;
+        if (stop.getdTimeS().length() > 6) {
+            LocalDateTime oldDate = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + stop.getdTimeS().substring(2)));
+            long extraDays = Long.parseLong(stop.getdTimeS().substring(0, 2));
+            scheduledTime = oldDate.plusDays(extraDays);
+        } else {
+            scheduledTime = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + stop.getdTimeS()));
+        }
+        return scheduledTime;
+    }
+
     private int getDelayFrom(Detail detail, LocalDateTime scheduledTime) {
         int delay = 0;
         if (detail.getStbStop().getdTimeR() != null) {
             LocalDateTime expectedTime = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + detail.getStbStop().getdTimeR()));
-            delay = (int) scheduledTime.until(expectedTime, ChronoUnit.MINUTES);
+            delay = (int) scheduledTime.until(expectedTime, ChronoUnit.SECONDS);
         }
         return delay;
     }
@@ -78,7 +96,7 @@ public class ResponseToBoardTranslator {
             if (stopInformation.getdPlatfR() != null) {
                 platform = stopInformation.getdPlatfR();
                 platformChange = true;
-            } else if (stopInformation.getdPlatfS() != null){
+            } else if (stopInformation.getdPlatfS() != null) {
                 platform = stopInformation.getdPlatfS();
                 platformChange = false;
             } else {
