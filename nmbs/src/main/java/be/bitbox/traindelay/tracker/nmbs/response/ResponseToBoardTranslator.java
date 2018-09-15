@@ -16,10 +16,7 @@
 package be.bitbox.traindelay.tracker.nmbs.response;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
-import be.bitbox.traindelay.tracker.core.board.BoardNotFoundException;
-import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -70,19 +67,28 @@ public enum ResponseToBoardTranslator {
     private LocalDateTime getScheduledTime(Detail detail, StopInformation stop) {
         LocalDateTime scheduledTime;
         if (stop.getdTimeS().length() > 6) {
-            LocalDateTime oldDate = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + stop.getdTimeS().substring(2)));
-            long extraDays = Long.parseLong(stop.getdTimeS().substring(0, 2));
-            scheduledTime = oldDate.plusDays(extraDays);
+            scheduledTime = getLocalDateTimeInFuture(detail, stop.getdTimeS());
         } else {
             scheduledTime = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + stop.getdTimeS()));
         }
         return scheduledTime;
     }
 
+    private LocalDateTime getLocalDateTimeInFuture(Detail detail, String time) {
+        LocalDateTime oldDate = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + time.substring(2)));
+        long extraDays = Long.parseLong(time.substring(0, 2));
+        return oldDate.plusDays(extraDays);
+    }
+
     private int getDelayFrom(Detail detail, LocalDateTime scheduledTime) {
         int delay = 0;
         if (detail.getStbStop().getdTimeR() != null) {
-            LocalDateTime expectedTime = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + detail.getStbStop().getdTimeR()));
+            LocalDateTime expectedTime;
+            if (detail.getStbStop().getdTimeR().length() > 6) {
+                expectedTime = getLocalDateTimeInFuture(detail, detail.getStbStop().getdTimeR());
+            } else {
+                expectedTime = LocalDateTime.from(DATE_TIME_FORMATTER.parse(detail.getDate() + detail.getStbStop().getdTimeR()));
+            }
             delay = (int) scheduledTime.until(expectedTime, ChronoUnit.SECONDS);
         }
         return delay;

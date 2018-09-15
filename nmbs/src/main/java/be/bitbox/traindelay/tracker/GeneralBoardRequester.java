@@ -2,19 +2,21 @@ package be.bitbox.traindelay.tracker;
 
 
 import be.bitbox.traindelay.tracker.core.board.Board;
+import be.bitbox.traindelay.tracker.core.board.BoardRequestException;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.irail.IRailBoardRequester;
 import be.bitbox.traindelay.tracker.nmbs.NMBSBoardRequester;
-import com.google.common.base.Stopwatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.TimeUnit;
-
+@Primary
 @Component
 public class GeneralBoardRequester implements BoardRequester {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeneralBoardRequester.class);
     private final NMBSBoardRequester nmbsBoardRequester;
     private final IRailBoardRequester iRailBoardRequester;
 
@@ -26,20 +28,13 @@ public class GeneralBoardRequester implements BoardRequester {
 
     @Override
     public Board requestBoardFor(Station station) {
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        Board nmbsBoard = nmbsBoardRequester.requestBoardFor(station);
-        long elapsed = stopwatch.elapsed(TimeUnit.MILLISECONDS);
-        stopwatch.reset().start();
-        Board iRailBoard = iRailBoardRequester.requestBoardFor(station);
-        stopwatch.stop();
-        System.out.println("NMBS : " + elapsed + "ms IRail : " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + "ms");
-        if (nmbsBoard.getDepartures().equals(iRailBoard.getDepartures())) {
-            System.out.println("both boards are equal");
-        } else {
-            System.err.println("difference");
+        Board board;
+        try {
+            board = nmbsBoardRequester.requestBoardFor(station);
+        } catch (BoardRequestException ex) {
+            LOGGER.error("Failure for NMBS, trying iRail for station " + station, ex);
+            board = iRailBoardRequester.requestBoardFor(station);
         }
-        System.out.println(iRailBoard);
-        System.out.println(nmbsBoard);
-        return nmbsBoard;
+        return board;
     }
 }

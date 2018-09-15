@@ -23,17 +23,14 @@ import be.bitbox.traindelay.tracker.nmbs.response.Response;
 import be.bitbox.traindelay.tracker.nmbs.response.ResponseToBoardTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 
-import static be.bitbox.traindelay.tracker.core.board.BoardNotFoundException.aBoardNotFoundException;
 import static be.bitbox.traindelay.tracker.core.board.BoardRequestException.aBoardRequestException;
-import static be.bitbox.traindelay.tracker.nmbs.RequestFactory.*;
+import static be.bitbox.traindelay.tracker.nmbs.RequestFactory.aRequest;
 
 @Component
 public class NMBSBoardRequester implements BoardRequester {

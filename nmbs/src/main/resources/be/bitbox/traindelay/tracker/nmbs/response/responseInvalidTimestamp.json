@@ -1,0 +1,1852 @@
+{
+  "ver": "1.21",
+  "lang": "nld",
+  "id": "4aisuuhukcijx44c",
+  "err": "OK",
+  "svcResL": [
+    {
+      "meth": "StationBoard",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [
+            {
+              "lid": "A=1@O=Erps-Kwerps@X=4585002@Y=50896510@U=80@L=8811262@",
+              "type": "S",
+              "name": "Erps-Kwerps",
+              "icoX": 1,
+              "extId": "8811262",
+              "state": "F",
+              "crd": {
+                "x": 4585002,
+                "y": 50896510,
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 64
+            }
+          ],
+          "prodL": [
+            {
+              "name": "S2 3666",
+              "number": "3666",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3666",
+                "num": "3666",
+                "matchId": "3666",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3789",
+              "number": "3789",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3789",
+                "num": "3789",
+                "matchId": "3789",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3767",
+              "number": "3767",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3767",
+                "num": "3767",
+                "matchId": "3767",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3690",
+              "number": "3690",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3690",
+                "num": "3690",
+                "matchId": "3690",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3667",
+              "number": "3667",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3667",
+                "num": "3667",
+                "matchId": "3667",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3790",
+              "number": "3790",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3790",
+                "num": "3790",
+                "matchId": "3790",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3768",
+              "number": "3768",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3768",
+                "num": "3768",
+                "matchId": "3768",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3691",
+              "number": "3691",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3691",
+                "num": "3691",
+                "matchId": "3691",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3668",
+              "number": "3668",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3668",
+                "num": "3668",
+                "matchId": "3668",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3692",
+              "number": "3692",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3692",
+                "num": "3692",
+                "matchId": "3692",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3669",
+              "number": "3669",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3669",
+                "num": "3669",
+                "matchId": "3669",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3693",
+              "number": "3693",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3693",
+                "num": "3693",
+                "matchId": "3693",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3670",
+              "number": "3670",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3670",
+                "num": "3670",
+                "matchId": "3670",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3671",
+              "number": "3671",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3671",
+                "num": "3671",
+                "matchId": "3671",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3672",
+              "number": "3672",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3672",
+                "num": "3672",
+                "matchId": "3672",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3676",
+              "number": "3676",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3676",
+                "num": "3676",
+                "matchId": "3676",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3677",
+              "number": "3677",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3677",
+                "num": "3677",
+                "matchId": "3677",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3777",
+              "number": "3777",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3777",
+                "num": "3777",
+                "matchId": "3777",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3755",
+              "number": "3755",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3755",
+                "num": "3755",
+                "matchId": "3755",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3678",
+              "number": "3678",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3678",
+                "num": "3678",
+                "matchId": "3678",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3655",
+              "number": "3655",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3655",
+                "num": "3655",
+                "matchId": "3655",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3778",
+              "number": "3778",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3778",
+                "num": "3778",
+                "matchId": "3778",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3756",
+              "number": "3756",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3756",
+                "num": "3756",
+                "matchId": "3756",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3679",
+              "number": "3679",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3679",
+                "num": "3679",
+                "matchId": "3679",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3656",
+              "number": "3656",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3656",
+                "num": "3656",
+                "matchId": "3656",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3779",
+              "number": "3779",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3779",
+                "num": "3779",
+                "matchId": "3779",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3757",
+              "number": "3757",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3757",
+                "num": "3757",
+                "matchId": "3757",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3680",
+              "number": "3680",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3680",
+                "num": "3680",
+                "matchId": "3680",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3657",
+              "number": "3657",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3657",
+                "num": "3657",
+                "matchId": "3657",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3780",
+              "number": "3780",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3780",
+                "num": "3780",
+                "matchId": "3780",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3758",
+              "number": "3758",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3758",
+                "num": "3758",
+                "matchId": "3758",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3681",
+              "number": "3681",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3681",
+                "num": "3681",
+                "matchId": "3681",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3658",
+              "number": "3658",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3658",
+                "num": "3658",
+                "matchId": "3658",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3781",
+              "number": "3781",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3781",
+                "num": "3781",
+                "matchId": "3781",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3759",
+              "number": "3759",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3759",
+                "num": "3759",
+                "matchId": "3759",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3682",
+              "number": "3682",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3682",
+                "num": "3682",
+                "matchId": "3682",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3659",
+              "number": "3659",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3659",
+                "num": "3659",
+                "matchId": "3659",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3782",
+              "number": "3782",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3782",
+                "num": "3782",
+                "matchId": "3782",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3760",
+              "number": "3760",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3760",
+                "num": "3760",
+                "matchId": "3760",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3683",
+              "number": "3683",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3683",
+                "num": "3683",
+                "matchId": "3683",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3660",
+              "number": "3660",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3660",
+                "num": "3660",
+                "matchId": "3660",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3783",
+              "number": "3783",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3783",
+                "num": "3783",
+                "matchId": "3783",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3761",
+              "number": "3761",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3761",
+                "num": "3761",
+                "matchId": "3761",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3684",
+              "number": "3684",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3684",
+                "num": "3684",
+                "matchId": "3684",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3661",
+              "number": "3661",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3661",
+                "num": "3661",
+                "matchId": "3661",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3784",
+              "number": "3784",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3784",
+                "num": "3784",
+                "matchId": "3784",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3762",
+              "number": "3762",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3762",
+                "num": "3762",
+                "matchId": "3762",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3685",
+              "number": "3685",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3685",
+                "num": "3685",
+                "matchId": "3685",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3662",
+              "number": "3662",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3662",
+                "num": "3662",
+                "matchId": "3662",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3785",
+              "number": "3785",
+              "icoX": 0,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3785",
+                "num": "3785",
+                "matchId": "3785",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            }
+          ],
+          "polyL": [],
+          "layerL": [
+            {
+              "id": "standard",
+              "name": "standard",
+              "index": 0,
+              "annoCnt": 0
+            }
+          ],
+          "crdSysL": [
+            {
+              "id": "standard",
+              "index": 0,
+              "type": "WGS84"
+            }
+          ],
+          "opL": [],
+          "remL": [],
+          "icoL": [
+            {
+              "res": "prod_comm",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255
+              },
+              "bg": {
+                "r": 255,
+                "g": 175,
+                "b": 50
+              }
+            },
+            {
+              "res": "STA_SNCB"
+            }
+          ]
+        },
+        "type": "DEP",
+        "jnyL": [
+          {
+            "jid": "1|3333|1|80|12092018",
+            "date": "20180912",
+            "prodX": 0,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 0,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "180600",
+              "dTimeR": "181000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3538|2|80|12092018",
+            "date": "20180912",
+            "prodX": 1,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 1,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "182400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3525|0|80|12092018",
+            "date": "20180912",
+            "prodX": 2,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 2,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "183500",
+              "dTimeR": "183500",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3352|2|80|12092018",
+            "date": "20180912",
+            "prodX": 3,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 3,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "185400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3338|0|80|12092018",
+            "date": "20180912",
+            "prodX": 4,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 4,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "190600",
+              "dTimeR": "190600",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3538|3|80|12092018",
+            "date": "20180912",
+            "prodX": 5,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 5,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "192400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3525|1|80|12092018",
+            "date": "20180912",
+            "prodX": 6,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 6,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "193500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3352|3|80|12092018",
+            "date": "20180912",
+            "prodX": 7,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 7,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "195400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3339|0|80|12092018",
+            "date": "20180912",
+            "prodX": 8,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 8,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "200600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3352|4|80|12092018",
+            "date": "20180912",
+            "prodX": 9,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 9,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "205400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3339|1|80|12092018",
+            "date": "20180912",
+            "prodX": 10,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 10,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "210600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3352|5|80|12092018",
+            "date": "20180912",
+            "prodX": 11,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 11,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "215400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3338|1|80|12092018",
+            "date": "20180912",
+            "prodX": 12,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 12,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "220600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3341|0|80|12092018",
+            "date": "20180912",
+            "prodX": 13,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 13,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "230600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3333|2|80|12092018",
+            "date": "20180912",
+            "prodX": 14,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 14,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "01000600",
+              "dTimeR": "01000600",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|0|80|13092018",
+            "date": "20180913",
+            "prodX": 15,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 15,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "045400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|1|80|13092018",
+            "date": "20180913",
+            "prodX": 16,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 16,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "055400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3529|0|80|13092018",
+            "date": "20180913",
+            "prodX": 17,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 17,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "062400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3511|0|80|13092018",
+            "date": "20180913",
+            "prodX": 18,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 18,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "063500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|2|80|13092018",
+            "date": "20180913",
+            "prodX": 19,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 19,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "065400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3325|0|80|13092018",
+            "date": "20180913",
+            "prodX": 20,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 20,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "070600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|0|80|13092018",
+            "date": "20180913",
+            "prodX": 21,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 21,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "072400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3515|0|80|13092018",
+            "date": "20180913",
+            "prodX": 22,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 22,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "073500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|3|80|13092018",
+            "date": "20180913",
+            "prodX": 23,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 23,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "075400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3328|0|80|13092018",
+            "date": "20180913",
+            "prodX": 24,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 24,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "080600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|1|80|13092018",
+            "date": "20180913",
+            "prodX": 25,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 25,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "082400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3519|0|80|13092018",
+            "date": "20180913",
+            "prodX": 26,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 26,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "083500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|4|80|13092018",
+            "date": "20180913",
+            "prodX": 27,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 27,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "085400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3330|0|80|13092018",
+            "date": "20180913",
+            "prodX": 28,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 28,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "090600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|2|80|13092018",
+            "date": "20180913",
+            "prodX": 29,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 29,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "092400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3521|0|80|13092018",
+            "date": "20180913",
+            "prodX": 30,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 30,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "093500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|5|80|13092018",
+            "date": "20180913",
+            "prodX": 31,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 31,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "095400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3325|1|80|13092018",
+            "date": "20180913",
+            "prodX": 32,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 32,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "100600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|3|80|13092018",
+            "date": "20180913",
+            "prodX": 33,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 33,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "102400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3522|0|80|13092018",
+            "date": "20180913",
+            "prodX": 34,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 34,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "103500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|6|80|13092018",
+            "date": "20180913",
+            "prodX": 35,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 35,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "105400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3332|0|80|13092018",
+            "date": "20180913",
+            "prodX": 36,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 36,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "110600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|4|80|13092018",
+            "date": "20180913",
+            "prodX": 37,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 37,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "112400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3522|1|80|13092018",
+            "date": "20180913",
+            "prodX": 38,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 38,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "113500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|7|80|13092018",
+            "date": "20180913",
+            "prodX": 39,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 39,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "115400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3333|0|80|13092018",
+            "date": "20180913",
+            "prodX": 40,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 40,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "120600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|5|80|13092018",
+            "date": "20180913",
+            "prodX": 41,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 41,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "122400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3522|2|80|13092018",
+            "date": "20180913",
+            "prodX": 42,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 42,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "123500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|8|80|13092018",
+            "date": "20180913",
+            "prodX": 43,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 43,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "125400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3334|0|80|13092018",
+            "date": "20180913",
+            "prodX": 44,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 44,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "130600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|6|80|13092018",
+            "date": "20180913",
+            "prodX": 45,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 45,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "132400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3522|3|80|13092018",
+            "date": "20180913",
+            "prodX": 46,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 46,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "133500",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3344|9|80|13092018",
+            "date": "20180913",
+            "prodX": 47,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 47,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "135400",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3334|1|80|13092018",
+            "date": "20180913",
+            "prodX": 48,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 48,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "140600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3532|7|80|13092018",
+            "date": "20180913",
+            "prodX": 49,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 3,
+              "dProdX": 49,
+              "dPlatfS": "1",
+              "dInR": true,
+              "dTimeS": "142400",
+              "type": "N"
+            },
+            "subscr": "F"
+          }
+        ],
+        "fpB": "20180904",
+        "fpE": "20191214",
+        "planrtTS": "1536767672",
+        "sD": "20180912",
+        "sT": "175530",
+        "locRefL": [
+          0
+        ]
+      }
+    }
+  ]
+}

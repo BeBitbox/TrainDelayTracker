@@ -73,6 +73,20 @@ public class ResponseToBoardTranslatorTest {
         assertThat(board.getDepartures().get(49).getVehicule()).isEqualTo("BE.NMBS.IC4313");
     }
 
+    @Test
+    public void translateSpecialDateTrain() throws IOException {
+        Response response = getResponseFrom("responseInvalidTimestamp.json");
+
+        Board board = translator.translateFrom(response);
+        assertThat(board).isNotNull();
+        assertThat(board.getStationId()).isEqualTo(aStationId("BE.NMBS.008811262"));
+        assertThat(board.getTime()).isNotNull();
+        assertThat(board.getDepartures()).hasSize(50);
+        TrainDeparture trainDeparture = board.getDepartures().get(14);
+        assertThat(trainDeparture.getVehicule()).isEqualTo("BE.NMBS.S23672");
+        assertThat(trainDeparture.getDelay()).isEqualTo(0);
+    }
+
     @Test(expected = BoardNotFoundException.class)
     public void translateEmptyBoard() throws IOException {
         Response response = getResponseFrom("responseEmpty.json");

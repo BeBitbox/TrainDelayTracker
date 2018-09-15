@@ -26,7 +26,7 @@ public class NMBSStationRetrieverTest {
 
         List<Station> stations = retriever.getStationsFor(Country.BE);
 
-        assertThat(stations, hasSize(556));
+        assertThat(stations, hasSize(570));
         StationId expectedFirstStationId = aStationId("BE.NMBS.008895000");
         Station expectedStation = aStation(expectedFirstStationId, "Aalst", BE)
                 .withAlternativeFrenchName("Alost")

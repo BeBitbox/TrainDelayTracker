@@ -160,4 +160,12 @@ public class DynamoTrainDepartureEvent {
     public void setPlatformChange(boolean platformChange) {
         this.platformChange = platformChange;
     }
+
+    @Override
+    public String toString() {
+        return "DynamoTrainDepartureEvent{" +
+                "stationId='" + stationId + '\'' +
+                ", expectedDepartureTime=" + expectedDepartureTime +
+                '}';
+    }
 }
