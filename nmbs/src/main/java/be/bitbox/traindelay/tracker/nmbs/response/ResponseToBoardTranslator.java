@@ -18,6 +18,7 @@ package be.bitbox.traindelay.tracker.nmbs.response;
 import be.bitbox.traindelay.tracker.core.board.Board;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Stream;
@@ -34,6 +35,7 @@ public enum ResponseToBoardTranslator {
     private static final String VEHICLE_PREFIX = "BE.NMBS.";
     private static final String STATION_PREFIX = "BE.NMBS.00";
     private static final String UNKNOWN_PLATFORM = "?";
+    private static final ZoneId PARIS_CENTRAL_TIME = ZoneId.of("Europe/Paris");
 
     public Board translateFrom(Response response) {
         ResultDetails resultDetails = response.getSvcResL()[0].getRes();
@@ -42,7 +44,7 @@ public enum ResponseToBoardTranslator {
             throw aBoardNotFoundException("Board not found");
         }
         String extStationID = resultDetails.getCommon().getLocL()[0].getExtId();
-        Board board = aBoardForStation(aStationId(STATION_PREFIX + extStationID), LocalDateTime.now());
+        Board board = aBoardForStation(aStationId(STATION_PREFIX + extStationID), LocalDateTime.now(PARIS_CENTRAL_TIME));
 
         String[] vehicleNames = Stream.of(resultDetails.getCommon().getProdL())
                 .map(vehicule -> vehicule.getName().replaceAll(" ", ""))
