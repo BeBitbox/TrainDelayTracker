@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.nmbs.request;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

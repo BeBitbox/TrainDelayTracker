@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.nmbs.request;
 
 import java.time.LocalDate;
 
-class RequestFactory {
+public class RequestFactory {
 
     private String stationName;
 
@@ -25,26 +25,29 @@ class RequestFactory {
 
     private LocalDate date;
 
-    static RequestFactory aRequest(){
+    private RequestFactory() {
+    }
+
+    public static RequestFactory aRequest(){
         return new RequestFactory();
     }
 
-    RequestFactory withStationName(String stationName) {
+    public RequestFactory withStationName(String stationName) {
         this.stationName = stationName;
         return this;
     }
 
-    RequestFactory withStationId(String stationId) {
+    public RequestFactory withStationId(String stationId) {
         this.stationId = stationId;
         return this;
     }
 
-    RequestFactory withDate(LocalDate date) {
+    public RequestFactory withDate(LocalDate date) {
         this.date = date;
         return this;
     }
 
-    Request build() {
+    public Request build() {
         return new Request(stationName, stationId, date);
     }
 

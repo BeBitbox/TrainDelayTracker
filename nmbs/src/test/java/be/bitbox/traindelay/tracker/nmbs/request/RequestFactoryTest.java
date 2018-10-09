@@ -1,12 +1,11 @@
-package be.bitbox.traindelay.tracker.nmbs;
+package be.bitbox.traindelay.tracker.nmbs.request;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.time.Month;
 
-import static be.bitbox.traindelay.tracker.nmbs.RequestFactory.aRequest;
+import static be.bitbox.traindelay.tracker.nmbs.request.RequestFactory.aRequest;
 import static java.time.Month.AUGUST;
 import static org.assertj.core.api.Assertions.assertThat;
 

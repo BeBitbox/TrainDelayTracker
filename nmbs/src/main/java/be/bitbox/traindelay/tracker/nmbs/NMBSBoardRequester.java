@@ -16,7 +16,6 @@
 package be.bitbox.traindelay.tracker.nmbs;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
-import be.bitbox.traindelay.tracker.core.board.BoardNotFoundException;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.nmbs.response.Response;
@@ -25,12 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-
-import java.time.LocalDate;
-
-import static be.bitbox.traindelay.tracker.core.board.BoardRequestException.aBoardRequestException;
-import static be.bitbox.traindelay.tracker.nmbs.RequestFactory.aRequest;
 
 @Component
 public class NMBSBoardRequester implements BoardRequester {
@@ -46,20 +39,7 @@ public class NMBSBoardRequester implements BoardRequester {
 
     @Override
     public Board requestBoardFor(Station station) {
-        RestTemplate restTemplate = new RestTemplate();
-        Request request = aRequest()
-                .withStationId(station.stationId().getId())
-                .withStationName(station.name())
-                .withDate(LocalDate.now())
-                .build();
-
-        try {
-            ResponseEntity<Response> responseEntity = restTemplate.postForEntity(nmbsBaseUrl, request, Response.class);
-            return translator.translateFrom(responseEntity.getBody());
-        } catch (BoardNotFoundException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw aBoardRequestException("Error during request " + nmbsBaseUrl, ex);
-        }
+        ResponseEntity<Response> responseEntity = new NMBSRequestCommand(station, nmbsBaseUrl).execute();
+        return translator.translateFrom(responseEntity.getBody());
     }
 }
