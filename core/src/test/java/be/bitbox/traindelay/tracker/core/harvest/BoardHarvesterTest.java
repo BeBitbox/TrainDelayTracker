@@ -15,6 +15,7 @@
  */
 package be.bitbox.traindelay.tracker.core.harvest;
 
+import be.bitbox.traindelay.tracker.core.LockingDao;
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardDao;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
@@ -23,6 +24,7 @@ import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationAvailabilityMonitor;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import com.google.common.eventbus.EventBus;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -56,17 +58,36 @@ public class BoardHarvesterTest {
 
     @Mock
     private BoardDao boardDao;
+    
+    @Mock
+    private LockingDao lockingDao;
+
+    @Before
+    public void setUp() {
+        when(lockingDao.obtainedLock()).thenReturn(true);
+    }
 
     @Test
-    public void checkBoardForEveryTrain_FirstHarvest() {
+    public void testWhenNoLock_ShouldCallNothing() {
+        when(lockingDao.obtainedLock()).thenReturn(false);
+        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao, lockingDao);
+        boardHarvester.lockAndHarvest();
+        verify(nmbsBoardRequester, never()).requestBoardFor(any());
+        verify(stationAvailabilityMonitor, never()).getTrainStations();
+        verify(eventBus, never()).post(any());
+        verify(boardDao, never()).getLastBoardFor(any());
+    }
+
+    @Test
+    public void checkBoardForEveryTrain_FirstlockAndHarvest() {
         StationId id1 = aStationId("id1");
         Station station = aStation(id1, "name", Country.BE);
         StationId id2 = aStationId("id2");
         Station station2 = aStation(id2, "name2", Country.BE);
         when(stationAvailabilityMonitor.getTrainStations()).thenReturn(asList(station, station2));
 
-        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao);
-        boardHarvester.harvest();
+        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao, lockingDao);
+        boardHarvester.lockAndHarvest();
 
         verify(nmbsBoardRequester, atLeastOnce()).requestBoardFor(station);
         verify(nmbsBoardRequester, atLeastOnce()).requestBoardFor(station2);
@@ -77,17 +98,17 @@ public class BoardHarvesterTest {
     }
 
     @Test
-    public void checkBoardForEveryTrain_NoChangesInBoard_MultipleHarvest() {
+    public void checkBoardForEveryTrain_NoChangesInBoard_MultiplelockAndHarvest() {
         StationId id = aStationId("id");
         Station station = aStation(id, "name", Country.BE);
         when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(aBoardForStation(id, now()));
         when(stationAvailabilityMonitor.getTrainStations()).thenReturn(singletonList(station));
 
-        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao);
-        boardHarvester.harvest();
-        boardHarvester.harvest();
-        boardHarvester.harvest();
-        boardHarvester.harvest();
+        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao, lockingDao);
+        boardHarvester.lockAndHarvest();
+        boardHarvester.lockAndHarvest();
+        boardHarvester.lockAndHarvest();
+        boardHarvester.lockAndHarvest();
 
         verify(nmbsBoardRequester, times(4)).requestBoardFor(station);
         verify(boardDao).getLastBoardFor(id);
@@ -96,12 +117,12 @@ public class BoardHarvesterTest {
     }
 
     @Test
-    public void checkBoardForOneTrain_OneTrainDeparted_TwoHarvest() {
+    public void checkBoardForOneTrain_OneTrainDeparted_TwolockAndHarvest() {
         StationId id = aStationId("id");
         Station station = aStation(id, "name", Country.BE);
         when(stationAvailabilityMonitor.getTrainStations()).thenReturn(singletonList(station));
 
-        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao);
+        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao, lockingDao);
 
         Board board = aBoardForStation(id, now());
         LocalDateTime trainLeavingTime = of(2018, JANUARY, 12, 5, 45, 0);
@@ -113,10 +134,10 @@ public class BoardHarvesterTest {
         board.addDeparture(aTrainDeparture(trainLeavingTime, delay, canceled, vehicule, platform, platformChange));
 
         when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(board);
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
         LocalDateTime boardTime = now();
         when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(aBoardForStation(id, boardTime));
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
 
         verify(nmbsBoardRequester, times(2)).requestBoardFor(station);
         TrainDepartureEvent event = TrainDepartureEvent.Builder.createTrainDepartureEvent()
@@ -134,12 +155,12 @@ public class BoardHarvesterTest {
     }
 
     @Test
-    public void checkBoardForOneTrain_OneFutureTrainRemovedFromBoard_TwoHarvest() {
+    public void checkBoardForOneTrain_OneFutureTrainRemovedFromBoard_TwolockAndHarvest() {
         StationId id = aStationId("id");
         Station station = aStation(id, "name", Country.BE);
         when(stationAvailabilityMonitor.getTrainStations()).thenReturn(singletonList(station));
 
-        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao);
+        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao, lockingDao);
 
         LocalDateTime now = now();
         Board board = aBoardForStation(id, now);
@@ -152,10 +173,10 @@ public class BoardHarvesterTest {
         board.addDeparture(aTrainDeparture(trainLeavingTime, delay, canceled, vehicule, platform, platformChange));
 
         when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(board);
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
         LocalDateTime boardTime = now();
         when(nmbsBoardRequester.requestBoardFor(station)).thenReturn(aBoardForStation(id, boardTime));
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
 
         verify(nmbsBoardRequester, times(2)).requestBoardFor(station);
         verify(boardDao).getLastBoardFor(id);
@@ -164,7 +185,7 @@ public class BoardHarvesterTest {
     }
 
     @Test
-    public void checkBoardForThreeTrain_TwoTrainDeparted_FourHarvest() {
+    public void checkBoardForThreeTrain_TwoTrainDeparted_FourlockAndHarvest() {
         StationId id1 = aStationId("id1");
         Station station1 = aStation(id1, "name1", Country.BE);
         StationId id2 = aStationId("id2");
@@ -173,7 +194,7 @@ public class BoardHarvesterTest {
         Station station3 = aStation(id3, "name3", Country.BE);
         when(stationAvailabilityMonitor.getTrainStations()).thenReturn(asList(station1, station2, station3));
 
-        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao);
+        BoardHarvester boardHarvester = new BoardHarvester(nmbsBoardRequester, stationAvailabilityMonitor, eventBus, boardDao, lockingDao);
 
         // Tick1:  station1 : 0 train, station2 : 2 train, station3 : 1 train
         Board board_1_1 = aBoardForStation(id1, now());
@@ -190,7 +211,7 @@ public class BoardHarvesterTest {
         when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_1_1);
         when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_1_2);
         when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_1_3);
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
         verify(eventBus, never()).post(any());
 
         // Tick2:  station1 : 1 train, station2 : 0 train, station3 : 2 train
@@ -209,7 +230,7 @@ public class BoardHarvesterTest {
         when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_2_1);
         when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_2_2);
         when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_2_3);
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
         TrainDepartureEvent event1_1 = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(time_2_2)
                 .withStationId(id2)
@@ -250,7 +271,7 @@ public class BoardHarvesterTest {
         when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_3_1);
         when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_3_2);
         when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_3_3);
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
         verify(eventBus, never()).post(any());
 
         // Tick4:  station1 : 1 train, station2 : 1 train, station3 : 1 train (added delay)
@@ -270,7 +291,7 @@ public class BoardHarvesterTest {
         when(nmbsBoardRequester.requestBoardFor(station1)).thenReturn(board_4_1);
         when(nmbsBoardRequester.requestBoardFor(station2)).thenReturn(board_4_2);
         when(nmbsBoardRequester.requestBoardFor(station3)).thenReturn(board_4_3);
-        boardHarvester.harvest();
+        boardHarvester.lockAndHarvest();
         TrainDepartureEvent event4_3 = TrainDepartureEvent.Builder.createTrainDepartureEvent()
                 .withEventCreationTime(time_4_3)
                 .withStationId(id3)

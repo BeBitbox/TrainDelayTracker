@@ -15,6 +15,7 @@
  */
 package be.bitbox.traindelay.tracker.core.harvest;
 
+import be.bitbox.traindelay.tracker.core.LockingDao;
 import be.bitbox.traindelay.tracker.core.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.board.*;
 import be.bitbox.traindelay.tracker.core.station.Station;
@@ -43,20 +44,30 @@ class BoardHarvester {
     private final EventBus eventBus;
     private final Map<StationId, Board> lastBoards;
     private final BoardDao boardDao;
+    private final LockingDao lockingDao;
 
     @Autowired
     BoardHarvester(BoardRequester boardRequester,
                    StationAvailabilityMonitor stationAvailabilityMonitor,
-                   EventBus eventBus, BoardDao boardDao) {
+                   EventBus eventBus, BoardDao boardDao, LockingDao lockingDao) {
         this.boardRequester = boardRequester;
         this.stationAvailabilityMonitor = stationAvailabilityMonitor;
         this.eventBus = eventBus;
         this.boardDao = boardDao;
+        this.lockingDao = lockingDao;
         lastBoards = new HashMap<>();
     }
-
+    
     @Scheduled(fixedDelay = 10000L)
-    void harvest() {
+    void lockAndHarvest() {
+        if (lockingDao.obtainedLock()) {
+            harvest();
+        } else {
+            LOGGER.info("Lock not obtained");    
+        }
+    }
+
+    private void harvest() {
         List<Station> trainStations = stationAvailabilityMonitor.getTrainStations();
         LOGGER.info("Start Harvest for {} stations", trainStations.size());
 
