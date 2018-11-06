@@ -15,17 +15,17 @@
  */
 package be.bitbox.traindelay.tracker.persistance.board;
 
-import be.bitbox.traindelay.tracker.core.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.board.Board;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture;
 import be.bitbox.traindelay.tracker.persistance.LocalDateTimeConverter;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static be.bitbox.traindelay.tracker.core.TrainDeparture.aTrainDeparture;
 import static be.bitbox.traindelay.tracker.core.board.Board.aBoardForStation;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
+import static be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture.aTrainDeparture;
 import static java.util.stream.Collectors.toList;
 
 @DynamoDBTable(tableName = "BoardStore")
@@ -71,8 +71,8 @@ public class DynamoBoard {
         @DynamoDBAttribute(attributeName = "canceled")
         private boolean canceled;
 
-        @DynamoDBAttribute(attributeName = "vehicule")
-        private String vehicule;
+        @DynamoDBAttribute(attributeName = "vehicle")
+        private String vehicle;
 
         @DynamoDBAttribute(attributeName = "platform")
         private String platform;
@@ -84,7 +84,7 @@ public class DynamoBoard {
             this.time = trainDeparture.getTime();
             this.delay = trainDeparture.getDelay();
             this.canceled = trainDeparture.isCanceled();
-            this.vehicule = trainDeparture.getVehicule();
+            this.vehicle = trainDeparture.getVehicle();
             this.platform = trainDeparture.getPlatform();
             this.platformChange = trainDeparture.isPlatformChange();
         }
@@ -93,7 +93,7 @@ public class DynamoBoard {
         }
 
         private TrainDeparture toTrainDeparture() {
-            return aTrainDeparture(time, delay, canceled, vehicule, platform, platformChange);
+            return aTrainDeparture(time, delay, canceled, vehicle, platform, platformChange);
         }
 
         public LocalDateTime getTime() {
@@ -120,12 +120,12 @@ public class DynamoBoard {
             this.canceled = canceled;
         }
 
-        public String getVehicule() {
-            return vehicule;
+        public String getVehicle() {
+            return vehicle;
         }
 
-        public void setVehicule(String vehicule) {
-            this.vehicule = vehicule;
+        public void setVehicle(String vehicle) {
+            this.vehicle = vehicle;
         }
 
         public String getPlatform() {

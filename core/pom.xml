@@ -9,8 +9,8 @@
     </parent>
     <groupId>be.bitbox.traindelay.tracker.core</groupId>
     <artifactId>core</artifactId>
-    <name>TrainDelayCore</name>
-    <description>Core to farm the traindelay events</description>
+    <name>core</name>
+    <description>The core of the application to farm traindelay events</description>
 
     <dependencies>
         <dependency>

@@ -16,7 +16,7 @@
 package be.bitbox.traindelay.tracker.core.board;
 
 
-import be.bitbox.traindelay.tracker.core.TrainDeparture;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 
 import java.time.LocalDateTime;

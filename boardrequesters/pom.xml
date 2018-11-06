@@ -7,11 +7,10 @@
         <artifactId>TrainDelayTracker</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>be.bitbox.traindelay.tracker.persistence</groupId>
-    <artifactId>persistance</artifactId>
+    <artifactId>boardrequesters</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>persistance</name>
-    <description>Persistance layer of the application : AWS DynamoDB focussed</description>
+    <name>boardrequesters</name>
+    <description>Package of boardrequesters like NMBS, iRail, GTFS,...</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,8 +23,8 @@
             <artifactId>core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-dynamodb</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
 
         <dependency>

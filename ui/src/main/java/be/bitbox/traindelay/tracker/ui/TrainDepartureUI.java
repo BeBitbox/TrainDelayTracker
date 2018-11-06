@@ -15,11 +15,11 @@
  */
 package be.bitbox.traindelay.tracker.ui;
 
-import be.bitbox.traindelay.tracker.core.TrainDepartureQuery;
-import be.bitbox.traindelay.tracker.core.harvest.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureQuery;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -65,7 +65,7 @@ public class TrainDepartureUI extends UI {
 
         grid.addColumn(TrainDepartureVo::getLocalTime).setCaption("Departure");
         grid.addColumn(TrainDepartureVo::getPlatform).setCaption("Platform");
-        grid.addColumn(TrainDepartureVo::getVehicule).setCaption("Vehicule");
+        grid.addColumn(TrainDepartureVo::getVehicle).setCaption("Vehicle");
         grid.addColumn(TrainDepartureVo::getDelay).setCaption("Delay (minutes)");
 
         stationComboBox.addValueChangeListener(e -> listTrainDepartures(e.getValue(), date.getValue()));
@@ -86,13 +86,13 @@ public class TrainDepartureUI extends UI {
     private class TrainDepartureVo implements Comparable{
         private final LocalTime localTime;
         private final String platform;
-        private final String vehicule;
+        private final String vehicle;
         private final int delay;
 
         private TrainDepartureVo(TrainDepartureEvent trainDepartureEvent) {
             localTime = trainDepartureEvent.getExpectedDepartureTime().toLocalTime();
             platform = trainDepartureEvent.getPlatform();
-            vehicule = trainDepartureEvent.getVehicule().replace("BE.NMBS.", "");
+            vehicle = trainDepartureEvent.getVehicle().replace("BE.NMBS.", "");
             delay = trainDepartureEvent.getDelay() / 60;
         }
 
@@ -104,8 +104,8 @@ public class TrainDepartureUI extends UI {
             return platform;
         }
 
-        String getVehicule() {
-            return vehicule;
+        String getVehicle() {
+            return vehicle;
         }
 
         int getDelay() {

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 
-import static be.bitbox.traindelay.tracker.core.TrainDeparture.aTrainDeparture;
+import static be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture.aTrainDeparture;
 import static be.bitbox.traindelay.tracker.core.board.Board.aBoardForStation;
 import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.of;
@@ -22,7 +22,7 @@ public class DynamoBoardDaoIntegrationTest {
 
     @Test
     @Ignore("Requires real DB")
-    public void testDao() throws Exception {
+    public void testDao() {
         AmazonDynamoDB client = AWSTestClient.create();
         BoardDao boardDao = new DynamoBoardDao(client);
 

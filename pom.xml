@@ -14,14 +14,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring.boot.version>1.5.9.RELEASE</spring.boot.version>
+        <spring.boot.version>1.5.17.RELEASE</spring.boot.version>
     </properties>
 
     <modules>
         <module>core</module>
         <module>ui</module>
         <module>persistance</module>
-        <module>nmbs</module>
+        <module>boardrequesters</module>
         <module>application</module>
     </modules>
 
