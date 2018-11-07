@@ -26,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>be.bitbox.traindelay.tracker</groupId>
-            <artifactId>nmbs</artifactId>
+            <artifactId>boardrequesters</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
