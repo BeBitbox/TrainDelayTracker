@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Bitbox : TrainDelayTracker
+ * Copyright 2019 Bitbox : TrainDelayTracker
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance.traindeparture;
+package be.bitbox.traindelay.tracker.persistance.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -26,25 +26,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-class TrainDepartureEventToDynamoDB {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrainDepartureEventToDynamoDB.class);
+class DepartureEventToDynamoDB {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DepartureEventToDynamoDB.class);
     private final DynamoDBMapper dynamoDBMapper;
 
     @Autowired
-    TrainDepartureEventToDynamoDB(AmazonDynamoDB client, EventBus eventBus) {
+    DepartureEventToDynamoDB(AmazonDynamoDB client, EventBus eventBus) {
         dynamoDBMapper = new DynamoDBMapper(client);
         eventBus.register(this);
     }
 
     @Subscribe
-    void subscribeTrainDepartureEvent(TrainDepartureEvent trainDepartureEvent) {
+    void subscribeDepartureEvent(TrainDepartureEvent trainDepartureEvent) {
         try {
-            DynamoTrainDepartureEvent dynamoItem = new DynamoTrainDepartureEvent(trainDepartureEvent);
-            LOGGER.debug("Saving dynamoItem {}", dynamoItem);
+            DynamoDepartureEvent dynamoItem = new DynamoDepartureEvent(trainDepartureEvent);
+            LOGGER.debug("Saving improved dynamoItem {}", dynamoItem);
             dynamoDBMapper.save(dynamoItem);
         }
         catch (Exception e) {
-            LOGGER.error("Failed to save event " + trainDepartureEvent, e);
+            LOGGER.error("Failed to save improved event " + trainDepartureEvent, e);
         }
     }
 }

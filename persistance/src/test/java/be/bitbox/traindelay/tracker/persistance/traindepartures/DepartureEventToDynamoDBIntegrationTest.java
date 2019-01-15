@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.persistance.traindeparture;
+package be.bitbox.traindelay.tracker.persistance.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.persistance.AWSTestClient;
@@ -14,7 +14,7 @@ import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.of;
 import static java.time.Month.JANUARY;
 
-public class TrainDepartureEventToDynamoDBIntegrationTest {
+public class DepartureEventToDynamoDBIntegrationTest {
 
     @Test
     @Ignore("Integration test to test the persistence in an AWS DynamoDB")
@@ -35,7 +35,7 @@ public class TrainDepartureEventToDynamoDBIntegrationTest {
                 .build();
 
         AmazonDynamoDB client = AWSTestClient.create();
-        TrainDepartureEventToDynamoDB persistent = new TrainDepartureEventToDynamoDB(client, new EventBus());
-        persistent.subscribeTrainDepartureEvent(event);
+        DepartureEventToDynamoDB persistent = new DepartureEventToDynamoDB(client, new EventBus());
+        persistent.subscribeDepartureEvent(event);
     }
 }

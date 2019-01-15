@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance.traindeparture;
+package be.bitbox.traindelay.tracker.persistance.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
@@ -26,42 +26,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
 @Component
-class DynamoTrainDepartureEventQuery implements TrainDepartureQuery {
+class DynamoDepartureEventQuery implements TrainDepartureQuery {
     private DynamoDBMapper dynamoDBMapper;
 
     @Autowired
-    DynamoTrainDepartureEventQuery(AmazonDynamoDB client) {
+    DynamoDepartureEventQuery(AmazonDynamoDB client) {
         dynamoDBMapper = new DynamoDBMapper(client);
     }
 
     @Override
     public List<TrainDepartureEvent> listTrainDepartureFor(StationId stationId, LocalDate date) {
-        String dateAsString = DynamoTrainDepartureEvent.DATE_FORMATTER.format(date);
-        return IntStream.range(0, 200)
-                .parallel()
-                .mapToObj(i -> {
-                    String partitionKey = dateAsString + "." + i;
-                    Map<String, AttributeValue> eav = new HashMap<>();
-                    eav.put(":id", new AttributeValue().withS(partitionKey));
-                    eav.put(":station", new AttributeValue().withS(stationId.getId()));
 
-                    DynamoDBQueryExpression<DynamoTrainDepartureEvent> queryExpression = new DynamoDBQueryExpression<DynamoTrainDepartureEvent>()
-                            .withKeyConditionExpression("id = :id")
-                            .withFilterExpression("station = :station")
-                            .withExpressionAttributeValues(eav);
-                    return dynamoDBMapper.query(DynamoTrainDepartureEvent.class, queryExpression);
-                })
-                .flatMap(Collection::stream)
-                .map(DynamoTrainDepartureEvent::asTrainDepartureEvent)
+        Map<String, AttributeValue> eav = new HashMap<>();
+        eav.put(":id", new AttributeValue().withS(stationId.getId()));
+        eav.put(":date", new AttributeValue().withS(date.toString()));
+        eav.put(":nextdate", new AttributeValue().withS(date.plusDays(1).toString()));
+
+        DynamoDBQueryExpression<DynamoDepartureEvent> queryExpression = new DynamoDBQueryExpression<DynamoDepartureEvent>()
+                .withKeyConditionExpression("station = :id and eventCreationTime between :date and :nextdate")
+                .withExpressionAttributeValues(eav);
+
+        return dynamoDBMapper
+                .query(DynamoDepartureEvent.class, queryExpression)
+                .stream()
+                .map(DynamoDepartureEvent::asTrainDepartureEvent)
                 .collect(toList());
     }
 }
