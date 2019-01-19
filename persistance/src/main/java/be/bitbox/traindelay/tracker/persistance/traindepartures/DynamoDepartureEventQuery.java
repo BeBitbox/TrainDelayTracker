@@ -50,7 +50,7 @@ class DynamoDepartureEventQuery implements TrainDepartureQuery {
         eav.put(":nextdate", new AttributeValue().withS(date.plusDays(1).toString()));
 
         DynamoDBQueryExpression<DynamoDepartureEvent> queryExpression = new DynamoDBQueryExpression<DynamoDepartureEvent>()
-                .withKeyConditionExpression("station = :id and eventCreationTime between :date and :nextdate")
+                .withKeyConditionExpression("station = :id and expected between :date and :nextdate")
                 .withExpressionAttributeValues(eav);
 
         return dynamoDBMapper
