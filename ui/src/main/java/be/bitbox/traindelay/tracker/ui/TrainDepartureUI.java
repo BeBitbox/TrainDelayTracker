@@ -26,10 +26,12 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toCollection;
 
 @SpringUI
 @Title("Train departures")
@@ -57,18 +59,20 @@ public class TrainDepartureUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        HorizontalLayout header = new HorizontalLayout(label, stationComboBox, date);
-        VerticalLayout mainLayout = new VerticalLayout(header, grid);
-        grid.setWidth(100, Unit.PERCENTAGE);
-        grid.setHeight(80, Unit.PERCENTAGE);
-        setContent(mainLayout);
-
         grid.addColumn(TrainDepartureVo::getLocalTime).setCaption("Departure");
         grid.addColumn(TrainDepartureVo::getPlatform).setCaption("Platform");
         grid.addColumn(TrainDepartureVo::getVehicle).setCaption("Vehicle");
         grid.addColumn(TrainDepartureVo::getDelay).setCaption("Delay (minutes)");
+        grid.setSizeFull();
+
+        HorizontalLayout header = new HorizontalLayout(label, stationComboBox, date);
+        VerticalLayout mainLayout = new VerticalLayout(header, grid);
+        mainLayout.setSizeFull();
+        mainLayout.setExpandRatio(grid, 0.8f);
+        setContent(mainLayout);
 
         stationComboBox.addValueChangeListener(e -> listTrainDepartures(e.getValue(), date.getValue()));
+        date.addValueChangeListener(e -> listTrainDepartures(stationComboBox.getValue(), e.getValue()));
     }
 
     private void listTrainDepartures(Station station, LocalDate date) {
@@ -79,11 +83,11 @@ public class TrainDepartureUI extends UI {
         TreeSet<TrainDepartureVo> trainDepartureVos = trainDepartureQuery.listTrainDepartureFor(station.stationId(), date)
                 .stream()
                 .map(TrainDepartureVo::new)
-                .collect(Collectors.toCollection(TreeSet::new));
+                .collect(toCollection(TreeSet::new));
         grid.setItems(trainDepartureVos);
     }
 
-    private class TrainDepartureVo implements Comparable{
+    private class TrainDepartureVo implements Comparable {
         private final LocalTime localTime;
         private final String platform;
         private final String vehicle;
@@ -114,7 +118,7 @@ public class TrainDepartureUI extends UI {
 
         @Override
         public int compareTo(Object o) {
-            return localTime.compareTo(((TrainDepartureVo)o).localTime);
+            return localTime.compareTo(((TrainDepartureVo) o).localTime);
         }
     }
 }
