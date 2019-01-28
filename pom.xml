@@ -16,6 +16,13 @@
         <java.version>1.8</java.version>
         <spring.boot.version>1.5.18.RELEASE</spring.boot.version>
         <jackson-databind.version>2.9.8</jackson-databind.version>
+        <spring-cloud-starter-netflix-hystrix.version>1.4.5.RELEASE</spring-cloud-starter-netflix-hystrix.version>
+        <spring-web.version>4.3.14.RELEASE</spring-web.version>
+        <vaadin-bom.version>8.3.1</vaadin-bom.version>
+        <guava.version>23.0</guava.version>
+        <aws-java-sdk-dynamodb.version>1.11.482</aws-java-sdk-dynamodb.version>
+        <jcl-over-slf4j.version>1.7.13</jcl-over-slf4j.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
     </properties>
 
     <modules>
@@ -36,7 +43,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-                <version>1.4.5.RELEASE</version>
+                <version>${spring-cloud-starter-netflix-hystrix.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -47,7 +54,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
-                <version>4.3.14.RELEASE</version>
+                <version>${spring-web.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -74,7 +81,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
-                <version>8.3.1</version>
+                <version>${vaadin-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -82,22 +89,22 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>23.0</version>
+                <version>${guava.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-dynamodb</artifactId>
-                <version>1.11.482</version>
+                <version>${aws-java-sdk-dynamodb.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jcl-over-slf4j</artifactId>
-                <version>1.7.13</version>
+                <version>${jcl-over-slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
+                <version>${logback-classic.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
