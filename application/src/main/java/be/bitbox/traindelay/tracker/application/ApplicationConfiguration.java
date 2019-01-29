@@ -26,16 +26,16 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = {"be.bitbox.traindelay.tracker"})
 public class ApplicationConfiguration {
 
-  @Bean
-  public EventBus getEventBus() {
-    return new EventBus();
-  }
+    @Bean
+    public EventBus getEventBus() {
+        return new EventBus();
+    }
 
-  @Bean
-  public AmazonDynamoDB getAmazonDynamoDB() {
-    return AmazonDynamoDBClientBuilder
-        .standard()
-        .withRegion("eu-west-3")
-        .build();
-  }
+    @Bean
+    public AmazonDynamoDB getAmazonDynamoDB() {
+        return AmazonDynamoDBClientBuilder
+                .standard()
+                .withRegion("eu-west-3")
+                .build();
+    }
 }

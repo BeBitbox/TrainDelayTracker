@@ -20,26 +20,30 @@ import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureQuery;
-import com.vaadin.annotations.Title;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.*;
+import com.vaadin.flow.component.ItemLabelGenerator;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Locale;
 import java.util.TreeSet;
 
 import static java.util.stream.Collectors.toCollection;
 
-@SpringUI
-@Title("Train departures")
-public class TrainDepartureUI extends UI {
-
+@Route("")
+@PWA(name = "Train departures", shortName = "Train departures")
+public class TrainDepartureUI extends VerticalLayout {
     private final Label label;
     private final ComboBox<Station> stationComboBox;
-    private final DateField date;
+    private final DatePicker date;
     private final Grid<TrainDepartureVo> grid;
     private final TrainDepartureQuery trainDepartureQuery;
 
@@ -48,29 +52,21 @@ public class TrainDepartureUI extends UI {
         label = new Label("See all departures");
         stationComboBox = new ComboBox<>();
         stationComboBox.setItems(stationRetriever.getStationsFor(Country.BE));
-        stationComboBox.setItemCaptionGenerator(Station::name);
-        stationComboBox.setWidth(250f, Unit.PIXELS);
-        date = new DateField();
-        date.setDateFormat("dd-MM-yyyy");
-        date.setValue(LocalDate.now().minusDays(1));
+        stationComboBox.setItemLabelGenerator((ItemLabelGenerator<Station>) Station::name);
+        stationComboBox.setWidth("250px");
+        date = new DatePicker(LocalDate.now().minusDays(1), new Locale("nl", "be"));
         grid = new Grid<>();
         this.trainDepartureQuery = trainDepartureQuery;
-    }
-
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
-        grid.addColumn(TrainDepartureVo::getLocalTime).setCaption("Departure");
-        grid.addColumn(TrainDepartureVo::getPlatform).setCaption("Platform");
-        grid.addColumn(TrainDepartureVo::getVehicle).setCaption("Vehicle");
-        grid.addColumn(TrainDepartureVo::getDelay).setCaption("Delay (minutes)");
+        grid.addColumn(TrainDepartureVo::getLocalTime).setHeader("Departure");
+        grid.addColumn(TrainDepartureVo::getPlatform).setHeader("Platform");
+        grid.addColumn(TrainDepartureVo::getVehicle).setHeader("Vehicle");
+        grid.addColumn(TrainDepartureVo::getDelay).setHeader("Delay (minutes)");
         grid.setSizeFull();
 
         HorizontalLayout header = new HorizontalLayout(label, stationComboBox, date);
-        VerticalLayout mainLayout = new VerticalLayout(header, grid);
-        mainLayout.setSizeFull();
-        mainLayout.setExpandRatio(grid, 0.8f);
-        setContent(mainLayout);
-
+        add(header, grid);
+        setSizeFull();
+        
         stationComboBox.addValueChangeListener(e -> listTrainDepartures(e.getValue(), date.getValue()));
         date.addValueChangeListener(e -> listTrainDepartures(stationComboBox.getValue(), e.getValue()));
     }
