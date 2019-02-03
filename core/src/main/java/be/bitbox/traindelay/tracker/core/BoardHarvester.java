@@ -105,7 +105,7 @@ class BoardHarvester {
     }
 
     private void compareBoards(Board oldBoard, Board newBoard) {
-        List<TrainDeparture> trainDepartures = oldBoard.getDepartures()
+        var trainDepartures = oldBoard.getDepartures()
                 .stream()
                 .filter(trainDeparture -> !newBoard.getDepartures().contains(trainDeparture))
                 .filter(trainDeparture -> trainDeparture.getTime().isBefore(newBoard.getTime().plusHours(1)))
