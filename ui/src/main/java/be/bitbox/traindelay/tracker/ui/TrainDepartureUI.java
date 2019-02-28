@@ -15,11 +15,11 @@
  */
 package be.bitbox.traindelay.tracker.ui;
 
+import be.bitbox.traindelay.tracker.core.service.StationService;
+import be.bitbox.traindelay.tracker.core.service.TrainDepartureVo;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureQuery;
 import com.vaadin.flow.component.ItemLabelGenerator;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -32,11 +32,7 @@ import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Locale;
-import java.util.TreeSet;
-
-import static java.util.stream.Collectors.toCollection;
 
 @Route("")
 @PWA(name = "Train departures", shortName = "Train departures")
@@ -45,10 +41,11 @@ public class TrainDepartureUI extends VerticalLayout {
     private final ComboBox<Station> stationComboBox;
     private final DatePicker date;
     private final Grid<TrainDepartureVo> grid;
-    private final TrainDepartureQuery trainDepartureQuery;
+    private final StationService stationService;
 
     @Autowired
-    public TrainDepartureUI(StationRetriever stationRetriever, TrainDepartureQuery trainDepartureQuery) {
+    public TrainDepartureUI(StationRetriever stationRetriever, StationService stationService) {
+        this.stationService = stationService;
         label = new Label("See all departures");
         stationComboBox = new ComboBox<>();
         stationComboBox.setItems(stationRetriever.getStationsFor(Country.BE));
@@ -56,7 +53,6 @@ public class TrainDepartureUI extends VerticalLayout {
         stationComboBox.setWidth("250px");
         date = new DatePicker(LocalDate.now().minusDays(1), new Locale("nl", "be"));
         grid = new Grid<>();
-        this.trainDepartureQuery = trainDepartureQuery;
         grid.addColumn(TrainDepartureVo::getLocalTime).setHeader("Departure");
         grid.addColumn(TrainDepartureVo::getPlatform).setHeader("Platform");
         grid.addColumn(TrainDepartureVo::getVehicle).setHeader("Vehicle");
@@ -75,46 +71,6 @@ public class TrainDepartureUI extends VerticalLayout {
         if (station == null || date == null) {
             return;
         }
-
-        TreeSet<TrainDepartureVo> trainDepartureVos = trainDepartureQuery.listTrainDepartureFor(station.stationId(), date)
-                .stream()
-                .map(TrainDepartureVo::new)
-                .collect(toCollection(TreeSet::new));
-        grid.setItems(trainDepartureVos);
-    }
-
-    private class TrainDepartureVo implements Comparable {
-        private final LocalTime localTime;
-        private final String platform;
-        private final String vehicle;
-        private final int delay;
-
-        private TrainDepartureVo(TrainDepartureEvent trainDepartureEvent) {
-            localTime = trainDepartureEvent.getExpectedDepartureTime().toLocalTime();
-            platform = trainDepartureEvent.getPlatform();
-            vehicle = trainDepartureEvent.getVehicle().replace("BE.NMBS.", "");
-            delay = trainDepartureEvent.getDelay() / 60;
-        }
-
-        LocalTime getLocalTime() {
-            return localTime;
-        }
-
-        String getPlatform() {
-            return platform;
-        }
-
-        String getVehicle() {
-            return vehicle;
-        }
-
-        int getDelay() {
-            return delay;
-        }
-
-        @Override
-        public int compareTo(Object o) {
-            return localTime.compareTo(((TrainDepartureVo) o).localTime);
-        }
+        grid.setItems(stationService.listTrainDeparturesFor(station.stationId(), date));
     }
 }
