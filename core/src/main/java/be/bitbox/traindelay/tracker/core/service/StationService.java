@@ -1,7 +1,7 @@
 package be.bitbox.traindelay.tracker.core.service;
 
 import be.bitbox.traindelay.tracker.core.station.*;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureQuery;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -19,17 +20,17 @@ import static java.util.stream.Collectors.toCollection;
 @Service
 public class StationService {
     public final static LocalDate START_DATE_SERVICE = LocalDate.of(2018, Month.FEBRUARY, 22); 
-    private final TrainDepartureQuery trainDepartureQuery;
+    private final TrainDepartureRepository trainDepartureRepository;
     private final StationRetriever stationRetriever;
     private Set<StationId> availableStations;
     
     @Autowired
-    public StationService(TrainDepartureQuery trainDepartureQuery, StationRetriever stationRetriever) {
-        this.trainDepartureQuery = trainDepartureQuery;
+    public StationService(TrainDepartureRepository trainDepartureRepository, StationRetriever stationRetriever) {
+        this.trainDepartureRepository = trainDepartureRepository;
         this.stationRetriever = stationRetriever;
     }
 
-    public SortedSet<TrainDepartureVo> listTrainDeparturesFor(StationId stationId, String date) {
+    public SortedSet<JsonTrainDeparture> listTrainDeparturesFor(StationId stationId, String date) {
         LocalDate localDate;
         try {
             localDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
@@ -39,14 +40,18 @@ public class StationService {
         return listTrainDeparturesFor(stationId, localDate);    
     }
     
-    public SortedSet<TrainDepartureVo> listTrainDeparturesFor(StationId stationId, LocalDate date) {
+    public SortedSet<JsonTrainDeparture> listTrainDeparturesFor(StationId stationId, LocalDate date) {
         validateStationIsKnown(stationId);
         validateDateIsNotBeforeServiceStart(date);
 
-        return trainDepartureQuery.listTrainDepartureFor(stationId, date)
+        return trainDepartureRepository.listTrainDepartureFor(stationId, date)
                 .stream()
-                .map(TrainDepartureVo::new)
+                .map(JsonTrainDeparture::new)
                 .collect(toCollection(TreeSet::new));
+    }
+    
+    public List<JsonTrainDeparture> listRecentTrainDepartures() {
+        return trainDepartureRepository.listRecentTrainDepartures();
     }
 
     private void validateDateIsNotBeforeServiceStart(LocalDate date) {

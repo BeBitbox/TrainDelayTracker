@@ -1,6 +1,6 @@
-package be.bitbox.traindelay.tracker.persistance.locking;
+package be.bitbox.traindelay.tracker.persistance.db.locking;
 
-import be.bitbox.traindelay.tracker.persistance.LocalDateTimeConverter;
+import be.bitbox.traindelay.tracker.persistance.db.LocalDateTimeConverter;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;

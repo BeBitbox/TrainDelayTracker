@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance.board;
+package be.bitbox.traindelay.tracker.persistance.db.board;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardDao;

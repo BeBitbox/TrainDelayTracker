@@ -1,7 +1,7 @@
-package be.bitbox.traindelay.tracker.persistance.traindepartures;
+package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import be.bitbox.traindelay.tracker.persistance.AWSTestClient;
+import be.bitbox.traindelay.tracker.persistance.db.AWSTestClient;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import org.junit.Ignore;
 import org.junit.Test;

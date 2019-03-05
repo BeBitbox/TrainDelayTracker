@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance.board;
+package be.bitbox.traindelay.tracker.persistance.db.board;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture;
-import be.bitbox.traindelay.tracker.persistance.LocalDateTimeConverter;
+import be.bitbox.traindelay.tracker.persistance.db.LocalDateTimeConverter;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.time.LocalDateTime;
@@ -144,8 +144,7 @@ public class DynamoBoard {
             this.platformChange = platformChange;
         }
     }
-
-
+    
     public String getStationId() {
         return stationId;
     }

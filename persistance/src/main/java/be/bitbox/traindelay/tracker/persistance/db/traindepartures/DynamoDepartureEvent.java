@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance.traindepartures;
+package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import be.bitbox.traindelay.tracker.persistance.LocalDateTimeConverter;
+import be.bitbox.traindelay.tracker.persistance.db.LocalDateTimeConverter;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.time.LocalDateTime;

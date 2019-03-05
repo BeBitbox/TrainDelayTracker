@@ -15,8 +15,8 @@
  */
 package be.bitbox.traindelay.tracker.ui;
 
+import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.service.StationService;
-import be.bitbox.traindelay.tracker.core.service.TrainDepartureVo;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
@@ -32,7 +32,9 @@ import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Route("")
 @PWA(name = "Train departures", shortName = "Train departures")
@@ -71,6 +73,45 @@ public class TrainDepartureUI extends VerticalLayout {
         if (station == null || date == null) {
             return;
         }
-        grid.setItems(stationService.listTrainDeparturesFor(station.stationId(), date));
+        var trainDepartureVos = stationService.listTrainDeparturesFor(station.stationId(), date)
+                .stream()
+                .map(TrainDepartureVo::new)
+                .collect(Collectors.toSet());
+        grid.setItems(trainDepartureVos);
+    }
+
+    private static class TrainDepartureVo implements Comparable<TrainDepartureVo> {
+        private final LocalTime localTime;
+        private final String platform;
+        private final String vehicle;
+        private final int delay;
+
+        TrainDepartureVo(JsonTrainDeparture jsonTrainDeparture) {
+            localTime = jsonTrainDeparture.getExpectedDepartureTime().toLocalTime();
+            platform = jsonTrainDeparture.getPlatform();
+            vehicle = jsonTrainDeparture.getVehicle();
+            delay = jsonTrainDeparture.getDelay();
+        }
+
+        LocalTime getLocalTime() {
+            return localTime;
+        }
+
+        String getPlatform() {
+            return platform;
+        }
+
+        String getVehicle() {
+            return vehicle;
+        }
+
+        int getDelay() {
+            return delay;
+        }
+
+        @Override
+        public int compareTo(TrainDepartureVo other) {
+            return localTime.compareTo(other.localTime);
+        }
     }
 }

@@ -3,7 +3,7 @@ package be.bitbox.traindelay.tracker.core.service;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.StationNotFoundException;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureQuery;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,13 +32,13 @@ public class StationServiceTest {
     private StationRetriever stationRetriever;
 
     @Mock
-    private TrainDepartureQuery trainDepartureQuery;
+    private TrainDepartureRepository trainDepartureRepository;
 
     private StationService stationService;
 
     @Before
     public void setUp() {
-        stationService = new StationService(trainDepartureQuery, stationRetriever);
+        stationService = new StationService(trainDepartureRepository, stationRetriever);
     }
 
     @Test(expected = StationNotFoundException.class)
@@ -87,36 +87,38 @@ public class StationServiceTest {
         var localDate = LocalDate.ofYearDay(2018, 99);
         when(stationRetriever.getStationsFor(Country.BE)).thenReturn(singletonList(station));
         var localTime1 = LocalTime.of(11, 56, 34);
+        var localDateTime1 = LocalDateTime.of(localDate, localTime1);
         var traindeparture1 = createTrainDepartureEvent()
                 .withStationId(stationId)
                 .withPlatform("3")
                 .withDelay(120)
                 .withVehicle("BE.NMBS.TSJOEK")
-                .withExpectedDepartureTime(LocalDateTime.of(localDate, localTime1))
+                .withExpectedDepartureTime(localDateTime1)
                 .build();
         var localTime2 = LocalTime.of(10, 52, 31);
+        var localDateTime2 = LocalDateTime.of(localDate, localTime2);
         var traindeparture2 = createTrainDepartureEvent()
                 .withStationId(stationId)
                 .withPlatform("B")
                 .withDelay(0)
                 .withVehicle("TRAIN")
-                .withExpectedDepartureTime(LocalDateTime.of(localDate, localTime2))
+                .withExpectedDepartureTime(localDateTime2)
                 .build();
-        when(trainDepartureQuery.listTrainDepartureFor(stationId, localDate)).thenReturn(List.of(traindeparture1, traindeparture2));
+        when(trainDepartureRepository.listTrainDepartureFor(stationId, localDate)).thenReturn(List.of(traindeparture1, traindeparture2));
 
-        var trainDepartureVos = stationService.listTrainDeparturesFor(stationId, localDate);
-        verify(trainDepartureQuery).listTrainDepartureFor(stationId, localDate);
-        assertThat(trainDepartureVos.size(), is(2));
-        var firstVo = trainDepartureVos.first();
-        assertThat(firstVo.getDelay(), is(0));
-        assertThat(firstVo.getLocalTime(), is(localTime2));
-        assertThat(firstVo.getVehicle(), is("TRAIN"));
-        assertThat(firstVo.getPlatform(), is("B"));
+        var jsonTrainDepartures = stationService.listTrainDeparturesFor(stationId, localDate);
+        verify(trainDepartureRepository).listTrainDepartureFor(stationId, localDate);
+        assertThat(jsonTrainDepartures.size(), is(2));
+        var firstDeparture = jsonTrainDepartures.first();
+        assertThat(firstDeparture.getDelay(), is(0));
+        assertThat(firstDeparture.getExpectedDepartureTime(), is(localDateTime2));
+        assertThat(firstDeparture.getVehicle(), is("TRAIN"));
+        assertThat(firstDeparture.getPlatform(), is("B"));
 
-        var secondVo = trainDepartureVos.last();
-        assertThat(secondVo.getDelay(), is(2));
-        assertThat(secondVo.getLocalTime(), is(localTime1));
-        assertThat(secondVo.getVehicle(), is("TSJOEK"));
-        assertThat(secondVo.getPlatform(), is("3"));
+        var secondDeparture = jsonTrainDepartures.last();
+        assertThat(secondDeparture.getDelay(), is(2));
+        assertThat(secondDeparture.getExpectedDepartureTime(), is(localDateTime1));
+        assertThat(secondDeparture.getVehicle(), is("TSJOEK"));
+        assertThat(secondDeparture.getPlatform(), is("3"));
     }
 }

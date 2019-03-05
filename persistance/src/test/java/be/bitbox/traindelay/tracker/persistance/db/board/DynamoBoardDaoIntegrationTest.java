@@ -1,9 +1,9 @@
-package be.bitbox.traindelay.tracker.persistance.board;
+package be.bitbox.traindelay.tracker.persistance.db.board;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardDao;
 import be.bitbox.traindelay.tracker.core.station.StationId;
-import be.bitbox.traindelay.tracker.persistance.AWSTestClient;
+import be.bitbox.traindelay.tracker.persistance.db.AWSTestClient;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package be.bitbox.traindelay.tracker.ui;
 
+import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.service.StationService;
-import be.bitbox.traindelay.tracker.core.service.TrainDepartureVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +24,8 @@ public class TrainDelayRestController {
     }
 
     @RequestMapping("/api/v1/station/{stationId}/depatures")
-    public Collection<TrainDepartureVo> trainsOnDate(@PathVariable String stationId,
-                                                     @RequestParam(required = false) String date) {
+    public Collection<JsonTrainDeparture> trainsOnDate(@PathVariable String stationId,
+                                                       @RequestParam(required = false) String date) {
         if (StringUtils.isEmpty(date)) {
             return stationService.listTrainDeparturesFor(aStationId(stationId), LocalDate.now());
         } else {

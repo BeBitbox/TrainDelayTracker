@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance.traindepartures;
+package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;

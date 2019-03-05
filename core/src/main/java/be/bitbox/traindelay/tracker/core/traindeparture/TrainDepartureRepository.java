@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance;
+package be.bitbox.traindelay.tracker.core.traindeparture;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
+import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
+import be.bitbox.traindelay.tracker.core.station.StationId;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
-public class LocalDateTimeConverter implements DynamoDBTypeConverter<String, LocalDateTime> {
+public interface TrainDepartureRepository {
 
-    @Override
-    public String convert(final LocalDateTime time) {
-        return time.toString();
-    }
-
-    @Override
-    public LocalDateTime unconvert(final String stringValue) {
-        return LocalDateTime.parse(stringValue);
-    }
+    List<TrainDepartureEvent> listTrainDepartureFor(StationId stationId, LocalDate date);
+    
+    List<JsonTrainDeparture> listRecentTrainDepartures();
 }

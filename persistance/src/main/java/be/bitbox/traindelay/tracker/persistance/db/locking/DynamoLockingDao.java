@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.persistance.locking;
+package be.bitbox.traindelay.tracker.persistance.db.locking;
 
 import be.bitbox.traindelay.tracker.core.LockingDao;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;

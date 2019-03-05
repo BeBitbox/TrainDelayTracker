@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.persistance.traindepartures;
+package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureQuery;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
@@ -32,18 +32,14 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
-@Component
-class DynamoDepartureEventQuery implements TrainDepartureQuery {
+public class DynamoDepartureEventQuery {
     private DynamoDBMapper dynamoDBMapper;
-
-    @Autowired
-    DynamoDepartureEventQuery(AmazonDynamoDB client) {
+    
+    public DynamoDepartureEventQuery(AmazonDynamoDB client) {
         dynamoDBMapper = new DynamoDBMapper(client);
     }
 
-    @Override
     public List<TrainDepartureEvent> listTrainDepartureFor(StationId stationId, LocalDate date) {
-
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":id", new AttributeValue().withS(stationId.getId()));
         eav.put(":date", new AttributeValue().withS(date.toString()));
