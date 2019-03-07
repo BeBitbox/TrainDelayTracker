@@ -17,9 +17,6 @@ package be.bitbox.traindelay.tracker.application;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.sns.AmazonSNS;
-import com.amazonaws.services.sns.AmazonSNSClient;
-import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.google.common.eventbus.EventBus;
@@ -43,15 +40,7 @@ public class ApplicationConfiguration {
                 .withRegion("eu-west-3")
                 .build();
     }
-    
-    @Bean
-    public AmazonSNS getAmazonSNS() {
-        return AmazonSNSClientBuilder
-                .standard()
-                .withRegion("eu-west-3")
-                .build();
-    }
-    
+
     @Bean
     public AmazonSQS getAmazonSQS() {
         return AmazonSQSClientBuilder

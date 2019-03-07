@@ -21,6 +21,7 @@ import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationAvailabilityMonitor;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
 import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,16 +46,21 @@ class BoardHarvester {
     private final Map<StationId, Board> lastBoards;
     private final BoardDao boardDao;
     private final LockingDao lockingDao;
+    private final TrainDepartureRepository trainDepartureRepository;
 
     @Autowired
     BoardHarvester(BoardRequester boardRequester,
                    StationAvailabilityMonitor stationAvailabilityMonitor,
-                   EventBus eventBus, BoardDao boardDao, LockingDao lockingDao) {
+                   EventBus eventBus,
+                   BoardDao boardDao,
+                   LockingDao lockingDao,
+                   TrainDepartureRepository trainDepartureRepository) {
         this.boardRequester = boardRequester;
         this.stationAvailabilityMonitor = stationAvailabilityMonitor;
         this.eventBus = eventBus;
         this.boardDao = boardDao;
         this.lockingDao = lockingDao;
+        this.trainDepartureRepository = trainDepartureRepository;
         lastBoards = new HashMap<>();
     }
     
@@ -63,7 +69,8 @@ class BoardHarvester {
         if (lockingDao.obtainedLock()) {
             harvest();
         } else {
-            LOGGER.info("Lock not obtained");    
+            LOGGER.info("Lock not obtained");
+            trainDepartureRepository.updateLatestTrainDepartures();
         }
     }
 

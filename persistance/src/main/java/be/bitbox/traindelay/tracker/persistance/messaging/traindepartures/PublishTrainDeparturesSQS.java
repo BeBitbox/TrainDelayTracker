@@ -17,7 +17,8 @@ package be.bitbox.traindelay.tracker.persistance.messaging.traindepartures;
 
 import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -31,29 +32,36 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 @Component
-class PublishTrainDeparturesSNS {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PublishTrainDeparturesSNS.class);
-    private final AmazonSNS amazonSNS;
-    private final String topicName;
-    
+class PublishTrainDeparturesSQS {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PublishTrainDeparturesSQS.class);
+    private final AmazonSQS amazonSQS;
+    private final String queueUrl;
+    private final RecentTrainDepartures recentTrainDepartures;
+
     @Autowired
-    PublishTrainDeparturesSNS(AmazonSNS amazonSNS,
+    PublishTrainDeparturesSQS(AmazonSQS amazonSQS,
                               EventBus eventBus,
-                              @Value("${topic.name}") String topicName) {
-        this.amazonSNS = amazonSNS;
-        this.topicName = topicName;
+                              @Value("${queue.url}") String queueUrl,
+                              RecentTrainDepartures recentTrainDepartures) {
+        this.amazonSQS = amazonSQS;
+        this.queueUrl = queueUrl;
+        this.recentTrainDepartures = recentTrainDepartures;
         eventBus.register(this);
     }
 
     @Subscribe
     void subscribeDepartureEvent(TrainDepartureEvent trainDepartureEvent) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        StringWriter stringWriter = new StringWriter();
+        var objectMapper = new ObjectMapper();
+        var stringWriter = new StringWriter();
+        var jsonTrainDeparture = new JsonTrainDeparture(trainDepartureEvent);
+
+        recentTrainDepartures.addTrainDeparture(jsonTrainDeparture);
         try {
-            objectMapper.writeValue(stringWriter, new JsonTrainDeparture(trainDepartureEvent));
+            objectMapper.writeValue(stringWriter, jsonTrainDeparture);
         } catch (IOException e) {
             LOGGER.error("Failed to transform TraindepartureEvent to JSON.", e);
         }
-        amazonSNS.publish(topicName, stringWriter.toString());
+        SendMessageRequest request = new SendMessageRequest(queueUrl, stringWriter.toString());
+        amazonSQS.sendMessage(request);
     }
 }

@@ -1,35 +1,32 @@
 package be.bitbox.traindelay.tracker.persistance.messaging.traindepartures;
 
-import be.bitbox.traindelay.tracker.core.station.Country;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.google.common.eventbus.EventBus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static be.bitbox.traindelay.tracker.core.station.Station.aStation;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent.Builder.createTrainDepartureEvent;
-import static java.util.Collections.singletonList;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PublishTrainDeparturesSNSTest {
+public class PublishTrainDeparturesSQSTest {
 
     @Mock
-    private AmazonSNS amazonSNS;
+    private AmazonSQS amazonSQS;
     
     @Test
-    public void subscribeDepartureEvent() {
-        var publishTrainDeparturesSNS = new PublishTrainDeparturesSNS(amazonSNS, new EventBus(), "topic");
+    public void subscribeDepartureEvent() throws IOException {
+        var recentTrainDepartures = new RecentTrainDepartures(5);
+        var publishTrainDeparturesSQS = new PublishTrainDeparturesSQS(amazonSQS, new EventBus(), "queueURL", recentTrainDepartures);
         var stationId = aStationId("myStation");
         var localDate = LocalDate.ofYearDay(2018, 101);
         var localTime = LocalTime.of(11, 56, 34);
@@ -40,8 +37,9 @@ public class PublishTrainDeparturesSNSTest {
                 .withVehicle("BE.NMBS.TSJOEK")
                 .withExpectedDepartureTime(LocalDateTime.of(localDate, localTime))
                 .build();
-        publishTrainDeparturesSNS.subscribeDepartureEvent(traindeparture);
-        var json = "{\"station\":\"myStation\",\"expectedDepartureTime\":\"2018-04-11T11:56:34Z\",\"delay\":2,\"canceled\":false,\"vehicle\":\"TSJOEK\",\"platform\":\"3\",\"platformChange\":false}"; 
-        verify(amazonSNS).publish("topic", json);
+        publishTrainDeparturesSQS.subscribeDepartureEvent(traindeparture);
+        var json = TestJsonFileReader.readJson();
+        var expectedSendMessage = new SendMessageRequest("queueURL", json);
+        verify(amazonSQS).sendMessage(expectedSendMessage);
     }
 }

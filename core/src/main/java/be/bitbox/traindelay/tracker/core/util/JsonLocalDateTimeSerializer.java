@@ -16,6 +16,6 @@ public class JsonLocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
     
     @Override
     public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeString(localDateTime.atZone(ZoneId.of("Z")).toString());
+        jsonGenerator.writeString(localDateTime.toString());
     }
 }

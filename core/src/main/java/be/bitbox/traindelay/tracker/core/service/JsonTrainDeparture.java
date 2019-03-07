@@ -1,8 +1,8 @@
 package be.bitbox.traindelay.tracker.core.service;
 
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
+import be.bitbox.traindelay.tracker.core.util.JsonLocalDateTimeDeserializer;
 import be.bitbox.traindelay.tracker.core.util.JsonLocalDateTimeSerializer;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -38,7 +38,7 @@ public class JsonTrainDeparture implements Comparable<JsonTrainDeparture> {
         return expectedDepartureTime;
     }
     
-    @JsonDeserialize(using = JsonDeserializer.class)
+    @JsonDeserialize(using = JsonLocalDateTimeDeserializer.class)
     public void setExpectedDepartureTime(LocalDateTime expectedDepartureTime) {
         this.expectedDepartureTime = expectedDepartureTime;
     }
@@ -90,5 +90,69 @@ public class JsonTrainDeparture implements Comparable<JsonTrainDeparture> {
     @Override
     public int compareTo(JsonTrainDeparture other) {
         return expectedDepartureTime.compareTo(other.expectedDepartureTime);
+    }
+
+    public static final class Builder {
+        private String station;
+        private LocalDateTime expectedDepartureTime;
+        private int delay;
+        private boolean canceled;
+        private String vehicle;
+        private String platform;
+        private boolean platformChange;
+
+        private Builder() {
+        }
+
+        public static Builder aJsonTrainDeparture() {
+            return new Builder();
+        }
+
+        public Builder withStation(String station) {
+            this.station = station;
+            return this;
+        }
+
+        public Builder withExpectedDepartureTime(LocalDateTime expectedDepartureTime) {
+            this.expectedDepartureTime = expectedDepartureTime;
+            return this;
+        }
+
+        public Builder withDelay(int delay) {
+            this.delay = delay;
+            return this;
+        }
+
+        public Builder withCanceled(boolean canceled) {
+            this.canceled = canceled;
+            return this;
+        }
+
+        public Builder withVehicle(String vehicle) {
+            this.vehicle = vehicle;
+            return this;
+        }
+
+        public Builder withPlatform(String platform) {
+            this.platform = platform;
+            return this;
+        }
+
+        public Builder withPlatformChange(boolean platformChange) {
+            this.platformChange = platformChange;
+            return this;
+        }
+
+        public JsonTrainDeparture build() {
+            JsonTrainDeparture jsonTrainDeparture = new JsonTrainDeparture();
+            jsonTrainDeparture.setStation(station);
+            jsonTrainDeparture.setExpectedDepartureTime(expectedDepartureTime);
+            jsonTrainDeparture.setDelay(delay);
+            jsonTrainDeparture.setCanceled(canceled);
+            jsonTrainDeparture.setVehicle(vehicle);
+            jsonTrainDeparture.setPlatform(platform);
+            jsonTrainDeparture.setPlatformChange(platformChange);
+            return jsonTrainDeparture;
+        }
     }
 }
