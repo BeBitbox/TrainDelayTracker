@@ -34,7 +34,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Locale;
-import java.util.stream.Collectors;
+import java.util.TreeSet;
+
+import static java.util.stream.Collectors.toCollection;
 
 @Route("")
 @PWA(name = "Train departures", shortName = "Train departures")
@@ -64,7 +66,7 @@ public class TrainDepartureUI extends VerticalLayout {
         HorizontalLayout header = new HorizontalLayout(label, stationComboBox, date);
         add(header, grid);
         setSizeFull();
-        
+
         stationComboBox.addValueChangeListener(e -> listTrainDepartures(e.getValue(), date.getValue()));
         date.addValueChangeListener(e -> listTrainDepartures(stationComboBox.getValue(), e.getValue()));
     }
@@ -76,7 +78,7 @@ public class TrainDepartureUI extends VerticalLayout {
         var trainDepartureVos = stationService.listTrainDeparturesFor(station.stationId(), date)
                 .stream()
                 .map(TrainDepartureVo::new)
-                .collect(Collectors.toSet());
+                .collect(toCollection(TreeSet::new));
         grid.setItems(trainDepartureVos);
     }
 
