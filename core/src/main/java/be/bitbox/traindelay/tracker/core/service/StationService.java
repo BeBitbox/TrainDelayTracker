@@ -50,8 +50,8 @@ public class StationService {
                 .collect(toCollection(TreeSet::new));
     }
     
-    public List<JsonTrainDeparture> listRecentTrainDepartures() {
-        return trainDepartureRepository.listRecentTrainDepartures();
+    public CurrentTrainTraffic listRecentTrainDepartures() {
+        return new CurrentTrainTraffic(trainDepartureRepository.listRecentTrainDepartures());
     }
 
     private void validateDateIsNotBeforeServiceStart(LocalDate date) {

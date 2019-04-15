@@ -1,5 +1,6 @@
 package be.bitbox.traindelay.tracker.ui;
 
+import be.bitbox.traindelay.tracker.core.service.CurrentTrainTraffic;
 import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.service.StationService;
 import be.bitbox.traindelay.tracker.core.station.StationNotFoundException;
@@ -34,7 +35,7 @@ public class TrainDelayRestController {
     }
 
     @RequestMapping("/api/v1/station/recentdepatures")
-    public Collection<JsonTrainDeparture> recentDepatures() {
+    public CurrentTrainTraffic recentDepatures() {
         return stationService.listRecentTrainDepartures();
     }
 
