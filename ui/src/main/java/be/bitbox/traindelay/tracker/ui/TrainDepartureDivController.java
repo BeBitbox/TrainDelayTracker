@@ -41,7 +41,6 @@ import static java.util.stream.Collectors.toCollection;
 public class TrainDepartureDivController {
     private final StationService stationService;
     private final StationRetriever stationRetriever;
-    private final Grid<TrainDepartureVo> grid = new Grid<>();
 
     @Autowired
     public TrainDepartureDivController(StationRetriever stationRetriever, StationService stationService) {
@@ -49,38 +48,39 @@ public class TrainDepartureDivController {
         this.stationRetriever = stationRetriever;
     }
 
-    public Div asDiv() {
+    Div asDiv() {
         Div div = new Div();
         var label = new Label("See all departures");
         var stationComboBox = new ComboBox<Station>();
         stationComboBox.setItems(stationRetriever.getStationsFor(Country.BE));
         stationComboBox.setItemLabelGenerator((ItemLabelGenerator<Station>) Station::name);
         stationComboBox.setWidth("250px");
+        stationComboBox.setId("stationComboBox");
+        label.setFor(stationComboBox);
         var datePicker = new DatePicker(LocalDate.now().minusDays(1), new Locale("nl", "be"));
+        Grid<TrainDepartureVo> grid = new Grid<>();
         grid.addColumn(TrainDepartureVo::getLocalTime).setHeader("Departure");
         grid.addColumn(TrainDepartureVo::getPlatform).setHeader("Platform");
         grid.addColumn(TrainDepartureVo::getVehicle).setHeader("Vehicle");
         grid.addColumn(TrainDepartureVo::getDelay).setHeader("Delay (minutes)");
-        grid.setSizeFull();
 
         HorizontalLayout header = new HorizontalLayout(label, stationComboBox, datePicker);
         div.add(header, grid);
         div.setSizeFull();
 
-        stationComboBox.addValueChangeListener(e -> listTrainDepartures(e.getValue(), datePicker.getValue()));
+        stationComboBox.addValueChangeListener(e -> grid.setItems(listTrainDepartures(e.getValue(), datePicker.getValue())));
         datePicker.addValueChangeListener(e -> listTrainDepartures(stationComboBox.getValue(), e.getValue()));
         return div;
     }
 
-    private void listTrainDepartures(Station station, LocalDate date) {
+    private TreeSet<TrainDepartureVo> listTrainDepartures(Station station, LocalDate date) {
         if (station == null || date == null) {
-            return;
+            return null;
         }
-        var trainDepartureVos = stationService.listTrainDeparturesFor(station.stationId(), date)
+        return stationService.listTrainDeparturesFor(station.stationId(), date)
                 .stream()
                 .map(TrainDepartureVo::new)
                 .collect(toCollection(TreeSet::new));
-        grid.setItems(trainDepartureVos);
     }
 
     private static class TrainDepartureVo implements Comparable<TrainDepartureVo> {
