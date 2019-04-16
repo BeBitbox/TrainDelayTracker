@@ -27,7 +27,6 @@ public class CurrentTrafficDivController {
         grid.setItems(currentTrainTraffic.getTrainDepartures());
         
         div.setSizeFull();
-        grid.setSizeFull();
         var currentTrafficSpan = new Span("Current train traffic is : " + currentTrainTraffic.getFuss());
         var averageDelaySpan = new Span("Average train delay : " + currentTrainTraffic.getAverageDelay());
         averageDelaySpan.setClassName("averageDelaySpan");

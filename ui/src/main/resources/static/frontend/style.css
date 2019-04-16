@@ -1,0 +1,18 @@
+.header {
+    width: 100%;
+}
+
+.titleH1 {
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.subTitleH3 {
+    text-align: center;
+}
+
+.averageDelaySpan {
+    padding-left: 20px;
+    color: red;
+}
