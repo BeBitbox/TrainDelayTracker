@@ -64,7 +64,7 @@ class BoardHarvester {
         lastBoards = new HashMap<>();
     }
     
-   // @Scheduled(fixedDelay = 10000L)
+    @Scheduled(fixedDelay = 10000L)
     void lockAndHarvest() {
         if (lockingDao.obtainedLock()) {
             harvest();
