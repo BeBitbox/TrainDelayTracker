@@ -20,4 +20,6 @@ import java.util.List;
 public interface StationRetriever {
 
     List<Station> getStationsFor(Country country);
+
+    Station getStationById(StationId stationId);
 }

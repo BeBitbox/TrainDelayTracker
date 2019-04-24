@@ -53,6 +53,15 @@ public class NMBSStationRetriever implements StationRetriever {
         return emptyList();
     }
 
+    @Override
+    public Station getStationById(StationId stationId) {
+        return getStationsFor(Country.BE)
+                .stream()
+                .filter(station -> station.stationId().equals(stationId))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("unknown StationId " + stationId));
+    }
+
     private List<Station> readInBelgianStations() {
         InputStream inputStream = NMBSStationRetriever.class.getResourceAsStream("stations.csv");
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));

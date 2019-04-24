@@ -89,7 +89,7 @@ public class JsonTrainDeparture implements Comparable<JsonTrainDeparture> {
     
     @Override
     public int compareTo(JsonTrainDeparture other) {
-        return expectedDepartureTime.compareTo(other.expectedDepartureTime);
+        return other.expectedDepartureTime.compareTo(expectedDepartureTime);
     }
 
     public static final class Builder {
