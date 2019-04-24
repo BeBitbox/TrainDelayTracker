@@ -9,8 +9,10 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
@@ -33,8 +35,9 @@ public class CurrentTrafficDivController {
         var grid = new Grid<CurrentTrainDepartureVO>();
         grid.addColumn(departureVO -> departureVO.station).setHeader("Station");
         grid.addColumn(departureVO -> departureVO.expectedDepartureTime).setHeader("Time");
-        grid.addColumn(departureVO -> departureVO.delay).setHeader("Delay");
+        grid.addColumn(departureVO -> departureVO.delay).setHeader("Delay (minutes)");
         grid.setItems(listLastTen(currentTrainTraffic));
+        grid.setWidth("33%");
 
         div.setSizeFull();
 
@@ -82,12 +85,13 @@ public class CurrentTrafficDivController {
 
     private class CurrentTrainDepartureVO {
         private final String station;
-        private final LocalDateTime expectedDepartureTime;
+        private final LocalTime expectedDepartureTime;
         private final int delay;
 
         private CurrentTrainDepartureVO(String station, LocalDateTime expectedDepartureTime, int delay) {
-            this.station = stationRetriever.getStationById(aStationId(station)).name();
-            this.expectedDepartureTime = expectedDepartureTime;
+            var stationById = stationRetriever.getStationById(aStationId(station));
+            this.station = StringUtils.isEmpty(stationById.alternativeEn()) ? stationById.name() : stationById.alternativeEn();
+            this.expectedDepartureTime = expectedDepartureTime.toLocalTime();
             this.delay = delay;
         }
     }

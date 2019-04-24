@@ -67,10 +67,6 @@ public class Station {
         return this;
     }
 
-    public String name() {
-        return name;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,5 +117,13 @@ public class Station {
 
     public StationId stationId() {
         return stationId;
+    }
+
+    public String name() {
+        return name;
+    }
+
+    public String alternativeEn() {
+        return alternativeEn;
     }
 }
