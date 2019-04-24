@@ -38,6 +38,13 @@ public class ConsumeTrainDepartureSQS {
     }
 
     public void updateLatestTrainDepartures() {
+        int teller;
+        do {
+            teller = updateLatestTenTrainDepartures();
+        } while (teller >= 10);
+    }
+
+    private int updateLatestTenTrainDepartures() {
         var receiveMessageRequest = new ReceiveMessageRequest(queueUrl).withMaxNumberOfMessages(10);
         var receiveMessageResult = amazonSQS.receiveMessage(receiveMessageRequest);
         int size = receiveMessageResult.getMessages().size();
@@ -56,6 +63,7 @@ public class ConsumeTrainDepartureSQS {
                     .collect(toList());
             amazonSQS.deleteMessageBatch(new DeleteMessageBatchRequest(queueUrl).withEntries(deletes));
         }
+        return size;
     }
 
     private Function<String, JsonTrainDeparture> getStringJsonTrainDepartureFunction() {
