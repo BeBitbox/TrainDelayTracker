@@ -58,6 +58,8 @@ public class TrainDepartureDivController {
         stationComboBox.setId("stationComboBox");
         label.setFor(stationComboBox);
         var datePicker = new DatePicker(LocalDate.now().minusDays(1), new Locale("nl", "be"));
+        datePicker.setMin(StationService.START_DATE_SERVICE);
+        datePicker.setMax(LocalDate.now());
         Grid<TrainDepartureVo> grid = new Grid<>();
         grid.addColumn(TrainDepartureVo::getLocalTime).setHeader("Departure");
         grid.addColumn(TrainDepartureVo::getPlatform).setHeader("Platform");
