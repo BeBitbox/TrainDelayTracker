@@ -25,7 +25,7 @@ public class RecentTrainDepartures {
     synchronized void addTrainDeparture(JsonTrainDeparture trainDeparture) {
         departures.add(trainDeparture);
         while (departures.size() > maxTrainDepartures) {
-            departures.remove(departures.first());
+            departures.remove(departures.last());
         }
     }
 

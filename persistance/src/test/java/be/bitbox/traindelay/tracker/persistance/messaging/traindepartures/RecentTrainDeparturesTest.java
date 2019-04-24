@@ -22,8 +22,8 @@ public class RecentTrainDeparturesTest {
 
         var jsonTrainDepartures = recentTrainDepartures.list();
         assertThat(jsonTrainDepartures.size(), is(2));
-        assertThat(jsonTrainDepartures.get(0).getStation(), is("YESTERDAY"));
-        assertThat(jsonTrainDepartures.get(1).getStation(), is("NOW"));
+        assertThat(jsonTrainDepartures.get(0).getStation(), is("NOW"));
+        assertThat(jsonTrainDepartures.get(1).getStation(), is("YESTERDAY"));
     }
 
     private JsonTrainDeparture create(String stationName, LocalDateTime time) {

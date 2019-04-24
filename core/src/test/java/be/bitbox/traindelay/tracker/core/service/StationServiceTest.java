@@ -110,15 +110,15 @@ public class StationServiceTest {
         verify(trainDepartureRepository).listTrainDepartureFor(stationId, localDate);
         assertThat(jsonTrainDepartures.size(), is(2));
         var firstDeparture = jsonTrainDepartures.first();
-        assertThat(firstDeparture.getDelay(), is(0));
-        assertThat(firstDeparture.getExpectedDepartureTime(), is(localDateTime2));
-        assertThat(firstDeparture.getVehicle(), is("TRAIN"));
-        assertThat(firstDeparture.getPlatform(), is("B"));
+        assertThat(firstDeparture.getDelay(), is(2));
+        assertThat(firstDeparture.getExpectedDepartureTime(), is(localDateTime1));
+        assertThat(firstDeparture.getVehicle(), is("TSJOEK"));
+        assertThat(firstDeparture.getPlatform(), is("3"));
 
         var secondDeparture = jsonTrainDepartures.last();
-        assertThat(secondDeparture.getDelay(), is(2));
-        assertThat(secondDeparture.getExpectedDepartureTime(), is(localDateTime1));
-        assertThat(secondDeparture.getVehicle(), is("TSJOEK"));
-        assertThat(secondDeparture.getPlatform(), is("3"));
+        assertThat(secondDeparture.getDelay(), is(0));
+        assertThat(secondDeparture.getExpectedDepartureTime(), is(localDateTime2));
+        assertThat(secondDeparture.getVehicle(), is("TRAIN"));
+        assertThat(secondDeparture.getPlatform(), is("B"));
     }
 }

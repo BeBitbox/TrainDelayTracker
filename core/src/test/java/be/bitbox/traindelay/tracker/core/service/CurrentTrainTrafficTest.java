@@ -13,7 +13,7 @@ public class CurrentTrainTrafficTest {
 
     @Test
     public void testTraffic_EveryMinuteOne() {
-        List<JsonTrainDeparture> departureList = generateTrainDeparturesEachMinute(1, 0);
+        List<JsonTrainDeparture> departureList = generateTrainDeparturesEachMinute(60, 0);
 
         var currentTrainTraffic = new CurrentTrainTraffic(departureList);
         assertThat(currentTrainTraffic.getTrainDepartures()).hasSize(50);
@@ -22,8 +22,8 @@ public class CurrentTrainTrafficTest {
     }
 
     @Test
-    public void testTraffic_EveryTwoMinutesOne() {
-        List<JsonTrainDeparture> departureList = generateTrainDeparturesEachMinute(2, 123);
+    public void testTraffic_Every90SecondsOne() {
+        List<JsonTrainDeparture> departureList = generateTrainDeparturesEachMinute(90, 123);
 
         var currentTrainTraffic = new CurrentTrainTraffic(departureList);
         assertThat(currentTrainTraffic.getTrainDepartures()).hasSize(50);
@@ -32,8 +32,8 @@ public class CurrentTrainTrafficTest {
     }
 
     @Test
-    public void testTraffic_EveryThreeMinutesOne() {
-        List<JsonTrainDeparture> departureList = generateTrainDeparturesEachMinute(3, 4000);
+    public void testTraffic_EveryTwoMinutesOne() {
+        List<JsonTrainDeparture> departureList = generateTrainDeparturesEachMinute(120, 4000);
 
         var currentTrainTraffic = new CurrentTrainTraffic(departureList);
         assertThat(currentTrainTraffic.getTrainDepartures()).hasSize(50);
@@ -41,11 +41,11 @@ public class CurrentTrainTrafficTest {
         assertThat(currentTrainTraffic.getAverageDelay()).isEqualTo(4000);
     }
 
-    private List<JsonTrainDeparture> generateTrainDeparturesEachMinute(int minutes, int delay) {
+    private List<JsonTrainDeparture> generateTrainDeparturesEachMinute(int seconds, int delay) {
         var localDateTime = LocalDateTime.now();
         List<JsonTrainDeparture> departureList = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            localDateTime = localDateTime.minusMinutes(minutes);
+            localDateTime = localDateTime.minusSeconds(seconds);
             JsonTrainDeparture jsonTrainDeparture = aJsonTrainDeparture()
                     .withExpectedDepartureTime(localDateTime)
                     .withDelay(delay)

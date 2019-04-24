@@ -12,7 +12,11 @@
     text-align: center;
 }
 
-.averageDelaySpan {
-    padding-left: 20px;
-    color: red;
+.fussTrainTraffic {
+    height : 70px;
+}
+
+.fussTrainTraffic span {
+    position: fixed;
+    margin: 10px;
 }

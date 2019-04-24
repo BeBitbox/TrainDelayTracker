@@ -5,6 +5,7 @@ import be.bitbox.traindelay.tracker.core.service.StationService;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,13 +37,37 @@ public class CurrentTrafficDivController {
         grid.setItems(listLastTen(currentTrainTraffic));
 
         div.setSizeFull();
-        var currentTrafficSpan = new Span("Current train traffic is : " + currentTrainTraffic.getFuss());
-        var averageDelaySpan = new Span("Average train delay : " + currentTrainTraffic.getAverageDelay());
-        averageDelaySpan.setClassName("averageDelaySpan");
-        var infoDiv = new Div(currentTrafficSpan, averageDelaySpan);
 
+        var infoDiv = getCurrentTrafficDiv(currentTrainTraffic);
         div.add(infoDiv);
         div.add(grid);
+        return div;
+    }
+
+    private Div getCurrentTrafficDiv(CurrentTrainTraffic currentTrainTraffic) {
+        String label;
+        String imageLocation;
+        switch (currentTrainTraffic.getFuss()) {
+            case BUSY:
+                label = "Busy train traffic";
+                imageLocation = "frontend/red_trains.png";
+                break;
+            case MEDIOCRE:
+                label = "Normal train traffic";
+                imageLocation = "frontend/orange_trains.png";
+                break;
+            case CALM:
+            default:
+                label = "Calm train traffic";
+                imageLocation = "frontend/green_train.png";
+        }
+
+        var div = new Div();
+        var averageDelayText = ", the average train delay is " + currentTrainTraffic.getAverageDelay() + " minutes";
+        var fussSpan = new Span(label + averageDelayText);
+        var image = new Image(imageLocation, label);
+        div.add(image, fussSpan);
+        div.setClassName("fussTrainTraffic");
         return div;
     }
 

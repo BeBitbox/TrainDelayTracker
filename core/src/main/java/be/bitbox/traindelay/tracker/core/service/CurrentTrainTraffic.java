@@ -26,12 +26,12 @@ public class CurrentTrainTraffic {
 
     private Fuss determineFussiness() {
         var optionalTrainDeparture = trainDepartures.stream()
-                .min(JsonTrainDeparture::compareTo);
+                .max(JsonTrainDeparture::compareTo);
         if (optionalTrainDeparture.isEmpty()) {
             return Fuss.CALM;
         }
         var oldestTrainDeparture = optionalTrainDeparture.get();
-        if (LocalDateTime.now().minusHours(2).isAfter(oldestTrainDeparture.getExpectedDepartureTime())) {
+        if (LocalDateTime.now().minusMinutes(90).isAfter(oldestTrainDeparture.getExpectedDepartureTime())) {
             return Fuss.CALM;
         } else if (LocalDateTime.now().minusHours(1).isBefore(oldestTrainDeparture.getExpectedDepartureTime())) {
             return Fuss.BUSY;
