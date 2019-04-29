@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Component
 class DepartureEventToDynamoDB {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartureEventToDynamoDB.class);
@@ -39,11 +41,12 @@ class DepartureEventToDynamoDB {
     @Subscribe
     void subscribeDepartureEvent(TrainDepartureEvent trainDepartureEvent) {
         try {
-            DynamoDepartureEvent dynamoItem = new DynamoDepartureEvent(trainDepartureEvent);
-            LOGGER.debug("Saving improved dynamoItem {}", dynamoItem);
-            dynamoDBMapper.save(dynamoItem);
-        }
-        catch (Exception e) {
+            if (ThreadLocalRandom.current().nextInt() % 4 == 0) {
+                DynamoDepartureEvent dynamoItem = new DynamoDepartureEvent(trainDepartureEvent);
+                LOGGER.debug("Saving improved dynamoItem {}", dynamoItem);
+                dynamoDBMapper.save(dynamoItem);
+            }
+        } catch (Exception e) {
             LOGGER.error("Failed to save improved event " + trainDepartureEvent, e);
         }
     }
