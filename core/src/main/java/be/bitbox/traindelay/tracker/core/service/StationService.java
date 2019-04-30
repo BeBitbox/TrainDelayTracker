@@ -1,7 +1,11 @@
 package be.bitbox.traindelay.tracker.core.service;
 
 import be.bitbox.traindelay.tracker.core.station.*;
+import be.bitbox.traindelay.tracker.core.stationstatistic.MissingStationStatisticEvent;
+import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic;
+import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatisticDao;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
+import com.google.common.eventbus.EventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,25 +13,29 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Collectors.toSet;
 
 @Service
 public class StationService {
     public final static LocalDate START_DATE_SERVICE = LocalDate.of(2018, Month.FEBRUARY, 22); 
     private final TrainDepartureRepository trainDepartureRepository;
     private final StationRetriever stationRetriever;
+    private final StationStatisticDao stationStatisticDao;
+    private final EventBus eventBus;
     private Set<StationId> availableStations;
     
     @Autowired
-    public StationService(TrainDepartureRepository trainDepartureRepository, StationRetriever stationRetriever) {
+    public StationService(TrainDepartureRepository trainDepartureRepository, StationRetriever stationRetriever, StationStatisticDao stationStatisticDao, EventBus eventBus) {
         this.trainDepartureRepository = trainDepartureRepository;
         this.stationRetriever = stationRetriever;
+        this.stationStatisticDao = stationStatisticDao;
+        this.eventBus = eventBus;
     }
 
     public SortedSet<JsonTrainDeparture> listTrainDeparturesFor(StationId stationId, String date) {
@@ -54,6 +62,14 @@ public class StationService {
         return new CurrentTrainTraffic(trainDepartureRepository.listRecentTrainDepartures());
     }
 
+    public StationStatistic getStationStatisticFor(StationId stationId, LocalDate localDate) {
+        var stationStatistic = stationStatisticDao.getStationStatistic(stationId, localDate);
+        if (stationStatistic == null) {
+            eventBus.post(new MissingStationStatisticEvent(stationId, localDate));
+        }
+        return stationStatistic;
+    }
+
     private void validateDateIsNotBeforeServiceStart(LocalDate date) {
         if (START_DATE_SERVICE.isAfter(date)) {
             throw new InvalidDateException(String.format("Date %s is too early. It cannot to be after %s", date, START_DATE_SERVICE));
@@ -74,6 +90,6 @@ public class StationService {
                 .getStationsFor(Country.BE)
                 .stream()
                 .map(Station::stationId)
-                .collect(Collectors.toSet());
+                .collect(toSet());
     }
 }
