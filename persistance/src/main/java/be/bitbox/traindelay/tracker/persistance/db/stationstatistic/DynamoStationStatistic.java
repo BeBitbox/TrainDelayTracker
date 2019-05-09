@@ -1,6 +1,5 @@
 package be.bitbox.traindelay.tracker.persistance.db.stationstatistic;
 
-import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
@@ -39,6 +38,20 @@ public class DynamoStationStatistic {
 
     @DynamoDBAttribute(attributeName = "platformChanges")
     private int platformChanges;
+
+    public DynamoStationStatistic() {
+    }
+
+    DynamoStationStatistic(StationStatistic stationStatistic) {
+        this.stationId = stationStatistic.getStationId().getId();
+        this.date = stationStatistic.getDay().toString();
+        this.creationTime = LocalDateTime.now();
+        this.departures = stationStatistic.getDepartures();
+        this.delays = stationStatistic.getDelays();
+        this.averageDelay = stationStatistic.getAverageDelay();
+        this.cancellations = stationStatistic.getCancellations();
+        this.platformChanges = stationStatistic.getPlatformChanges();
+    }
 
     StationStatistic toStationStatistic() {
         return aStationStatistic()

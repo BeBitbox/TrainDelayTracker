@@ -1,7 +1,5 @@
 package be.bitbox.traindelay.tracker.core.stationstatistic;
 
-import be.bitbox.traindelay.tracker.core.station.StationId;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
 import com.google.common.eventbus.EventBus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,69 +7,45 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import static be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
-import static be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent.Builder.createTrainDepartureEvent;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StationStatisticServiceTest {
-
     @Mock
     private EventBus eventBus;
 
     @Mock
-    private TrainDepartureRepository trainDepartureRepository;
-
-    @Mock
-    private StationStatisticDao stationStatisticDao;
+    private StationStatisticDao stationStatisticdDao;
 
     @Test
-    public void subscribe() {
-        var stationId = StationId.aStationId("miepStation");
-        var date = LocalDate.now();
+    public void getStationStatistic_happyCase() {
+        var stationId = aStationId("station");
+        var localDate = LocalDate.now();
+        var stationStatistic = new StationStatistic();
+        when(stationStatisticdDao.getStationStatistic(stationId, localDate)).thenReturn(stationStatistic);
+        var stationStatisticService = new StationStatisticService(stationStatisticdDao, eventBus);
 
-        var departureEvent1 = createTrainDepartureEvent()
-                .withStationId(stationId)
-                .withPlatform("3")
-                .withDelay(100)
-                .withVehicle("BE.NMBS.TSJOEK1")
-                .withExpectedDepartureTime(LocalDateTime.now())
-                .build();
-        var departureEvent2 = createTrainDepartureEvent()
-                .withStationId(stationId)
-                .withPlatform("3")
-                .withDelay(20)
-                .withCanceled(true)
-                .withVehicle("BE.NMBS.TSJOEK2")
-                .withExpectedDepartureTime(LocalDateTime.now())
-                .build();
-        var departureEvent3 = createTrainDepartureEvent()
-                .withStationId(stationId)
-                .withPlatform("3")
-                .withDelay(0)
-                .withVehicle("BE.NMBS.TSJOEK3")
-                .withPlatformChange(true)
-                .withExpectedDepartureTime(LocalDateTime.now())
-                .build();
+        var actualStationStatic = stationStatisticService.getStationStatisticFor(stationId, localDate);
 
-        when(trainDepartureRepository.listTrainDepartureFor(stationId, date)).thenReturn(..);
+        assertThat(actualStationStatic).isEqualTo(stationStatistic);
+        verify(stationStatisticdDao).getStationStatistic(stationId, localDate);
+        verifyZeroInteractions(eventBus);
+    }
 
-        var stationStatisticService = new StationStatisticService(eventBus, trainDepartureRepository, stationStatisticDao);
-        stationStatisticService.subscribe(new MissingStationStatisticEvent(stationId, date));
+    @Test
+    public void getStationStatistic_ErrorsThrown() {
+        var stationId = aStationId("station");
+        var localDate = LocalDate.now();
+        when(stationStatisticdDao.getStationStatistic(stationId, localDate)).thenThrow(new IllegalArgumentException("BOYCOT"));
+        var stationStatisticService = new StationStatisticService(stationStatisticdDao, eventBus);
 
-        var expectedStationStatistic = aStationStatistic()
-                .withStationId(stationId)
-                .withDay(date)
-                .withAverageDelay(40)
-                .withCancellations(1)
-                .withDelays(2)
-                .withPlatformChanges(1)
-                .build();
-        verify(eventBus).register(stationStatisticService);
-        verify(trainDepartureRepository).listTrainDepartureFor(stationId, date);k
-        verify(stationStatisticDao).save(expectedStationStatistic);
+        var actualStationStatic = stationStatisticService.getStationStatisticFor(stationId, localDate);
+
+        assertThat(actualStationStatic).isNull();
+        verify(stationStatisticdDao).getStationStatistic(stationId, localDate);
+        verify(eventBus).post(new MissingStationStatisticEvent(stationId, localDate));
     }
 }

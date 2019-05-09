@@ -27,4 +27,9 @@ public class DynamoStationStatisticDao implements StationStatisticDao {
         }
         return dynamoStationStatistic.toStationStatistic();
     }
+
+    @Override
+    public void save(StationStatistic stationStatistic) {
+        dynamoDBMapper.save(new DynamoStationStatistic(stationStatistic));
+    }
 }

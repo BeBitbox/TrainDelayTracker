@@ -38,7 +38,7 @@ public class StationServiceTest {
 
     @Before
     public void setUp() {
-        stationService = new StationService(trainDepartureRepository, stationStatistic, stationRetriever, eventBus);
+        stationService = new StationService(trainDepartureRepository, stationRetriever);
     }
 
     @Test(expected = StationNotFoundException.class)

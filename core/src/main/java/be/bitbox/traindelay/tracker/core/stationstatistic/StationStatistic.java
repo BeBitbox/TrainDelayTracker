@@ -3,6 +3,7 @@ package be.bitbox.traindelay.tracker.core.stationstatistic;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class StationStatistic {
     private StationId stationId;
@@ -103,5 +104,37 @@ public class StationStatistic {
 
     public int getPlatformChanges() {
         return platformChanges;
+    }
+
+    @Override
+    public String toString() {
+        return "StationStatistic{" +
+                "stationId=" + stationId +
+                ", day=" + day +
+                ", departures=" + departures +
+                ", delays=" + delays +
+                ", averageDelay=" + averageDelay +
+                ", cancellations=" + cancellations +
+                ", platformChanges=" + platformChanges +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StationStatistic that = (StationStatistic) o;
+        return departures == that.departures &&
+                delays == that.delays &&
+                averageDelay == that.averageDelay &&
+                cancellations == that.cancellations &&
+                platformChanges == that.platformChanges &&
+                Objects.equals(stationId, that.stationId) &&
+                Objects.equals(day, that.day);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(stationId, day, departures, delays, averageDelay, cancellations, platformChanges);
     }
 }

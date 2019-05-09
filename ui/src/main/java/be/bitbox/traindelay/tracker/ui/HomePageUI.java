@@ -26,10 +26,10 @@ public class HomePageUI extends VerticalLayout {
     private final Map<Tab, Div> divs = new HashMap<>();
 
     @Autowired
-    public HomePageUI(CurrentTrafficDivController currentTrafficDivController, TrainDepartureDivController trainDepartureDivController) {
+    public HomePageUI(HomePageDivController homePageDivController, TrainDepartureDivController trainDepartureDivController) {
         var overviewTab = new Tab("Overview");
         var trainDeparturesTab = new Tab("Train Departures");
-        tabOverview.put(overviewTab, currentTrafficDivController::asDiv);
+        tabOverview.put(overviewTab, homePageDivController::asDiv);
         tabOverview.put(trainDeparturesTab, trainDepartureDivController::asDiv);
         
         var tabs = new Tabs(overviewTab, trainDeparturesTab);
