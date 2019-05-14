@@ -6,9 +6,11 @@ import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatisticDao;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class DynamoStationStatisticDao implements StationStatisticDao {
 
     private final DynamoDBMapper dynamoDBMapper;

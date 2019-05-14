@@ -79,7 +79,7 @@ public class CurrentTrafficDivController {
         return trainDepartures
                 .stream()
                 .map(departure -> new CurrentTrainDepartureVO(departure.getStation(), departure.getExpectedDepartureTime(), departure.getDelay()))
-                .limit(10)
+                .limit(8)
                 .collect(toList());
     }
 

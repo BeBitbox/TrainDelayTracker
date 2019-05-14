@@ -57,23 +57,27 @@ public class StationStaticsDayDivController {
         return div;
     }
 
-    private void fillGrid(Grid grid, StationId stationId, LocalDate localDate) {
+    private void fillGrid(Grid<Entry> grid, StationId stationId, LocalDate localDate) {
         var stationStatistic = stationStatisticService.getStationStatisticFor(stationId, localDate);
 
-        var departuresEntry = new Entry("Number of departures", stationStatistic.getDepartures());
-        var delaysEntry = new Entry("Delay percentage", stationStatistic.getDelays() / stationStatistic.getDepartures() * 100);
-        var averageDelayEntry = new Entry("Average delay", stationStatistic.getAverageDelay());
-        var cancellationsEntry = new Entry("Cancellations", stationStatistic.getCancellations());
-        var platformChangesEntry = new Entry("Platform Changes", stationStatistic.getPlatformChanges());
+        if (stationStatistic != null) {
+            int departures = stationStatistic.getDepartures();
+            var departuresEntry = new Entry("Number of departures", String.valueOf(departures));
+            Integer delayPercentage = departures == 0 ? 0 : (int) stationStatistic.getDelays() * 100 / departures;
+            var delaysEntry = new Entry("Delay percentage", delayPercentage + "%");
+            var averageDelayEntry = new Entry("Average delay", stationStatistic.getAverageDelay() + " seconds");
+            var cancellationsEntry = new Entry("Cancellations", stationStatistic.getCancellations() + " trains");
+            var platformChangesEntry = new Entry("Platform Changes", stationStatistic.getPlatformChanges() + " times");
 
-        grid.setItems(departuresEntry, delaysEntry, averageDelayEntry, cancellationsEntry, platformChangesEntry);
+            grid.setItems(departuresEntry, delaysEntry, averageDelayEntry, cancellationsEntry, platformChangesEntry);
+        }
     }
 
     private static class Entry {
         private final String label;
-        private final Integer value;
+        private final String value;
 
-        private Entry(String label, Integer value) {
+        private Entry(String label, String value) {
             this.label = label;
             this.value = value;
         }
@@ -82,7 +86,7 @@ public class StationStaticsDayDivController {
             return label;
         }
 
-        Integer getValue() {
+        String getValue() {
             return value;
         }
     }

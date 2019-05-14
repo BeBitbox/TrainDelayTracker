@@ -1,13 +1,15 @@
 package be.bitbox.traindelay.tracker.persistance.db.stationstatistic;
 
 import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic;
+import be.bitbox.traindelay.tracker.persistance.db.InstantConverter;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
@@ -21,8 +23,9 @@ public class DynamoStationStatistic {
     @DynamoDBRangeKey(attributeName = "date")
     private String date;
 
+    @DynamoDBTypeConverted(converter = InstantConverter.class)
     @DynamoDBAttribute(attributeName = "creationTime")
-    private LocalDateTime creationTime;
+    private Instant creationTime;
 
     @DynamoDBAttribute(attributeName = "departures")
     private int departures;
@@ -45,7 +48,7 @@ public class DynamoStationStatistic {
     DynamoStationStatistic(StationStatistic stationStatistic) {
         this.stationId = stationStatistic.getStationId().getId();
         this.date = stationStatistic.getDay().toString();
-        this.creationTime = LocalDateTime.now();
+        this.creationTime = Instant.now();
         this.departures = stationStatistic.getDepartures();
         this.delays = stationStatistic.getDelays();
         this.averageDelay = stationStatistic.getAverageDelay();
@@ -81,11 +84,11 @@ public class DynamoStationStatistic {
         this.date = date;
     }
 
-    public LocalDateTime getCreationTime() {
+    public Instant getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(LocalDateTime creationTime) {
+    public void setCreationTime(Instant creationTime) {
         this.creationTime = creationTime;
     }
 
