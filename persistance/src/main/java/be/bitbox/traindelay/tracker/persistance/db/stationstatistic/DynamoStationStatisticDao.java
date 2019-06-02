@@ -50,7 +50,7 @@ class DynamoStationStatisticDao implements StationStatisticDao {
         eav.put(":to", new AttributeValue().withS(to.toString()));
 
         var queryExpression = new DynamoDBQueryExpression<DynamoStationStatistic>()
-                .withKeyConditionExpression("station = :id and date between :from and :to")
+                .withKeyConditionExpression("station = :id and local_date between :from and :to")
                 .withExpressionAttributeValues(eav);
         return dynamoDBMapper
                 .query(DynamoStationStatistic.class, queryExpression)

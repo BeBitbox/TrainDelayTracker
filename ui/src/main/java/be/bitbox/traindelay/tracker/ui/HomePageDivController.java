@@ -8,18 +8,22 @@ import org.springframework.stereotype.Component;
 public class HomePageDivController {
     private final CurrentTrafficDivController currentTrafficDivController;
     private final StationStaticsDayDivController stationStaticsDayDivController;
+    private final StationStaticsYearDivController stationStaticsYearDivController;
 
     @Autowired
-    public HomePageDivController(CurrentTrafficDivController currentTrafficDivController, StationStaticsDayDivController stationStaticsDayDivController) {
+    public HomePageDivController(CurrentTrafficDivController currentTrafficDivController,
+                                 StationStaticsDayDivController stationStaticsDayDivController,
+                                 StationStaticsYearDivController stationStaticsYearDivController) {
         this.currentTrafficDivController = currentTrafficDivController;
         this.stationStaticsDayDivController = stationStaticsDayDivController;
+        this.stationStaticsYearDivController = stationStaticsYearDivController;
     }
 
     Div asDiv() {
         var div = new Div();
         div.setSizeFull();
 
-        div.add(currentTrafficDivController.asDiv(), stationStaticsDayDivController.asDiv());
+        div.add(currentTrafficDivController.asDiv(), stationStaticsDayDivController.asDiv(), stationStaticsYearDivController.asDiv());
         return div;
     }
 }

@@ -20,7 +20,7 @@ public class DynamoStationStatistic {
     @DynamoDBHashKey(attributeName = "station")
     private String stationId;
 
-    @DynamoDBRangeKey(attributeName = "date")
+    @DynamoDBRangeKey(attributeName = "local_date")
     private String date;
 
     @DynamoDBTypeConverted(converter = InstantConverter.class)
