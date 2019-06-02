@@ -55,7 +55,7 @@ public class StationStatisticService {
     public StationStatistic getFullStationStaticFromLastYear() {
         if (expiredTime == null || LocalDateTime.now().isAfter(expiredTime)) {
             this.stationStatisticOfYear = createFullStationStaticFromLastYear();
-            this.expiredTime = LocalDateTime.now().plusMinutes(5);
+            this.expiredTime = LocalDateTime.now().plusHours(1);
         }
         return stationStatisticOfYear;
 
