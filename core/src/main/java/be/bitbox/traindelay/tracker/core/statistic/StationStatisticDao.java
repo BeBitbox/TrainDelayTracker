@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.core.stationstatistic;
+package be.bitbox.traindelay.tracker.core.statistic;
 
 import be.bitbox.traindelay.tracker.core.station.StationId;
 

@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.core.stationstatistic;
+package be.bitbox.traindelay.tracker.core.statistic;
 
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
@@ -7,7 +7,7 @@ import com.google.common.eventbus.Subscribe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
+import static be.bitbox.traindelay.tracker.core.statistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
 
 @Service
 public class StationStatisticsEventHandler {

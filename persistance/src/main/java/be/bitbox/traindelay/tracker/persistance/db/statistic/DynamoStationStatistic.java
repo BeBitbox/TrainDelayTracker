@@ -1,6 +1,6 @@
-package be.bitbox.traindelay.tracker.persistance.db.stationstatistic;
+package be.bitbox.traindelay.tracker.persistance.db.statistic;
 
-import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic;
+import be.bitbox.traindelay.tracker.core.statistic.StationStatistic;
 import be.bitbox.traindelay.tracker.persistance.db.InstantConverter;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
-import static be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
+import static be.bitbox.traindelay.tracker.core.statistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
 
 @DynamoDBTable(tableName = "StationStatistic")
 public class DynamoStationStatistic {

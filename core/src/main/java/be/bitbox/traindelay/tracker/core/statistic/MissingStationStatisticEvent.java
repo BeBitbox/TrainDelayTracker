@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.core.stationstatistic;
+package be.bitbox.traindelay.tracker.core.statistic;
 
 import be.bitbox.traindelay.tracker.core.station.StationId;
 
@@ -9,7 +9,7 @@ public class MissingStationStatisticEvent {
     private final StationId stationId;
     private final LocalDate localDate;
 
-    public MissingStationStatisticEvent(StationId stationId, LocalDate localDate) {
+    MissingStationStatisticEvent(StationId stationId, LocalDate localDate) {
         this.stationId = stationId;
         this.localDate = localDate;
     }

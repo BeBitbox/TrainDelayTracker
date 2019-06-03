@@ -4,7 +4,7 @@ import be.bitbox.traindelay.tracker.core.service.StationService;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
-import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatisticService;
+import be.bitbox.traindelay.tracker.core.statistic.StatisticService;
 import com.vaadin.flow.component.ItemLabelGenerator;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -18,12 +18,12 @@ import java.util.Locale;
 
 @Component
 public class StationStaticsDayDivController {
-    private final StationStatisticService stationStatisticService;
+    private final StatisticService statisticService;
     private final StationRetriever stationRetriever;
 
     @Autowired
-    public StationStaticsDayDivController(StationStatisticService stationStatisticService, StationRetriever stationRetriever) {
-        this.stationStatisticService = stationStatisticService;
+    public StationStaticsDayDivController(StatisticService statisticService, StationRetriever stationRetriever) {
+        this.statisticService = statisticService;
         this.stationRetriever = stationRetriever;
     }
 
@@ -60,7 +60,7 @@ public class StationStaticsDayDivController {
     }
 
     private StationStatisticGrid createStationStatisticGrid(ComboBox<Station> stationComboBox, DatePicker datePicker) {
-        var stationStatistic = stationStatisticService.getStationStatisticFor(stationComboBox.getValue().stationId(), datePicker.getValue());
+        var stationStatistic = statisticService.getStationStatisticFor(stationComboBox.getValue().stationId(), datePicker.getValue());
         return new StationStatisticGrid(stationStatistic);
     }
 }

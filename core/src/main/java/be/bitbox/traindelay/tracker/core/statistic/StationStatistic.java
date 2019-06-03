@@ -1,11 +1,11 @@
-package be.bitbox.traindelay.tracker.core.stationstatistic;
+package be.bitbox.traindelay.tracker.core.statistic;
 
 import be.bitbox.traindelay.tracker.core.station.StationId;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class StationStatistic {
+public class StationStatistic implements Statistic {
     private StationId stationId;
     private LocalDate day;
     private int departures;
@@ -86,22 +86,27 @@ public class StationStatistic {
         return day;
     }
 
+    @Override
     public int getDepartures() {
         return departures;
     }
 
+    @Override
     public int getDelays() {
         return delays;
     }
 
+    @Override
     public int getAverageDelay() {
         return averageDelay;
     }
 
+    @Override
     public int getCancellations() {
         return cancellations;
     }
 
+    @Override
     public int getPlatformChanges() {
         return platformChanges;
     }

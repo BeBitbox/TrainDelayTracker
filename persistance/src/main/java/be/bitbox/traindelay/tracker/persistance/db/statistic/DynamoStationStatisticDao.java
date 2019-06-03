@@ -1,8 +1,8 @@
-package be.bitbox.traindelay.tracker.persistance.db.stationstatistic;
+package be.bitbox.traindelay.tracker.persistance.db.statistic;
 
 import be.bitbox.traindelay.tracker.core.station.StationId;
-import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatistic;
-import be.bitbox.traindelay.tracker.core.stationstatistic.StationStatisticDao;
+import be.bitbox.traindelay.tracker.core.statistic.StationStatistic;
+import be.bitbox.traindelay.tracker.core.statistic.StationStatisticDao;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
