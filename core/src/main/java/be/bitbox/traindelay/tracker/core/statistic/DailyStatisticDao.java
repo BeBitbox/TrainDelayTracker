@@ -8,4 +8,6 @@ public interface DailyStatisticDao {
     List<DailyStatistic> getDayStatistic(LocalDate from, LocalDate toIncluded);
 
     DailyStatistic getDayStatistic(LocalDate date);
+
+    void save(DailyStatistic dailyStatistic);
 }

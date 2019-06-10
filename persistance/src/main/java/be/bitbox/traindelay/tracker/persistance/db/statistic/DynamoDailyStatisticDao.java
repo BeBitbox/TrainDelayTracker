@@ -50,4 +50,9 @@ class DynamoDailyStatisticDao implements DailyStatisticDao {
         }
         return dailyStatistic.toDailyStatistic();
     }
+
+    @Override
+    public void save(DailyStatistic dailyStatistic) {
+        dynamoDBMapper.save(new DynamoDailyStatistic(dailyStatistic));
+    }
 }
