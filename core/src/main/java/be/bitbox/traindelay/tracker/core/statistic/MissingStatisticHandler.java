@@ -25,7 +25,8 @@ public class MissingStatisticHandler {
     public MissingStatisticHandler(DailyStatisticDao dailyStatisticDao,
                                    StationStatisticDao stationStatisticDao,
                                    StationRetriever stationRetriever,
-                                   EventBus eventBus, TrainDepartureRepository trainDepartureRepository) {
+                                   EventBus eventBus,
+                                   TrainDepartureRepository trainDepartureRepository) {
         this.dailyStatisticDao = dailyStatisticDao;
         this.stationStatisticDao = stationStatisticDao;
         this.stationRetriever = stationRetriever;
@@ -58,21 +59,6 @@ public class MissingStatisticHandler {
         LOGGER.info("Treating missing event {} like a princess", missingStationStatisticEvent);
 
         var departures = trainDepartureRepository.listTrainDepartureFor(missingStationStatisticEvent.getStationId(), missingStationStatisticEvent.getLocalDate());
-
-        new StationStatistic()
-
-            var stationStatistic = stationStatisticDao.getStationStatistic(station.stationId(), missingDailyStatisticEvent.getDate());
-            if (stationStatistic == null) {
-                stationMissing = true;
-                eventBus.post(new MissingStationStatisticEvent(station.stationId(), missingDailyStatisticEvent.getDate()));
-            } else {
-                collectedStationStatistic.add(stationStatistic);
-            }
-        }
-
-        if (!stationMissing) {
-            dailyStatisticDao.save(new DailyStatistic(collectedStationStatistic));
-        }
-
+        stationStatisticDao.save(new StationStatistic(departures, missingStationStatisticEvent));
     }
 }

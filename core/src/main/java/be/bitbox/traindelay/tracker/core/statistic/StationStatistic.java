@@ -1,8 +1,10 @@
 package be.bitbox.traindelay.tracker.core.statistic;
 
 import be.bitbox.traindelay.tracker.core.station.StationId;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class StationStatistic implements Statistic {
@@ -13,6 +15,31 @@ public class StationStatistic implements Statistic {
     private int averageDelay;
     private int cancellations;
     private int platformChanges;
+
+    StationStatistic(List<TrainDepartureEvent> trainDepartureEvents, MissingStationStatisticEvent missingStationStatisticEvent) {
+        departures = trainDepartureEvents.size();
+        stationId = missingStationStatisticEvent.getStationId();
+        day = missingStationStatisticEvent.getLocalDate();
+
+        for (TrainDepartureEvent trainDepartureEvent : trainDepartureEvents) {
+            averageDelay += trainDepartureEvent.getDelay();
+            if (trainDepartureEvent.getDelay() > 0) {
+                delays++;
+            }
+
+            if (trainDepartureEvent.isCanceled()) {
+                cancellations++;
+            }
+            if (trainDepartureEvent.isPlatformChange()) {
+                platformChanges++;
+            }
+        }
+        if (departures > 0) {
+            averageDelay = averageDelay / departures;
+        }
+    }
+
+    private StationStatistic() {  }
 
     public static final class StationStatisticBuilder {
         private StationId stationId;

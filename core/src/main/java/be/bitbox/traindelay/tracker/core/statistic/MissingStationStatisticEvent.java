@@ -9,7 +9,7 @@ public class MissingStationStatisticEvent {
     private final StationId stationId;
     private final LocalDate localDate;
 
-    MissingStationStatisticEvent(StationId stationId, LocalDate localDate) {
+    public MissingStationStatisticEvent(StationId stationId, LocalDate localDate) {
         this.stationId = stationId;
         this.localDate = localDate;
     }

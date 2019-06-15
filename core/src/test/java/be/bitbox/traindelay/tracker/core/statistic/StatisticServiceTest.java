@@ -13,6 +13,7 @@ import java.util.List;
 
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static be.bitbox.traindelay.tracker.core.statistic.DailyStatistic.DayStatisticBuilder.aDayStatistic;
+import static be.bitbox.traindelay.tracker.core.statistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.times;
@@ -35,7 +36,7 @@ public class StatisticServiceTest {
     public void getStationStatistic_happyCase() {
         var stationId = aStationId("station");
         var localDate = LocalDate.now();
-        var stationStatistic = new StationStatistic();
+        var stationStatistic = aStationStatistic().build();
         when(stationStatisticdDao.getStationStatistic(stationId, localDate)).thenReturn(stationStatistic);
         var stationStatisticService = new StatisticService(stationStatisticdDao, eventBus, dailyStatisticDao);
 

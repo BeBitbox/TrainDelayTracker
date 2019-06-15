@@ -29,11 +29,12 @@ class DynamoDailyStatisticDao implements DailyStatisticDao {
     @Override
     public List<DailyStatistic> getDayStatistic(LocalDate from, LocalDate to) {
         Map<String, AttributeValue> eav = new HashMap<>();
+        eav.put(":id", new AttributeValue().withS("*"));
         eav.put(":from", new AttributeValue().withS(from.toString()));
         eav.put(":to", new AttributeValue().withS(to.toString()));
 
         var queryExpression = new DynamoDBQueryExpression<DynamoDailyStatistic>()
-                .withKeyConditionExpression("local_date between :from and :to")
+                .withKeyConditionExpression("station = :id and local_date between :from and :to")
                 .withExpressionAttributeValues(eav);
         return dynamoDBMapper
                 .query(DynamoDailyStatistic.class, queryExpression)
@@ -44,7 +45,7 @@ class DynamoDailyStatisticDao implements DailyStatisticDao {
 
     @Override
     public DailyStatistic getDayStatistic(LocalDate date) {
-        var dailyStatistic = dynamoDBMapper.load(DynamoDailyStatistic.class, date.toString());
+        var dailyStatistic = dynamoDBMapper.load(DynamoDailyStatistic.class, "*", date.toString());
         if (dailyStatistic == null) {
             return null;
         }

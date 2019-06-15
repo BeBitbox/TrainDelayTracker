@@ -43,7 +43,7 @@ public class ConsumeMissingDailyStatisticSQS {
         objectMapper = new ObjectMapper();
     }
 
-    @Scheduled(fixedDelay = 2000)
+    @Scheduled(fixedDelay = 2000L)
     public void resolveMissingStatistic() {
         var missingDailyStatisticEvent = fetchMissingDailyStatisticEvent();
         missingDailyStatisticEvent.ifPresent(missingStatisticHandler::onCommandFor);
@@ -63,14 +63,15 @@ public class ConsumeMissingDailyStatisticSQS {
                 .map(Message::getBody)
                 .map(deserialize())
                 .filter(Objects::nonNull)
+                .map(MissingDailyStatisticMessage::asMissingDailyStaticEvent)
                 .filter(event -> dailyStatisticDao.getDayStatistic(event.getDate()) == null)
                 .findAny();
     }
 
-    private Function<String, MissingDailyStatisticEvent> deserialize() {
+    private Function<String, MissingDailyStatisticMessage> deserialize() {
         return body -> {
             try {
-                return objectMapper.readValue(body, MissingDailyStatisticEvent.class);
+                return objectMapper.readValue(body, MissingDailyStatisticMessage.class);
             } catch (IOException e) {
                 LOGGER.error("Error while parsing missing statistic event from the queue", e);
                 return null;

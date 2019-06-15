@@ -29,7 +29,7 @@ public class ConsumeTrainDepartureSQS {
 
     @Autowired
     public ConsumeTrainDepartureSQS(AmazonSQS amazonSQS,
-                                    @Value("${queue.url}") String queueUrl,
+                                    @Value("${traindeparture.queue.url}") String queueUrl,
                                     RecentTrainDepartures recentTrainDepartures) {
         this.amazonSQS = amazonSQS;
         this.queueUrl = queueUrl;

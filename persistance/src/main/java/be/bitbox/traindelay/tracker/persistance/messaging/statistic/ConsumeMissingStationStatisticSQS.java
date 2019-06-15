@@ -43,10 +43,10 @@ public class ConsumeMissingStationStatisticSQS {
         objectMapper = new ObjectMapper();
     }
 
-    @Scheduled(fixedDelay = 2000)
+    @Scheduled(fixedDelay = 2000L)
     public void resolveMissingStatistic() {
-        var missingDailyStatisticEvent = fetchMissingStationStatisticEvent();
-        missingDailyStatisticEvent.ifPresent(missingStatisticHandler::onCommandFor);
+        var missingStationStatisticEvent = fetchMissingStationStatisticEvent();
+        missingStationStatisticEvent.ifPresent(missingStatisticHandler::onCommandFor);
     }
 
     private Optional<MissingStationStatisticEvent> fetchMissingStationStatisticEvent() {
@@ -63,14 +63,15 @@ public class ConsumeMissingStationStatisticSQS {
                 .map(Message::getBody)
                 .map(deserialize())
                 .filter(Objects::nonNull)
-                .filter(event -> stationStatisticDao.getStationStatistic(event.getStationId(), event.getLocalDate()) != null)
+                .map(MissingStationStatisticMessage::asMissingStationStatisticEvent)
+                .filter(event -> stationStatisticDao.getStationStatistic(event.getStationId(), event.getLocalDate()) == null)
                 .findAny();
     }
 
-    private Function<String, MissingStationStatisticEvent> deserialize() {
+    private Function<String, MissingStationStatisticMessage> deserialize() {
         return body -> {
             try {
-                return objectMapper.readValue(body, MissingStationStatisticEvent.class);
+                return objectMapper.readValue(body, MissingStationStatisticMessage.class);
             } catch (IOException e) {
                 LOGGER.error("Error while parsing missing statistic event from the queue", e);
                 return null;

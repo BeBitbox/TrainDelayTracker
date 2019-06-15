@@ -6,7 +6,7 @@ import java.util.Objects;
 public class MissingDailyStatisticEvent {
     private final LocalDate date;
 
-    MissingDailyStatisticEvent(LocalDate localDate) {
+    public MissingDailyStatisticEvent(LocalDate localDate) {
         this.date = localDate;
     }
 

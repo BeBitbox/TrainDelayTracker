@@ -4,6 +4,7 @@ import be.bitbox.traindelay.tracker.core.statistic.DailyStatistic;
 import be.bitbox.traindelay.tracker.persistance.db.InstantConverter;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
@@ -13,7 +14,10 @@ import java.time.LocalDate;
 @DynamoDBTable(tableName = "DailyStatistic")
 public class DynamoDailyStatistic {
 
-    @DynamoDBHashKey(attributeName = "local_date")
+    @DynamoDBHashKey(attributeName = "station")
+    private String stationId;
+
+    @DynamoDBRangeKey(attributeName = "local_date")
     private String date;
 
     @DynamoDBTypeConverted(converter = InstantConverter.class)
@@ -39,6 +43,7 @@ public class DynamoDailyStatistic {
     }
 
     DynamoDailyStatistic(DailyStatistic dailyStatistic) {
+        this.stationId = "*";
         this.date = dailyStatistic.getDay().toString();
         this.creationTime = Instant.now();
         this.departures = dailyStatistic.getDepartures();
@@ -105,6 +110,14 @@ public class DynamoDailyStatistic {
 
     public void setCancellations(int cancellations) {
         this.cancellations = cancellations;
+    }
+
+    public String getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(String stationId) {
+        this.stationId = stationId;
     }
 
     public int getPlatformChanges() {

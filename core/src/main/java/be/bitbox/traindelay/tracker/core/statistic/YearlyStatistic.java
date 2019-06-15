@@ -28,7 +28,7 @@ public class YearlyStatistic implements Statistic {
 
         this.departures = departures.get();
         this.delays = delays.get();
-        this.averageDelay = totalDelay.get() / this.departures;
+        this.averageDelay = this.departures > 0 ? totalDelay.get() / this.departures : 0 ;
         this.cancellations = cancellations.get();
         this.platformChanges = platformChanges.get();
     }
