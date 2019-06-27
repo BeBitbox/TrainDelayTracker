@@ -9,6 +9,7 @@ import com.vaadin.flow.component.ItemLabelGenerator;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,9 @@ public class StationStaticsDayDivController {
 
     Div asDiv() {
         var div = new Div();
+        div.setId("main_block_middle");
+
+        var titleDiv = new Div(new Span("See statistics for a station"));
 
         var stationComboBox = new ComboBox<Station>();
         List<Station> stations = stationRetriever.getStationsFor(Country.BE);
@@ -54,8 +58,7 @@ public class StationStaticsDayDivController {
 
         });
 
-        div.setSizeFull();
-        div.add(stationComboBox, datePicker, grid);
+        div.add(titleDiv, stationComboBox, datePicker, grid);
         return div;
     }
 

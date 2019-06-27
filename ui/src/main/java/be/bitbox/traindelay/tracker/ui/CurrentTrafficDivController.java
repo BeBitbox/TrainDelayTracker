@@ -31,15 +31,13 @@ public class CurrentTrafficDivController {
 
     Div asDiv() {
         var div = new Div();
+        div.setId("main_block_left");
         var currentTrainTraffic = stationService.listRecentTrainDepartures();
         var grid = new Grid<CurrentTrainDepartureVO>();
         grid.addColumn(departureVO -> departureVO.station).setHeader("Station");
         grid.addColumn(departureVO -> departureVO.expectedDepartureTime).setHeader("Time");
         grid.addColumn(departureVO -> departureVO.delay).setHeader("Delay (minutes)");
         grid.setItems(listLastTen(currentTrainTraffic));
-        grid.setWidth("33%");
-
-        div.setSizeFull();
 
         var infoDiv = getCurrentTrafficDiv(currentTrainTraffic);
         div.add(infoDiv);

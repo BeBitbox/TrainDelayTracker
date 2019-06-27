@@ -33,7 +33,7 @@ public class DailyStatistic implements Statistic {
         this.day = stationStatistics.isEmpty() ? null : stationStatistics.get(0).getDay();
         this.departures = departures.get();
         this.delays = delays.get();
-        this.averageDelay = totalDelay.get() / this.departures;
+        this.averageDelay = this.departures == 0 ? 0 : totalDelay.get() / this.departures;
         this.cancellations = cancellations.get();
         this.platformChanges = platformChanges.get();
     }

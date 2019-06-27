@@ -23,7 +23,9 @@ public class HomePageDivController {
         var div = new Div();
         div.setSizeFull();
 
-        div.add(currentTrafficDivController.asDiv(), stationStaticsDayDivController.asDiv(), stationStaticsYearDivController.asDiv());
+        Div clearDiv = new Div();
+        clearDiv.setClassName("clearBoth");
+        div.add(currentTrafficDivController.asDiv(), stationStaticsDayDivController.asDiv(), stationStaticsYearDivController.asDiv(), clearDiv);
         return div;
     }
 }

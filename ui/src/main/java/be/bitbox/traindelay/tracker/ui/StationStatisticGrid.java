@@ -9,7 +9,6 @@ class StationStatisticGrid extends Grid<StationStatisticGrid.Entry> {
         super();
         addColumn(Entry::getLabel);
         addColumn(Entry::getValue);
-        setWidth("33%");
 
         if (statistic != null) {
             int departures = statistic.getDepartures();
