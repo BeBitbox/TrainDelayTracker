@@ -12,12 +12,12 @@ class StationStatisticGrid extends Grid<StationStatisticGrid.Entry> {
 
         if (statistic != null) {
             int departures = statistic.getDepartures();
-            var departuresEntry = new Entry("Number of departures", String.valueOf(departures));
-            Integer delayPercentage = departures == 0 ? 0 : statistic.getDelays() * 100 / departures;
+            var departuresEntry = new Entry("Number of departures", String.format("%,d", departures));
+            int delayPercentage = departures == 0 ? 0 : statistic.getDelays() * 100 / departures;
             var delaysEntry = new Entry("Delay percentage", delayPercentage + "%");
             var averageDelayEntry = new Entry("Average delay", statistic.getAverageDelay() + " seconds");
-            var cancellationsEntry = new Entry("Cancellations", statistic.getCancellations() + " trains");
-            var platformChangesEntry = new Entry("Platform Changes", statistic.getPlatformChanges() + " times");
+            var cancellationsEntry = new Entry("Cancellations", String.format("%,d trains", statistic.getCancellations()));
+            var platformChangesEntry = new Entry("Platform Changes", String.format("%,d times", statistic.getPlatformChanges()));
 
             setItems(departuresEntry, delaysEntry, averageDelayEntry, cancellationsEntry, platformChangesEntry);
         }

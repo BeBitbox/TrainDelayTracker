@@ -60,6 +60,7 @@
     height: 343px;
 }
 
-#pwa-ip {
+#pwa-ip .banner {
     display: none;
+    visibility: hidden;
 }
