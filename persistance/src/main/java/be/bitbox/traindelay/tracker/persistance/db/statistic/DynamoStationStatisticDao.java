@@ -1,11 +1,7 @@
 package be.bitbox.traindelay.tracker.persistance.db.statistic;
 
-import be.bitbox.traindelay.tracker.core.station.StationId;
-import be.bitbox.traindelay.tracker.core.statistic.StationStatistic;
-import be.bitbox.traindelay.tracker.core.statistic.StationStatisticDao;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,16 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import be.bitbox.traindelay.tracker.core.station.StationId;
+import be.bitbox.traindelay.tracker.core.statistic.StationStatistic;
+import be.bitbox.traindelay.tracker.core.statistic.StationStatisticDao;
 import static java.util.stream.Collectors.toList;
 
 @Component
 class DynamoStationStatisticDao implements StationStatisticDao {
 
-    private final DynamoDBMapper dynamoDBMapper;
+    private final IDynamoDBMapper dynamoDBMapper;
 
     @Autowired
-    DynamoStationStatisticDao(AmazonDynamoDB dynamoDB) {
-        this.dynamoDBMapper = new DynamoDBMapper(dynamoDB);
+    DynamoStationStatisticDao(IDynamoDBMapper dynamoDBMapper) {
+        this.dynamoDBMapper = dynamoDBMapper;
     }
 
 

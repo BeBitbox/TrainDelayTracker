@@ -17,12 +17,18 @@ package be.bitbox.traindelay.tracker.application;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.google.common.eventbus.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+import be.bitbox.traindelay.tracker.application.local.LocalAmazonSQS;
+import be.bitbox.traindelay.tracker.application.local.LocalDynamoDBMapper;
 
 @Configuration
 @ComponentScan(basePackages = {"be.bitbox.traindelay.tracker"})
@@ -34,18 +40,33 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public AmazonDynamoDB getAmazonDynamoDB() {
-        return AmazonDynamoDBClientBuilder
+    @Profile("!local")
+    public IDynamoDBMapper getDynamoDBMapper() {
+        var amazonDynamoDB = AmazonDynamoDBClientBuilder
+                .standard()
+                .withRegion("eu-west-3")
+                .build();
+        return new DynamoDBMapper(amazonDynamoDB);
+    }
+
+    @Bean
+    @Profile("local")
+    public IDynamoDBMapper getLocalDynamoDBMapper() {
+        return new LocalDynamoDBMapper();
+    }
+
+    @Bean
+    @Profile("!local")
+    public AmazonSQS getAmazonSQS() {
+        return AmazonSQSClientBuilder
                 .standard()
                 .withRegion("eu-west-3")
                 .build();
     }
 
     @Bean
-    public AmazonSQS getAmazonSQS() {
-        return AmazonSQSClientBuilder
-                .standard()
-                .withRegion("eu-west-3")
-                .build();
-    } 
+    @Profile("local")
+    public AmazonSQS getLocalAmazonSQS() {
+        return new LocalAmazonSQS();
+    }
 }

@@ -3,6 +3,8 @@ This application will track and store train departure events. The goal of the pr
 have the possibilities to query that data and obtain useful statistics from it and display 
 it using a webpage.
 
+To run the application locally without external dependencies such as a database, start the springboot application with profile "local".
+
 ## Core module
 This is the most important module that contains all the specific models of the application and
 most of the businessrules applied on them. It has no external dependencies, except some technical ones.

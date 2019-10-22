@@ -15,22 +15,22 @@
  */
 package be.bitbox.traindelay.tracker.persistance.db.board;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardDao;
 import be.bitbox.traindelay.tracker.core.station.StationId;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component
 class DynamoBoardDao implements BoardDao {
 
-    private final DynamoDBMapper dynamoDBMapper;
+    private final IDynamoDBMapper dynamoDBMapper;
 
     @Autowired
-    DynamoBoardDao(AmazonDynamoDB dynamoDB) {
-        this.dynamoDBMapper = new DynamoDBMapper(dynamoDB);
+    DynamoBoardDao(IDynamoDBMapper dynamoDBMapper) {
+        this.dynamoDBMapper = dynamoDBMapper;
     }
 
     @Override

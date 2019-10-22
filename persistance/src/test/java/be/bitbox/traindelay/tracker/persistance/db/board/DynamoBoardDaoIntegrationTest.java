@@ -1,29 +1,29 @@
 package be.bitbox.traindelay.tracker.persistance.db.board;
 
-import be.bitbox.traindelay.tracker.core.board.Board;
-import be.bitbox.traindelay.tracker.core.board.BoardDao;
-import be.bitbox.traindelay.tracker.core.station.StationId;
-import be.bitbox.traindelay.tracker.persistance.db.AWSTestClient;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
-import static be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture.aTrainDeparture;
+import be.bitbox.traindelay.tracker.core.board.Board;
+import be.bitbox.traindelay.tracker.core.board.BoardDao;
+import be.bitbox.traindelay.tracker.core.station.StationId;
+import be.bitbox.traindelay.tracker.persistance.db.AWSTestClient;
 import static be.bitbox.traindelay.tracker.core.board.Board.aBoardForStation;
+import static be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture.aTrainDeparture;
 import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.of;
 import static java.time.Month.JANUARY;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class DynamoBoardDaoIntegrationTest {
 
     @Test
     @Ignore("Requires real DB")
     public void testDao() {
-        AmazonDynamoDB client = AWSTestClient.create();
+        DynamoDBMapper client = AWSTestClient.create();
         BoardDao boardDao = new DynamoBoardDao(client);
 
         StationId id = StationId.aStationId("mystation");

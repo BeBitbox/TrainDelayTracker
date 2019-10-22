@@ -1,8 +1,6 @@
 package be.bitbox.traindelay.tracker.persistance.db.locking;
 
-import be.bitbox.traindelay.tracker.core.LockingDao;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +11,19 @@ import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import be.bitbox.traindelay.tracker.core.LockingDao;
+
 @Component
 public class DynamoLockingDao implements LockingDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamoLockingDao.class);
     private static final String LOCK_KEY = "BoardRetrievalLock";
 
-    private final DynamoDBMapper dynamoDBMapper;
+    private final IDynamoDBMapper dynamoDBMapper;
     private final String hostname;
 
     @Autowired
-    public DynamoLockingDao(AmazonDynamoDB dynamoDB) {
-        this.dynamoDBMapper = new DynamoDBMapper(dynamoDB);
+    public DynamoLockingDao(IDynamoDBMapper dynamoDBMapper) {
+        this.dynamoDBMapper = dynamoDBMapper;
         this.hostname = getHostname();
     }
 

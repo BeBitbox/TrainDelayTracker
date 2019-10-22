@@ -1,0 +1,2143 @@
+{
+  "ver": "1.21",
+  "lang": "nld",
+  "id": "592aiq5a4qgbwkc4",
+  "err": "OK",
+  "svcResL": [
+    {
+      "meth": "StationBoard",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [
+            {
+              "lid": "A=1@O=Brussel-Zuid@X=4336531@Y=50835707@U=80@L=8814001@",
+              "type": "S",
+              "name": "Brussel-Zuid",
+              "icoX": 1,
+              "extId": "8814001",
+              "state": "F",
+              "crd": {
+                "x": 4336531,
+                "y": 50835707,
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 1893
+            },
+            {
+              "lid": "A=1@O=Marseille Saint Ch (f)@X=5400000@Y=43299996@U=80@L=8775100@",
+              "type": "S",
+              "name": "Marseille Saint Ch (f)",
+              "icoX": 5,
+              "extId": "8775100",
+              "state": "F",
+              "crd": {
+                "x": 5400000,
+                "y": 43299996,
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 1
+            },
+            {
+              "lid": "A=1@O=Paris Nord (f)@X=2333330@Y=48866665@U=80@L=8727100@",
+              "type": "S",
+              "name": "Paris Nord (f)",
+              "icoX": 5,
+              "extId": "8727100",
+              "state": "F",
+              "crd": {
+                "x": 2333330,
+                "y": 48866665,
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 1
+            },
+            {
+              "lid": "A=1@O=Strasbourg (f)@X=7733905@Y=48585437@U=80@L=8721202@",
+              "type": "S",
+              "name": "Strasbourg (f)",
+              "icoX": 5,
+              "extId": "8721202",
+              "state": "F",
+              "crd": {
+                "x": 7733905,
+                "y": 48585437,
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 1
+            },
+            {
+              "lid": "A=1@O=Essen Hbf `@X=6776114@Y=51429517@U=80@L=8010184@",
+              "type": "S",
+              "name": "Essen Hbf `",
+              "icoX": 5,
+              "extId": "8010184",
+              "state": "F",
+              "crd": {
+                "x": 6776114,
+                "y": 51429517,
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 1
+            }
+          ],
+          "prodL": [
+            {
+              "name": "IC 2005",
+              "number": "2005",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2005",
+                "num": "2005",
+                "matchId": "2005",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7800",
+              "number": "7800",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7800",
+                "num": "7800",
+                "matchId": "7800",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S1 1777",
+              "number": "1777",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S1  1777",
+                "num": "1777",
+                "matchId": "1777",
+                "catOut": "S1      ",
+                "catOutS": "070",
+                "catOutL": "S1",
+                "catIn": "070",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3756",
+              "number": "3756",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3756",
+                "num": "3756",
+                "matchId": "3756",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7901",
+              "number": "7901",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7901",
+                "num": "7901",
+                "matchId": "7901",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3777",
+              "number": "3777",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3777",
+                "num": "3777",
+                "matchId": "3777",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S1 1756",
+              "number": "1756",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S1  1756",
+                "num": "1756",
+                "matchId": "1756",
+                "catOut": "S1      ",
+                "catOutS": "070",
+                "catOutL": "S1",
+                "catIn": "070",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2407",
+              "number": "2407",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2407",
+                "num": "2407",
+                "matchId": "2407",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 528",
+              "number": "528",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC   528",
+                "num": "528",
+                "matchId": "528",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 3706",
+              "number": "3706",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  3706",
+                "num": "3706",
+                "matchId": "3706",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7001",
+              "number": "7001",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7001",
+                "num": "7001",
+                "matchId": "7001",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S10 3877",
+              "number": "3877",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S10 3877",
+                "num": "3877",
+                "matchId": "3877",
+                "catOut": "S10     ",
+                "catOutS": "080",
+                "catOutL": "S10",
+                "catIn": "080",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7721",
+              "number": "7721",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7721",
+                "num": "7721",
+                "matchId": "7721",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "TGV 9810",
+              "number": "9810",
+              "icoX": 3,
+              "cls": 1,
+              "prodCtx": {
+                "name": "TGV 9810",
+                "num": "9810",
+                "matchId": "9810",
+                "catOut": "TGV     ",
+                "catOutS": "000",
+                "catOutL": "TGV",
+                "catIn": "000",
+                "catCode": "0",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7952",
+              "number": "7952",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7952",
+                "num": "7952",
+                "matchId": "7952",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S6 1555",
+              "number": "1555",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S6  1555",
+                "num": "1555",
+                "matchId": "1555",
+                "catOut": "S6      ",
+                "catOutS": "076",
+                "catOutL": "S6",
+                "catIn": "076",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 1505",
+              "number": "1505",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  1505",
+                "num": "1505",
+                "matchId": "1505",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 1928",
+              "number": "1928",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  1928",
+                "num": "1928",
+                "matchId": "1928",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "THA 9304",
+              "number": "9304",
+              "icoX": 3,
+              "cls": 1,
+              "prodCtx": {
+                "name": "THA 9304",
+                "num": "9304",
+                "matchId": "9304",
+                "catOut": "THALYS  ",
+                "catOutS": "001",
+                "catOutL": "THALYS",
+                "catIn": "001",
+                "catCode": "0",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2028",
+              "number": "2028",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2028",
+                "num": "2028",
+                "matchId": "2028",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 3604",
+              "number": "3604",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  3604",
+                "num": "3604",
+                "matchId": "3604",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S1 3957",
+              "number": "3957",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S1  3957",
+                "num": "3957",
+                "matchId": "3957",
+                "catOut": "S1      ",
+                "catOutS": "070",
+                "catOutL": "S1",
+                "catIn": "070",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "TGV 9870",
+              "number": "9870",
+              "icoX": 3,
+              "cls": 1,
+              "prodCtx": {
+                "name": "TGV 9870",
+                "num": "9870",
+                "matchId": "9870",
+                "catOut": "TGV     ",
+                "catOutS": "000",
+                "catOutL": "TGV",
+                "catIn": "000",
+                "catCode": "0",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2228",
+              "number": "2228",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2228",
+                "num": "2228",
+                "matchId": "2228",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 3205",
+              "number": "3205",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  3205",
+                "num": "3205",
+                "matchId": "3205",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7006",
+              "number": "7006",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7006",
+                "num": "7006",
+                "matchId": "7006",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 4506",
+              "number": "4506",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  4506",
+                "num": "4506",
+                "matchId": "4506",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2304",
+              "number": "2304",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2304",
+                "num": "2304",
+                "matchId": "2304",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 1728",
+              "number": "1728",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  1728",
+                "num": "1728",
+                "matchId": "1728",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7801",
+              "number": "7801",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7801",
+                "num": "7801",
+                "matchId": "7801",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S1 1978",
+              "number": "1978",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S1  1978",
+                "num": "1978",
+                "matchId": "1978",
+                "catOut": "S1      ",
+                "catOutS": "070",
+                "catOutL": "S1",
+                "catIn": "070",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S3 2278",
+              "number": "2278",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S3  2278",
+                "num": "2278",
+                "matchId": "2278",
+                "catOut": "S3      ",
+                "catOutS": "072",
+                "catOutL": "S3",
+                "catIn": "072",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2828",
+              "number": "2828",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2828",
+                "num": "2828",
+                "matchId": "2828",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 406",
+              "number": "406",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC   406",
+                "num": "406",
+                "matchId": "406",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 3307",
+              "number": "3307",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  3307",
+                "num": "3307",
+                "matchId": "3307",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "THA 9401",
+              "number": "9401",
+              "icoX": 3,
+              "cls": 1,
+              "prodCtx": {
+                "name": "THA 9401",
+                "num": "9401",
+                "matchId": "9401",
+                "catOut": "THALYS  ",
+                "catOutS": "001",
+                "catOutL": "THALYS",
+                "catIn": "001",
+                "catCode": "0",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 3428",
+              "number": "3428",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  3428",
+                "num": "3428",
+                "matchId": "3428",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3656",
+              "number": "3656",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3656",
+                "num": "3656",
+                "matchId": "3656",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "P 7513",
+              "number": "7513",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "P   7513",
+                "num": "7513",
+                "matchId": "7513",
+                "catOut": "P       ",
+                "catOutS": "044",
+                "catOutL": "P",
+                "catIn": "044",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 428",
+              "number": "428",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC   428",
+                "num": "428",
+                "matchId": "428",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2107",
+              "number": "2107",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2107",
+                "num": "2107",
+                "matchId": "2107",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 3406",
+              "number": "3406",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  3406",
+                "num": "3406",
+                "matchId": "3406",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S2 3678",
+              "number": "3678",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S2  3678",
+                "num": "3678",
+                "matchId": "3678",
+                "catOut": "S2      ",
+                "catOutS": "071",
+                "catOutL": "S2",
+                "catIn": "071",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2806",
+              "number": "2806",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2806",
+                "num": "2806",
+                "matchId": "2806",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S1 1956",
+              "number": "1956",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S1  1956",
+                "num": "1956",
+                "matchId": "1956",
+                "catOut": "S1      ",
+                "catOutS": "070",
+                "catOutL": "S1",
+                "catIn": "070",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 1706",
+              "number": "1706",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  1706",
+                "num": "1706",
+                "matchId": "1706",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 2330",
+              "number": "2330",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  2330",
+                "num": "2330",
+                "matchId": "2330",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "S3 2256",
+              "number": "2256",
+              "icoX": 2,
+              "cls": 64,
+              "prodCtx": {
+                "name": "S3  2256",
+                "num": "2256",
+                "matchId": "2256",
+                "catOut": "S3      ",
+                "catOutS": "072",
+                "catOutL": "S3",
+                "catIn": "072",
+                "catCode": "6",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "IC 3229",
+              "number": "3229",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "IC  3229",
+                "num": "3229",
+                "matchId": "3229",
+                "catOut": "IC      ",
+                "catOutS": "007",
+                "catOutL": "IC ",
+                "catIn": "007",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            },
+            {
+              "name": "ICT 6901",
+              "number": "6901",
+              "icoX": 0,
+              "cls": 4,
+              "prodCtx": {
+                "name": "ICT 6901",
+                "num": "6901",
+                "matchId": "6901",
+                "catOut": "ICT     ",
+                "catOutS": "024",
+                "catOutL": "ICT",
+                "catIn": "024",
+                "catCode": "2",
+                "admin": "88____"
+              }
+            }
+          ],
+          "polyL": [],
+          "layerL": [
+            {
+              "id": "standard",
+              "name": "standard",
+              "index": 0,
+              "annoCnt": 0
+            }
+          ],
+          "crdSysL": [
+            {
+              "id": "standard",
+              "index": 0,
+              "type": "WGS84"
+            }
+          ],
+          "opL": [],
+          "remL": [
+            {
+              "type": "A",
+              "code": "60",
+              "prio": 10,
+              "icoX": 4,
+              "txtN": "Reservation obligatory"
+            },
+            {
+              "type": "A",
+              "code": "64",
+              "prio": 110,
+              "icoX": 4,
+              "txtN": "Supplement"
+            },
+            {
+              "type": "A",
+              "code": "47",
+              "prio": 140,
+              "icoX": 4,
+              "txtN": "Bar"
+            },
+            {
+              "type": "A",
+              "code": "O2",
+              "prio": 2,
+              "icoX": 4,
+              "txtN": "A lack of seats is possible due to a rush of passengers (Brussel-Zuid / Bruxelles-Midi - Brussel-Zuid / Bruxelles-Midi)"
+            }
+          ],
+          "icoL": [
+            {
+              "res": "prod_ic"
+            },
+            {
+              "res": "STA_SNCB"
+            },
+            {
+              "res": "prod_comm",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255
+              },
+              "bg": {
+                "r": 255,
+                "g": 175,
+                "b": 50
+              }
+            },
+            {
+              "res": "prod_ice"
+            },
+            {
+              "res": "INFO"
+            },
+            {
+              "res": "STA"
+            }
+          ]
+        },
+        "type": "DEP",
+        "jnyL": [
+          {
+            "jid": "1|1451|0|80|28082018",
+            "date": "20180828",
+            "prodX": 0,
+            "dirTxt": "Antwerpen-Noorderdokken",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 17,
+              "dProdX": 0,
+              "dPlatfS": "20",
+              "dInR": true,
+              "dTimeS": "065000",
+              "dTimeR": "070100",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5139|0|80|28082018",
+            "date": "20180828",
+            "prodX": 1,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 1,
+              "dPlatfS": "18",
+              "dInR": true,
+              "dTimeS": "065400",
+              "dTimeR": "070000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1141|0|80|28082018",
+            "date": "20180828",
+            "prodX": 2,
+            "dirTxt": "Nivelles",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 19,
+              "dProdX": 2,
+              "dPlatfS": "21",
+              "dInR": true,
+              "dTimeS": "070000",
+              "dTimeR": "070000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3465|0|80|28082018",
+            "date": "20180828",
+            "prodX": 3,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 9,
+              "dProdX": 3,
+              "dPlatfS": "13",
+              "dInR": true,
+              "dTimeS": "070000",
+              "dTimeR": "070200",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5154|0|80|28082018",
+            "date": "20180828",
+            "prodX": 4,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 16,
+              "dProdX": 4,
+              "dPlatfS": "10",
+              "dInR": true,
+              "dTimeS": "070000",
+              "dTimeR": "070000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3491|0|80|28082018",
+            "date": "20180828",
+            "prodX": 5,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 14,
+              "dProdX": 5,
+              "dPlatfS": "17",
+              "dInR": true,
+              "dTimeS": "070200",
+              "dTimeR": "070300",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1099|0|80|28082018",
+            "date": "20180828",
+            "prodX": 6,
+            "dirTxt": "Antwerpen-Centraal",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 11,
+              "dProdX": 6,
+              "dPlatfS": "18",
+              "dInR": true,
+              "dTimeS": "070300",
+              "dTimeR": "071000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2248|0|80|28082018",
+            "date": "20180828",
+            "prodX": 7,
+            "dirTxt": "Liege-Palais",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 10,
+              "dProdX": 7,
+              "dPlatfS": "14",
+              "dInR": true,
+              "dTimeS": "070300",
+              "dTimeR": "070400",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|300|0|80|28082018",
+            "date": "20180828",
+            "prodX": 8,
+            "dirTxt": "Oostende",
+            "status": "P",
+            "isPartCncl": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 26,
+              "dProdX": 8,
+              "dPlatfS": "15",
+              "dInR": true,
+              "dTimeS": "070600",
+              "dTimeR": "070600",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3379|0|80|28082018",
+            "date": "20180828",
+            "prodX": 9,
+            "dirTxt": "Brussels Airport - Zaventem",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 15,
+              "dProdX": 9,
+              "dPlatfS": "5",
+              "dInR": true,
+              "dTimeS": "070600",
+              "dTimeR": "070800",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|4901|0|80|28082018",
+            "date": "20180828",
+            "prodX": 10,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 11,
+              "dProdX": 10,
+              "dPlatfS": "12",
+              "dInR": true,
+              "dTimeS": "070600",
+              "dTimeR": "070600",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|6525|1|80|28082018",
+            "date": "20180828",
+            "prodX": 11,
+            "dirTxt": "Dendermonde",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 16,
+              "dProdX": 11,
+              "dPlatfS": "11",
+              "dInR": true,
+              "dTimeS": "070600",
+              "dTimeR": "070600",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5111|0|80|28082018",
+            "date": "20180828",
+            "prodX": 12,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 25,
+              "dProdX": 12,
+              "dPlatfS": "19",
+              "dInR": true,
+              "dTimeS": "070700",
+              "dTimeR": "071000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5784|0|80|28082018",
+            "date": "20180828",
+            "prodX": 13,
+            "dirTxt": "Marseille Saint Ch (f)",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 0,
+              "dProdX": 13,
+              "dPlatfS": "6",
+              "dInR": true,
+              "dTimeS": "070800",
+              "type": "N"
+            },
+            "msgL": [
+              {
+                "type": "REM",
+                "remX": 0,
+                "fLocX": 0,
+                "tLocX": 1,
+                "tagL": [
+                  "RES_JNY_DTL_H2"
+                ]
+              },
+              {
+                "type": "REM",
+                "remX": 1,
+                "fLocX": 0,
+                "tLocX": 1,
+                "tagL": [
+                  "RES_JNY_DTL"
+                ]
+              }
+            ],
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5160|0|80|28082018",
+            "date": "20180828",
+            "prodX": 14,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 16,
+              "dProdX": 14,
+              "dPlatfS": "8",
+              "dInR": true,
+              "dTimeS": "071000",
+              "dTimeR": "071000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|992|0|80|28082018",
+            "date": "20180828",
+            "prodX": 15,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 22,
+              "dProdX": 15,
+              "dPlatfS": "16",
+              "dInR": true,
+              "dTimeS": "071100",
+              "dTimeR": "071100",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|695|0|80|28082018",
+            "date": "20180828",
+            "prodX": 16,
+            "dirTxt": "Genk",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 12,
+              "dProdX": 16,
+              "dPlatfS": "13",
+              "dInR": true,
+              "dTimeS": "071200",
+              "dTimeR": "071200",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1309|0|80|28082018",
+            "date": "20180828",
+            "prodX": 17,
+            "dirTxt": "Tournai",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 9,
+              "dProdX": 17,
+              "dPlatfS": "18",
+              "dInR": true,
+              "dTimeS": "071200",
+              "dTimeR": "071200",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5604|0|80|28082018",
+            "date": "20180828",
+            "prodX": 18,
+            "dirTxt": "Paris Nord (f)",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 0,
+              "dProdX": 18,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "071300",
+              "type": "N"
+            },
+            "msgL": [
+              {
+                "type": "REM",
+                "remX": 0,
+                "fLocX": 0,
+                "tLocX": 2,
+                "tagL": [
+                  "RES_JNY_DTL_H2"
+                ]
+              },
+              {
+                "type": "REM",
+                "remX": 1,
+                "fLocX": 0,
+                "tLocX": 2,
+                "tagL": [
+                  "RES_JNY_DTL"
+                ]
+              },
+              {
+                "type": "REM",
+                "remX": 2,
+                "fLocX": 0,
+                "tLocX": 2,
+                "tagL": [
+                  "RES_JNY_DTL"
+                ]
+              }
+            ],
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1489|0|80|28082018",
+            "date": "20180828",
+            "prodX": 19,
+            "dirTxt": "Charleroi-Sud",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 21,
+              "dProdX": 19,
+              "dPlatfS": "21",
+              "dInR": true,
+              "dTimeS": "071500",
+              "dTimeR": "071500",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3233|0|80|28082018",
+            "date": "20180828",
+            "prodX": 20,
+            "dirTxt": "Landen",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 12,
+              "dProdX": 20,
+              "dPlatfS": "14",
+              "dInR": true,
+              "dTimeS": "071500",
+              "dTimeR": "071500",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3677|0|80|28082018",
+            "date": "20180828",
+            "prodX": 21,
+            "dirTxt": "Louvain-La-Neuve",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 0,
+              "dProdX": 21,
+              "dPlatfS": "17",
+              "dInR": true,
+              "dTimeS": "071700",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5807|0|80|28082018",
+            "date": "20180828",
+            "prodX": 22,
+            "dirTxt": "Strasbourg (f)",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 0,
+              "dProdX": 22,
+              "dPlatfS": "6",
+              "dInR": true,
+              "dTimeS": "071700",
+              "type": "N"
+            },
+            "msgL": [
+              {
+                "type": "REM",
+                "remX": 0,
+                "fLocX": 0,
+                "tLocX": 3,
+                "tagL": [
+                  "RES_JNY_DTL_H2"
+                ]
+              },
+              {
+                "type": "REM",
+                "remX": 1,
+                "fLocX": 0,
+                "tLocX": 3,
+                "tagL": [
+                  "RES_JNY_DTL"
+                ]
+              },
+              {
+                "type": "REM",
+                "remX": 2,
+                "fLocX": 0,
+                "tLocX": 3,
+                "tagL": [
+                  "RES_JNY_DTL"
+                ]
+              }
+            ],
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2029|0|80|28082018",
+            "date": "20180828",
+            "prodX": 23,
+            "dirTxt": "Gent-Sint-Pieters",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 24,
+              "dProdX": 23,
+              "dPlatfS": "12",
+              "dInR": true,
+              "dTimeS": "071800",
+              "dTimeR": "071800",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2974|0|80|28082018",
+            "date": "20180828",
+            "prodX": 24,
+            "dirTxt": "Sint-Niklaas",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 13,
+              "dProdX": 24,
+              "dPlatfS": "7",
+              "dInR": true,
+              "dTimeS": "071800",
+              "dTimeR": "071800",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|4903|0|80|28082018",
+            "date": "20180828",
+            "prodX": 25,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 11,
+              "dProdX": 25,
+              "dPlatfS": "16",
+              "dInR": true,
+              "dTimeS": "071800",
+              "dTimeR": "071800",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3978|0|80|28082018",
+            "date": "20180828",
+            "prodX": 26,
+            "dirTxt": "Essen",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 17,
+              "dProdX": 26,
+              "dPlatfS": "20",
+              "dInR": true,
+              "dTimeS": "072000",
+              "dTimeR": "072000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2093|0|80|28082018",
+            "date": "20180828",
+            "prodX": 27,
+            "dirTxt": "Brussels Airport - Zaventem",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 16,
+              "dProdX": 27,
+              "dPlatfS": "10",
+              "dInR": true,
+              "dTimeS": "072300",
+              "dTimeR": "072300",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1078|0|80|28082018",
+            "date": "20180828",
+            "prodX": 28,
+            "dirTxt": "Quievrain",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 28,
+              "dProdX": 28,
+              "dPlatfS": "18",
+              "dInR": true,
+              "dTimeS": "072400",
+              "dTimeR": "072400",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5140|0|80|28082018",
+            "date": "20180828",
+            "prodX": 29,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 12,
+              "dProdX": 29,
+              "dPlatfS": "5",
+              "dInR": true,
+              "dTimeS": "072400",
+              "dTimeR": "072400",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1404|0|80|28082018",
+            "date": "20180828",
+            "prodX": 30,
+            "dirTxt": "Nivelles",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 19,
+              "dProdX": 30,
+              "dPlatfS": "21",
+              "dInR": true,
+              "dTimeS": "072500",
+              "dTimeR": "072500",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2082|0|80|28082018",
+            "date": "20180828",
+            "prodX": 31,
+            "dirTxt": "Zottegem",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 15,
+              "dProdX": 31,
+              "dPlatfS": "9",
+              "dInR": true,
+              "dTimeS": "072500",
+              "dTimeR": "072500",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2606|0|80|28082018",
+            "date": "20180828",
+            "prodX": 32,
+            "dirTxt": "Knokke",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 6,
+              "dProdX": 32,
+              "dPlatfS": "6",
+              "dInR": true,
+              "dTimeS": "072600",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|110|0|80|28082018",
+            "date": "20180828",
+            "prodX": 33,
+            "dirTxt": "Welkenraedt",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 6,
+              "dProdX": 33,
+              "dPlatfS": "13",
+              "dInR": true,
+              "dTimeS": "072700",
+              "dTimeR": "072700",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3036|0|80|28082018",
+            "date": "20180828",
+            "prodX": 34,
+            "dirTxt": "Antwerpen-Centraal",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 0,
+              "dProdX": 34,
+              "dPlatfS": "19",
+              "dInR": true,
+              "dTimeS": "072700",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5729|0|80|28082018",
+            "date": "20180828",
+            "prodX": 35,
+            "dirTxt": "Essen Hbf `",
+            "status": "P",
+            "isPartCncl": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 2,
+              "dProdX": 35,
+              "dPlatfS": "3",
+              "dInR": true,
+              "dTimeS": "072800",
+              "dTimeR": "072800",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "msgL": [
+              {
+                "type": "REM",
+                "remX": 0,
+                "fLocX": 0,
+                "tLocX": 4,
+                "tagL": [
+                  "RES_JNY_DTL_H2"
+                ]
+              },
+              {
+                "type": "REM",
+                "remX": 1,
+                "fLocX": 0,
+                "tLocX": 4,
+                "tagL": [
+                  "RES_JNY_DTL"
+                ]
+              },
+              {
+                "type": "REM",
+                "remX": 2,
+                "fLocX": 0,
+                "tLocX": 4,
+                "tagL": [
+                  "RES_JNY_DTL"
+                ]
+              }
+            ],
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3183|0|80|28082018",
+            "date": "20180828",
+            "prodX": 36,
+            "dirTxt": "Binche",
+            "status": "P",
+            "isPartCncl": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 21,
+              "dProdX": 36,
+              "dPlatfS": "20",
+              "dInR": true,
+              "dTimeS": "073000",
+              "dTimeR": "073000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3349|0|80|28082018",
+            "date": "20180828",
+            "prodX": 37,
+            "dirTxt": "Leuven",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 9,
+              "dProdX": 37,
+              "dPlatfS": "15",
+              "dInR": true,
+              "dTimeS": "073000",
+              "dTimeR": "073000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "msgL": [
+              {
+                "type": "REM",
+                "remX": 3,
+                "fLocX": 0,
+                "tLocX": 0,
+                "tagL": [
+                  "RES_JNY_DTL_H3"
+                ]
+              }
+            ],
+            "subscr": "F"
+          },
+          {
+            "jid": "1|5020|0|80|28082018",
+            "date": "20180828",
+            "prodX": 38,
+            "dirTxt": "Schaarbeek / Schaerbeek",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 13,
+              "dProdX": 38,
+              "dPlatfS": "17",
+              "dInR": true,
+              "dTimeS": "073000",
+              "dTimeR": "073200",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|140|0|80|28082018",
+            "date": "20180828",
+            "prodX": 39,
+            "dirTxt": "Kortrijk",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 26,
+              "dProdX": 39,
+              "dPlatfS": "10",
+              "dInR": true,
+              "dTimeS": "073200",
+              "dTimeR": "073200",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1591|0|80|28082018",
+            "date": "20180828",
+            "prodX": 40,
+            "dirTxt": "Arlon",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 0,
+              "dProdX": 40,
+              "dPlatfS": "12",
+              "dInR": true,
+              "dTimeS": "073300",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3164|0|80|28082018",
+            "date": "20180828",
+            "prodX": 41,
+            "dirTxt": "Turnhout",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 16,
+              "dProdX": 41,
+              "dPlatfS": "18",
+              "dInR": true,
+              "dTimeS": "073400",
+              "dTimeR": "073400",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|3364|1|80|28082018",
+            "date": "20180828",
+            "prodX": 42,
+            "dirTxt": "Braine-Le-Comte",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 14,
+              "dProdX": 42,
+              "dPlatfS": "16",
+              "dInR": true,
+              "dTimeS": "073400",
+              "dTimeR": "073400",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2558|0|80|28082018",
+            "date": "20180828",
+            "prodX": 43,
+            "dirTxt": "Brussels Airport - Zaventem",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 14,
+              "dProdX": 43,
+              "dPlatfS": "5",
+              "dInR": true,
+              "dTimeS": "073700",
+              "dTimeR": "073700",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1341|1|80|28082018",
+            "date": "20180828",
+            "prodX": 44,
+            "dirTxt": "Antwerpen-Centraal",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 11,
+              "dProdX": 44,
+              "dPlatfS": "20",
+              "dInR": true,
+              "dTimeS": "073800",
+              "dTimeR": "073800",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|1066|0|80|28082018",
+            "date": "20180828",
+            "prodX": 45,
+            "dirTxt": "Liege-Guillemins",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 23,
+              "dProdX": 45,
+              "dPlatfS": "15",
+              "dInR": true,
+              "dTimeS": "073900",
+              "dTimeR": "073900",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2176|0|80|28082018",
+            "date": "20180828",
+            "prodX": 46,
+            "dirTxt": "Oostende",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 9,
+              "dProdX": 46,
+              "dPlatfS": "17",
+              "dInR": true,
+              "dTimeS": "073900",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2072|0|80|28082018",
+            "date": "20180828",
+            "prodX": 47,
+            "dirTxt": "Dendermonde",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 10,
+              "dProdX": 47,
+              "dPlatfS": "9",
+              "dInR": true,
+              "dTimeS": "074000",
+              "dTimeR": "074000",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|2993|0|80|28082018",
+            "date": "20180828",
+            "prodX": 48,
+            "dirTxt": "Kortrijk",
+            "status": "P",
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 20,
+              "dProdX": 48,
+              "dPlatfS": "6",
+              "dInR": true,
+              "dTimeS": "074300",
+              "dTimeR": "074300",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          },
+          {
+            "jid": "1|4857|0|80|28082018",
+            "date": "20180828",
+            "prodX": 49,
+            "dirTxt": "De Panne",
+            "status": "P",
+            "isRedir": true,
+            "isRchbl": true,
+            "stbStop": {
+              "locX": 0,
+              "idx": 4,
+              "dProdX": 49,
+              "dPlatfS": "11",
+              "dInR": true,
+              "dTimeS": "074300",
+              "dTimeR": "074300",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "subscr": "F"
+          }
+        ],
+        "fpB": "20171210",
+        "fpE": "20181208",
+        "planrtTS": "1535432257",
+        "sD": "20180828",
+        "sT": "065811",
+        "locRefL": [
+          0
+        ]
+      }
+    }
+  ]
+}

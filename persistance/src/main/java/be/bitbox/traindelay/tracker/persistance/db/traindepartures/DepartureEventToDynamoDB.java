@@ -15,9 +15,7 @@
  */
 package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;
@@ -27,14 +25,16 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
+
 @Component
 class DepartureEventToDynamoDB {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartureEventToDynamoDB.class);
-    private final DynamoDBMapper dynamoDBMapper;
+    private final IDynamoDBMapper dynamoDBMapper;
 
     @Autowired
-    DepartureEventToDynamoDB(AmazonDynamoDB client, EventBus eventBus) {
-        dynamoDBMapper = new DynamoDBMapper(client);
+    DepartureEventToDynamoDB(IDynamoDBMapper dynamoDBMapper, EventBus eventBus) {
+        this.dynamoDBMapper = dynamoDBMapper;
         eventBus.register(this);
     }
 

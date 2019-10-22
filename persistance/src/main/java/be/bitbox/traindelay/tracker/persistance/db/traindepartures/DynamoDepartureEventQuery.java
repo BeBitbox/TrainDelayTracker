@@ -15,28 +15,24 @@
  */
 package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
-import be.bitbox.traindelay.tracker.core.station.StationId;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import be.bitbox.traindelay.tracker.core.station.StationId;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import static java.util.stream.Collectors.toList;
 
 public class DynamoDepartureEventQuery {
-    private DynamoDBMapper dynamoDBMapper;
-    
-    public DynamoDepartureEventQuery(AmazonDynamoDB client) {
-        dynamoDBMapper = new DynamoDBMapper(client);
+    private final IDynamoDBMapper dynamoDBMapper;
+
+    public DynamoDepartureEventQuery(IDynamoDBMapper dynamoDBMapper) {
+        this.dynamoDBMapper = dynamoDBMapper;
     }
 
     public List<TrainDepartureEvent> listTrainDepartureFor(StationId stationId, LocalDate date) {

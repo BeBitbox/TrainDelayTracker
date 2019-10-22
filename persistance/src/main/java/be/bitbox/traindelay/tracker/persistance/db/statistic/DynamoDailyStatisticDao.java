@@ -1,11 +1,9 @@
 package be.bitbox.traindelay.tracker.persistance.db.statistic;
 
-import be.bitbox.traindelay.tracker.core.statistic.DailyStatistic;
-import be.bitbox.traindelay.tracker.core.statistic.DailyStatisticDao;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +12,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import be.bitbox.traindelay.tracker.core.statistic.DailyStatistic;
+import be.bitbox.traindelay.tracker.core.statistic.DailyStatisticDao;
 import static java.util.stream.Collectors.toList;
 
 @Component
 class DynamoDailyStatisticDao implements DailyStatisticDao {
 
-    private final DynamoDBMapper dynamoDBMapper;
+    private final IDynamoDBMapper dynamoDBMapper;
 
     @Autowired
-    DynamoDailyStatisticDao(AmazonDynamoDB dynamoDB) {
-        this.dynamoDBMapper = new DynamoDBMapper(dynamoDB);
+    DynamoDailyStatisticDao(IDynamoDBMapper dynamoDBMapper) {
+        this.dynamoDBMapper = dynamoDBMapper;
     }
 
     @Override
@@ -36,11 +36,14 @@ class DynamoDailyStatisticDao implements DailyStatisticDao {
         var queryExpression = new DynamoDBQueryExpression<DynamoDailyStatistic>()
                 .withKeyConditionExpression("station = :id and local_date between :from and :to")
                 .withExpressionAttributeValues(eav);
-        return dynamoDBMapper
-                .query(DynamoDailyStatistic.class, queryExpression)
-                .stream()
-                .map(DynamoDailyStatistic::toDailyStatistic)
-                .collect(toList());
+        var query = dynamoDBMapper.query(DynamoDailyStatistic.class, queryExpression);
+        if (query == null) {
+            return Lists.newArrayList();
+        } else {
+            return query.stream()
+                    .map(DynamoDailyStatistic::toDailyStatistic)
+                    .collect(toList());
+        }
     }
 
     @Override

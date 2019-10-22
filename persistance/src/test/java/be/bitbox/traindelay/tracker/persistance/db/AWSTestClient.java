@@ -19,15 +19,17 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 public class AWSTestClient {
 
-    public static AmazonDynamoDB create() {
+    public static DynamoDBMapper create() {
         AWSCredentials credentials = getAwsCredentials();
-        return AmazonDynamoDBClientBuilder.standard()
+        AmazonDynamoDB amazonDB = AmazonDynamoDBClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withRegion(getRegion())
                 .build();
+        return new DynamoDBMapper(amazonDB);
     }
 
     private static String getRegion() {
