@@ -28,7 +28,9 @@ public class HomePageUI extends VerticalLayout {
     @Autowired
     public HomePageUI(HomePageDivController homePageDivController, TrainDepartureDivController trainDepartureDivController) {
         var overviewTab = new Tab("Overview");
+        overviewTab.setId("overviewTab");
         var trainDeparturesTab = new Tab("Train Departures");
+        trainDeparturesTab.setId("trainDeparturesTab");
         tabOverview.put(overviewTab, homePageDivController::asDiv);
         tabOverview.put(trainDeparturesTab, trainDepartureDivController::asDiv);
         

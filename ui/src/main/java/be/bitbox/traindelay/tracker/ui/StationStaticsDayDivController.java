@@ -38,7 +38,7 @@ public class StationStaticsDayDivController {
         List<Station> stations = stationRetriever.getStationsFor(Country.BE);
         stationComboBox.setItems(stations);
         stationComboBox.setItemLabelGenerator((ItemLabelGenerator<Station>) Station::name);
-        stationComboBox.setId("stationComboBox");
+        stationComboBox.setId("stationComboBoxSmallDiv");
         stationComboBox.setValue(stations.get(0));
 
         var datePicker = new DatePicker(LocalDate.now().minusDays(1), new Locale("nl", "be"));
