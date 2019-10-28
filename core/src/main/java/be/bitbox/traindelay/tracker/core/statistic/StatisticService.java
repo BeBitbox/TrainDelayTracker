@@ -64,7 +64,6 @@ public class StatisticService {
         expectedDates.forEach(localDate -> eventBus.post(new MissingDailyStatisticEvent(localDate)));
         return new YearlyStatistic(dailyStatisticList);
     }
-
     private Set<LocalDate> getAllExpectedDates(LocalDate today, LocalDate oneYearAgo) {
         Set<LocalDate> expectedDates = new HashSet<>();
         var counterDay = oneYearAgo;
@@ -73,5 +72,9 @@ public class StatisticService {
             counterDay = counterDay.plusDays(1);
         }
         return expectedDates;
+    }
+
+    private class FetchFromDatabase{
+
     }
 }

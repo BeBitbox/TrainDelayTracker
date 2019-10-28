@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Component
 public class StationStaticsDayDivController {
@@ -48,18 +49,22 @@ public class StationStaticsDayDivController {
         StationStatisticGrid grid = createStationStatisticGrid(stationComboBox, datePicker);
 
         stationComboBox.addValueChangeListener(e -> {
-            div.remove(grid);
-            div.add(createStationStatisticGrid(stationComboBox, datePicker));
-
+            replaceOldGrid(div, stationComboBox, datePicker);
         });
         datePicker.addValueChangeListener(e -> {
-            div.remove(grid);
-            div.add(createStationStatisticGrid(stationComboBox, datePicker));
-
+            replaceOldGrid(div, stationComboBox, datePicker);
         });
 
         div.add(titleDiv, stationComboBox, datePicker, grid);
         return div;
+    }
+
+    private void replaceOldGrid(Div div, ComboBox<Station> stationComboBox, DatePicker datePicker) {
+        div.getChildren()
+                .filter(child -> child instanceof StationStatisticGrid)
+                .findAny()
+                .ifPresent(div::remove);
+        div.add(createStationStatisticGrid(stationComboBox, datePicker));
     }
 
     private StationStatisticGrid createStationStatisticGrid(ComboBox<Station> stationComboBox, DatePicker datePicker) {
