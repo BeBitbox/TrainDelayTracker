@@ -1,29 +1,41 @@
 package be.bitbox.traindelay.tracker.ui;
 
 import com.vaadin.flow.i18n.I18NProvider;
+import com.vaadin.flow.i18n.LocaleChangeEvent;
+import com.vaadin.flow.i18n.LocaleChangeObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 @Component
 public class BelgianProvider implements I18NProvider {
-
-    public static final Locale BELGIAN_LOCAL = new Locale("nl", "be");
+    private final ResourceBundle dutch;
+    private final ResourceBundle french;
+    private final ResourceBundle english;
 
     @Autowired
     public BelgianProvider() {
-        Locale.setDefault(BELGIAN_LOCAL);
+        dutch = ResourceBundle.getBundle("translation", LanguageOptionSpan.DUTCH.getLocale());
+        french = ResourceBundle.getBundle("translation", LanguageOptionSpan.FRENCH.getLocale());
+        english = ResourceBundle.getBundle("translation", LanguageOptionSpan.ENGLISH.getLocale());
     }
 
     @Override
     public List<Locale> getProvidedLocales() {
-        return List.of(BELGIAN_LOCAL);
+        return List.of(LanguageOptionSpan.DUTCH.getLocale(), LanguageOptionSpan.FRENCH.getLocale(), LanguageOptionSpan.ENGLISH.getLocale());
     }
 
     @Override
-    public String getTranslation(String s, Locale locale, Object... objects) {
-        return null;
+    public String getTranslation(String key, Locale locale, Object... objects) {
+        if ("nl".equals(locale.getLanguage())) {
+            return dutch.getString(key);
+        } else if ("fr".equals(locale.getLanguage())) {
+            return french.getString(key);
+        } else {
+            return english.getString(key);
+        }
     }
 }
