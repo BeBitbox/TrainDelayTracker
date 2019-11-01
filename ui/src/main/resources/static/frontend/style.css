@@ -25,6 +25,7 @@
 
 #main_block_left {
     display: inline-block;
+    vertical-align: middle;
     margin: 1.7rem;
 }
 
@@ -35,6 +36,7 @@
 #main_block_middle {
     font-size: 1rem;
     display: inline-block;
+    vertical-align: middle;
     margin: 1.7rem;
 }
 
@@ -43,6 +45,7 @@
     width: 24rem;
     height: 20rem;
     display: inline-block;
+    vertical-align: middle;
     margin: 1.7rem;
 }
 
@@ -57,6 +60,34 @@
     top: 2rem;
 }
 
-#contactTab {
+#supportTab {
     margin-left: 2rem;
+}
+
+#contactDiv {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 3rem;
+    background-color:#334;
+    color: #008b8b;
+    border-radius: 2rem;
+    padding: 2rem;
+    width: 20rem;
+    height: 15rem;
+}
+
+#contactDiv h2, #developDiv h2 {
+    color: aliceblue;
+}
+
+#developDiv {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 3rem;
+    background-color:#334;
+    color: #1e90ff;
+    border-radius: 2rem;
+    padding: 2rem;
+    width: 20rem;
+    height: 15rem;
 }

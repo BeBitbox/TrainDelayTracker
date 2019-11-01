@@ -34,24 +34,24 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
 
     private final Tab overviewTab;
     private final Tab trainDeparturesTab;
-    private final Tab contactTab;
+    private final Tab supportTab;
 
     @Autowired
     public HomePageUI(HomePageDivController homePageDivController,
                       TrainDepartureDivController trainDepartureDivController,
-                      ContactDivController contactDivController) {
+                      SupportDivController supportDivController) {
         overviewTab = new Tab();
         overviewTab.setId("overviewTab");
         trainDeparturesTab = new Tab();
         trainDeparturesTab.setId("trainDeparturesTab");
-        contactTab = new Tab();
-        contactTab.setId("contactTab");
+        supportTab = new Tab();
+        supportTab.setId("supportTab");
 
         tabOverview.put(overviewTab, homePageDivController::asDiv);
         tabOverview.put(trainDeparturesTab, trainDepartureDivController::asDiv);
-        tabOverview.put(contactTab, contactDivController::asDiv);
+        tabOverview.put(supportTab, supportDivController::asDiv);
 
-        var tabs = new Tabs(overviewTab, trainDeparturesTab, contactTab);
+        var tabs = new Tabs(overviewTab, trainDeparturesTab, supportTab);
         overviewTab.setSelected(true);
         tabs.addSelectedChangeListener(event -> setTabsVisibility());
         titleH1 = new H1();
@@ -69,7 +69,6 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
         header.addClassName("header");
 
         add(header, tabs);
-        setTabsVisibility();
     }
 
     private void setTabsVisibility() {
@@ -95,8 +94,13 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
         titleH1.setText(getTranslation("title"));
         overviewTab.setLabel(getTranslation("tab.overview"));
         trainDeparturesTab.setLabel(getTranslation("tab.traindepartures"));
-        contactTab.setLabel(getTranslation("tab.contact"));
+        supportTab.setLabel(getTranslation("tab.contact"));
 
         languagePicker.setValue(LanguageOptionSpan.from(localeChangeEvent.getLocale()));
+        divs.clear();
+        getChildren()
+                .filter(child -> child instanceof Div)
+                .forEach(this::remove);
+        setTabsVisibility();
     }
 }
