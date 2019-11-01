@@ -32,22 +32,32 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
     private final H1 titleH1;
     private final ComboBox<LanguageOptionSpan> languagePicker;
 
+    private final Tab overviewTab;
+    private final Tab trainDeparturesTab;
+    private final Tab contactTab;
+
     @Autowired
-    public HomePageUI(HomePageDivController homePageDivController, TrainDepartureDivController trainDepartureDivController) {
-        var overviewTab = new Tab("Overview");
+    public HomePageUI(HomePageDivController homePageDivController,
+                      TrainDepartureDivController trainDepartureDivController,
+                      ContactDivController contactDivController) {
+        overviewTab = new Tab();
         overviewTab.setId("overviewTab");
-        var trainDeparturesTab = new Tab("Train Departures");
+        trainDeparturesTab = new Tab();
         trainDeparturesTab.setId("trainDeparturesTab");
+        contactTab = new Tab();
+        contactTab.setId("contactTab");
+
         tabOverview.put(overviewTab, homePageDivController::asDiv);
         tabOverview.put(trainDeparturesTab, trainDepartureDivController::asDiv);
+        tabOverview.put(contactTab, contactDivController::asDiv);
 
-        var tabs = new Tabs(overviewTab, trainDeparturesTab);
+        var tabs = new Tabs(overviewTab, trainDeparturesTab, contactTab);
         overviewTab.setSelected(true);
         tabs.addSelectedChangeListener(event -> setTabsVisibility());
         titleH1 = new H1();
         titleH1.addClassName("titleH1");
         var subTitleH3 = new H3("Independent train departure statistics");
-        languagePicker = new ComboBox<LanguageOptionSpan>();
+        languagePicker = new ComboBox<>();
         languagePicker.addClassName("languagePicker");
         languagePicker.setId("languagePicker");
         languagePicker.setRenderer(new IconRenderer<>(LanguageOptionSpan::getImage, languageOption -> " " + languageOption.getLanguage()));
@@ -83,6 +93,10 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
     @Override
     public void localeChange(LocaleChangeEvent localeChangeEvent) {
         titleH1.setText(getTranslation("title"));
+        overviewTab.setLabel(getTranslation("tab.overview"));
+        trainDeparturesTab.setLabel(getTranslation("tab.traindepartures"));
+        contactTab.setLabel(getTranslation("tab.contact"));
+
         languagePicker.setValue(LanguageOptionSpan.from(localeChangeEvent.getLocale()));
     }
 }
