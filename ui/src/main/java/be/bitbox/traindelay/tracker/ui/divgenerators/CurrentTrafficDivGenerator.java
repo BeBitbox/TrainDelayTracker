@@ -1,8 +1,9 @@
-package be.bitbox.traindelay.tracker.ui;
+package be.bitbox.traindelay.tracker.ui.divgenerators;
 
 import be.bitbox.traindelay.tracker.core.service.CurrentTrainTraffic;
 import be.bitbox.traindelay.tracker.core.service.StationService;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
@@ -14,58 +15,61 @@ import org.springframework.util.StringUtils;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Locale;
 
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static java.util.stream.Collectors.toList;
 
 @Component
-public class CurrentTrafficDivController {
+public class CurrentTrafficDivGenerator extends DivGenerator {
     private final StationService stationService;
     private final StationRetriever stationRetriever;
 
     @Autowired
-    public CurrentTrafficDivController(StationService stationService, StationRetriever stationRetriever) {
+    public CurrentTrafficDivGenerator(StationService stationService, StationRetriever stationRetriever) {
         this.stationService = stationService;
         this.stationRetriever = stationRetriever;
     }
 
-    Div asDiv() {
+    @Override
+    public Div asDiv() {
         var div = new Div();
+        var locale = UI.getCurrent().getLocale();
         div.setId("main_block_left");
         var currentTrainTraffic = stationService.listRecentTrainDepartures();
         var grid = new Grid<CurrentTrainDepartureVO>();
-        grid.addColumn(departureVO -> departureVO.station).setHeader("Station");
-        grid.addColumn(departureVO -> departureVO.expectedDepartureTime).setHeader("Time");
-        grid.addColumn(departureVO -> departureVO.delay).setHeader("Delay (minutes)");
+        grid.addColumn(departureVO -> departureVO.station).setHeader(translate("general.station", locale));
+        grid.addColumn(departureVO -> departureVO.expectedDepartureTime).setHeader(translate("general.time", locale));
+        grid.addColumn(departureVO -> departureVO.delay).setHeader(translate("general.delay.minutes", locale));
         grid.setItems(listLastTen(currentTrainTraffic));
 
-        var infoDiv = getCurrentTrafficDiv(currentTrainTraffic);
+        var infoDiv = getCurrentTrafficDiv(currentTrainTraffic, locale);
         div.add(infoDiv);
         div.add(grid);
         return div;
     }
 
-    private Div getCurrentTrafficDiv(CurrentTrainTraffic currentTrainTraffic) {
+    private Div getCurrentTrafficDiv(CurrentTrainTraffic currentTrainTraffic, Locale locale) {
         String label;
         String imageLocation;
         switch (currentTrainTraffic.getFuss()) {
             case BUSY:
-                label = "Busy train traffic";
+                label = translate("general.traffic.busy", locale);
                 imageLocation = "frontend/red_trains.png";
                 break;
             case MEDIOCRE:
-                label = "Normal train traffic";
+                label = translate("general.traffic.normal", locale);
                 imageLocation = "frontend/orange_trains.png";
                 break;
             case CALM:
             default:
-                label = "Calm train traffic";
+                label = translate("general.traffic.calm", locale);
                 imageLocation = "frontend/green_train.png";
         }
 
         var div = new Div();
-        var averageDelayText = ", the average train delay is " + currentTrainTraffic.getAverageDelay() + " minutes";
-        var fussSpan = new Span(label + averageDelayText);
+        var averageDelayText = String.format(translate("general.traffic.delay", locale), label, currentTrainTraffic.getAverageDelay());
+        var fussSpan = new Span(averageDelayText);
         var image = new Image(imageLocation, label);
         div.add(image, fussSpan);
         div.setClassName("fussTrainTraffic");

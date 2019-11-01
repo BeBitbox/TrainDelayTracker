@@ -1,15 +1,14 @@
-package be.bitbox.traindelay.tracker.ui;
+package be.bitbox.traindelay.tracker.ui.divgenerators;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.server.VaadinService;
 import org.springframework.stereotype.Component;
 
-import java.util.Locale;
-
 @Component
-public class SupportDivController {
-    Div asDiv() {
+public class SupportDivGenerator extends DivGenerator {
+
+    @Override
+    public Div asDiv() {
         var div = new Div();
         var locale = UI.getCurrent().getLocale();
         var contactDiv = new Div(
@@ -17,7 +16,7 @@ public class SupportDivController {
                 new Paragraph(translate("support.contact.info", locale)),
                 new Paragraph(
                         new Span(translate("support.contact.extra", locale)),
-                        new Anchor("https://www.bitbox.be","BitBox"))
+                        new Anchor("https://www.bitbox.be", "BitBox"))
         );
         contactDiv.setId("contactDiv");
         var developDiv = new Div(
@@ -30,9 +29,5 @@ public class SupportDivController {
         developDiv.setId("developDiv");
         div.add(contactDiv, developDiv);
         return div;
-    }
-
-    private String translate(String key, Locale locale) {
-        return VaadinService.getCurrent().getInstantiator().getI18NProvider().getTranslation(key, locale);
     }
 }

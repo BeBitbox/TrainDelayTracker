@@ -1,5 +1,6 @@
 package be.bitbox.traindelay.tracker.ui;
 
+import be.bitbox.traindelay.tracker.ui.divgenerators.SupportDivGenerator;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -30,6 +31,7 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
     private final Map<Tab, Supplier<Div>> tabOverview = new HashMap<>();
     private final Map<Tab, Div> divs = new HashMap<>();
     private final H1 titleH1;
+    private final H3 subTitleH3;
     private final ComboBox<LanguageOptionSpan> languagePicker;
 
     private final Tab overviewTab;
@@ -39,7 +41,7 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
     @Autowired
     public HomePageUI(HomePageDivController homePageDivController,
                       TrainDepartureDivController trainDepartureDivController,
-                      SupportDivController supportDivController) {
+                      SupportDivGenerator supportDivGenerator) {
         overviewTab = new Tab();
         overviewTab.setId("overviewTab");
         trainDeparturesTab = new Tab();
@@ -49,26 +51,35 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
 
         tabOverview.put(overviewTab, homePageDivController::asDiv);
         tabOverview.put(trainDeparturesTab, trainDepartureDivController::asDiv);
-        tabOverview.put(supportTab, supportDivController::asDiv);
+        tabOverview.put(supportTab, supportDivGenerator::asDiv);
 
         var tabs = new Tabs(overviewTab, trainDeparturesTab, supportTab);
         overviewTab.setSelected(true);
         tabs.addSelectedChangeListener(event -> setTabsVisibility());
         titleH1 = new H1();
         titleH1.addClassName("titleH1");
-        var subTitleH3 = new H3("Independent train departure statistics");
-        languagePicker = new ComboBox<>();
-        languagePicker.addClassName("languagePicker");
-        languagePicker.setId("languagePicker");
-        languagePicker.setRenderer(new IconRenderer<>(LanguageOptionSpan::getImage, languageOption -> " " + languageOption.getLanguage()));
-        languagePicker.addValueChangeListener(change -> UI.getCurrent().getSession().setLocale(change.getValue().getLocale()));
-
-        languagePicker.setItems(LanguageOptionSpan.DUTCH, LanguageOptionSpan.FRENCH, LanguageOptionSpan.ENGLISH);
+        subTitleH3 = new H3();
+        languagePicker = defineLanguagePicker();
 
         Header header = new Header(titleH1, subTitleH3, languagePicker);
         header.addClassName("header");
 
         add(header, tabs);
+    }
+
+    private ComboBox<LanguageOptionSpan> defineLanguagePicker() {
+        var languagePicker = new ComboBox<LanguageOptionSpan>();
+        languagePicker.addClassName("languagePicker");
+        languagePicker.setId("languagePicker");
+        languagePicker.setRenderer(
+                new IconRenderer<>(LanguageOptionSpan::getImage, languageOption -> " " + languageOption.getLanguage())
+        );
+        languagePicker.addValueChangeListener(
+                change -> UI.getCurrent().getSession().setLocale(change.getValue().getLocale())
+        );
+
+        languagePicker.setItems(LanguageOptionSpan.DUTCH, LanguageOptionSpan.FRENCH, LanguageOptionSpan.ENGLISH);
+        return languagePicker;
     }
 
     private void setTabsVisibility() {
@@ -92,6 +103,7 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
     @Override
     public void localeChange(LocaleChangeEvent localeChangeEvent) {
         titleH1.setText(getTranslation("title"));
+        subTitleH3.setText(getTranslation("subtitle"));
         overviewTab.setLabel(getTranslation("tab.overview"));
         trainDeparturesTab.setLabel(getTranslation("tab.traindepartures"));
         supportTab.setLabel(getTranslation("tab.contact"));
