@@ -15,11 +15,11 @@
  */
 package be.bitbox.traindelay.tracker.core;
 
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.board.*;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationAvailabilityMonitor;
 import be.bitbox.traindelay.tracker.core.station.StationId;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
 import com.google.common.eventbus.EventBus;
@@ -63,8 +63,8 @@ class BoardHarvester {
         this.trainDepartureRepository = trainDepartureRepository;
         lastBoards = new HashMap<>();
     }
-    
-   //f @Scheduled(fixedDelay = 10000L)
+
+    @Scheduled(fixedDelay = 10000L)
     void lockAndHarvest() {
         if (lockingDao.obtainedLock()) {
             harvest();
