@@ -15,17 +15,18 @@
  */
 package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
+import be.bitbox.traindelay.tracker.core.station.StationId;
+import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import be.bitbox.traindelay.tracker.core.station.StationId;
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import static java.util.stream.Collectors.toList;
 
 public class DynamoDepartureEventQuery {
@@ -44,11 +45,15 @@ public class DynamoDepartureEventQuery {
         DynamoDBQueryExpression<DynamoDepartureEvent> queryExpression = new DynamoDBQueryExpression<DynamoDepartureEvent>()
                 .withKeyConditionExpression("station = :id and expected between :date and :nextdate")
                 .withExpressionAttributeValues(eav);
+        var query = dynamoDBMapper.query(DynamoDepartureEvent.class, queryExpression);
 
-        return dynamoDBMapper
-                .query(DynamoDepartureEvent.class, queryExpression)
-                .stream()
-                .map(DynamoDepartureEvent::asTrainDepartureEvent)
-                .collect(toList());
+        if (query == null || query.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return query
+                    .stream()
+                    .map(DynamoDepartureEvent::asTrainDepartureEvent)
+                    .collect(toList());
+        }
     }
 }

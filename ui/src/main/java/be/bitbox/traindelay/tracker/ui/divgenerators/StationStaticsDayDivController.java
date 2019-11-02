@@ -1,11 +1,13 @@
-package be.bitbox.traindelay.tracker.ui;
+package be.bitbox.traindelay.tracker.ui.divgenerators;
 
 import be.bitbox.traindelay.tracker.core.service.StationService;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
 import be.bitbox.traindelay.tracker.core.statistic.StatisticService;
+import be.bitbox.traindelay.tracker.ui.gridgenerators.StationStatisticGrid;
 import com.vaadin.flow.component.ItemLabelGenerator;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
@@ -15,11 +17,9 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 @Component
-public class StationStaticsDayDivController {
+public class StationStaticsDayDivController extends DivGenerator {
     private final StatisticService statisticService;
     private final StationRetriever stationRetriever;
 
@@ -29,11 +29,13 @@ public class StationStaticsDayDivController {
         this.stationRetriever = stationRetriever;
     }
 
-    Div asDiv() {
+    @Override
+    public Div asDiv() {
+        var locale = UI.getCurrent().getLocale();
         var div = new Div();
         div.setId("main_block_middle");
 
-        var titleDiv = new Div(new Span("See statistics for a station"));
+        var titleDiv = new Div(new Span(translate("title.statistics.daily", locale)));
 
         var stationComboBox = new ComboBox<Station>();
         List<Station> stations = stationRetriever.getStationsFor(Country.BE);
@@ -42,7 +44,7 @@ public class StationStaticsDayDivController {
         stationComboBox.setId("stationComboBoxSmallDiv");
         stationComboBox.setValue(stations.get(0));
 
-        var datePicker = new DatePicker(LocalDate.now().minusDays(1), new Locale("nl", "be"));
+        var datePicker = new DatePicker(LocalDate.now().minusDays(1), locale);
         datePicker.setMin(StationService.START_DATE_SERVICE);
         datePicker.setMax(LocalDate.now());
 

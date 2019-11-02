@@ -1,26 +1,26 @@
-package be.bitbox.traindelay.tracker.ui;
+package be.bitbox.traindelay.tracker.ui.divgenerators;
 
-import be.bitbox.traindelay.tracker.ui.divgenerators.CurrentTrafficDivGenerator;
 import com.vaadin.flow.component.html.Div;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HomePageDivController {
+public class HomePageDivGenerator extends DivGenerator {
     private final CurrentTrafficDivGenerator currentTrafficDivGenerator;
     private final StationStaticsDayDivController stationStaticsDayDivController;
     private final StationStaticsYearDivController stationStaticsYearDivController;
 
     @Autowired
-    public HomePageDivController(CurrentTrafficDivGenerator currentTrafficDivGenerator,
-                                 StationStaticsDayDivController stationStaticsDayDivController,
-                                 StationStaticsYearDivController stationStaticsYearDivController) {
+    public HomePageDivGenerator(CurrentTrafficDivGenerator currentTrafficDivGenerator,
+                                StationStaticsDayDivController stationStaticsDayDivController,
+                                StationStaticsYearDivController stationStaticsYearDivController) {
         this.currentTrafficDivGenerator = currentTrafficDivGenerator;
         this.stationStaticsDayDivController = stationStaticsDayDivController;
         this.stationStaticsYearDivController = stationStaticsYearDivController;
     }
 
-    Div asDiv() {
+    @Override
+    public Div asDiv() {
         var div = new Div();
         div.setSizeFull();
 

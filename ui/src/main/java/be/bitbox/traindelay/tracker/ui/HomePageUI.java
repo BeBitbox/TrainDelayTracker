@@ -1,6 +1,8 @@
 package be.bitbox.traindelay.tracker.ui;
 
+import be.bitbox.traindelay.tracker.ui.divgenerators.HomePageDivGenerator;
 import be.bitbox.traindelay.tracker.ui.divgenerators.SupportDivGenerator;
+import be.bitbox.traindelay.tracker.ui.divgenerators.TrainDepartureDivController;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -39,7 +41,7 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
     private final Tab supportTab;
 
     @Autowired
-    public HomePageUI(HomePageDivController homePageDivController,
+    public HomePageUI(HomePageDivGenerator homePageDivGenerator,
                       TrainDepartureDivController trainDepartureDivController,
                       SupportDivGenerator supportDivGenerator) {
         overviewTab = new Tab();
@@ -49,7 +51,7 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
         supportTab = new Tab();
         supportTab.setId("supportTab");
 
-        tabOverview.put(overviewTab, homePageDivController::asDiv);
+        tabOverview.put(overviewTab, homePageDivGenerator::asDiv);
         tabOverview.put(trainDeparturesTab, trainDepartureDivController::asDiv);
         tabOverview.put(supportTab, supportDivGenerator::asDiv);
 
@@ -75,7 +77,11 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
                 new IconRenderer<>(LanguageOptionSpan::getImage, languageOption -> " " + languageOption.getLanguage())
         );
         languagePicker.addValueChangeListener(
-                change -> UI.getCurrent().getSession().setLocale(change.getValue().getLocale())
+                change -> {
+                    if (change != null && change.getValue() != null) {
+                        UI.getCurrent().getSession().setLocale(change.getValue().getLocale());
+                    }
+                }
         );
 
         languagePicker.setItems(LanguageOptionSpan.DUTCH, LanguageOptionSpan.FRENCH, LanguageOptionSpan.ENGLISH);

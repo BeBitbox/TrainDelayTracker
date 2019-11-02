@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.ui;
+package be.bitbox.traindelay.tracker.ui.api;
 
 import be.bitbox.traindelay.tracker.core.service.CurrentTrainTraffic;
 import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;

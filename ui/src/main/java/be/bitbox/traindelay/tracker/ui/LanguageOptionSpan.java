@@ -7,9 +7,9 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class LanguageOptionSpan extends Span {
-    public static final LanguageOptionSpan DUTCH = new LanguageOptionSpan(new Image("frontend/nl_flag.png", "Nederlands"), "Nederlands", Locale.forLanguageTag("nl"));
-    public static final LanguageOptionSpan FRENCH = new LanguageOptionSpan(new Image("frontend/fr_flag.png", "Français"), "Français", Locale.FRENCH);
-    public static final LanguageOptionSpan ENGLISH = new LanguageOptionSpan(new Image("frontend/uk_flag.png", "English"), "English", Locale.ENGLISH);
+    static final LanguageOptionSpan DUTCH = new LanguageOptionSpan(new Image("frontend/nl_flag.png", "Nederlands"), "Nederlands", Locale.forLanguageTag("nl"));
+    static final LanguageOptionSpan FRENCH = new LanguageOptionSpan(new Image("frontend/fr_flag.png", "Français"), "Français", Locale.FRENCH);
+    static final LanguageOptionSpan ENGLISH = new LanguageOptionSpan(new Image("frontend/uk_flag.png", "English"), "English", Locale.ENGLISH);
 
     private final Image image;
     private final String language;
@@ -23,19 +23,22 @@ public class LanguageOptionSpan extends Span {
         add(language);
     }
 
-    public static LanguageOptionSpan from(Locale locale) {
+    static LanguageOptionSpan from(Locale locale) {
         switch (locale.getLanguage()) {
-            case "nl": return DUTCH;
-            case "fr": return FRENCH;
-            default: return ENGLISH;
+            case "nl":
+                return DUTCH;
+            case "fr":
+                return FRENCH;
+            default:
+                return ENGLISH;
         }
     }
 
-    public Image getImage() {
+    Image getImage() {
         return image;
     }
 
-    public String getLanguage() {
+    String getLanguage() {
         return language;
     }
 

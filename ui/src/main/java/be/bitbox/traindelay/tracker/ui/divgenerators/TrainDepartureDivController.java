@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.ui;
+package be.bitbox.traindelay.tracker.ui.divgenerators;
 
 import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.service.StationService;
@@ -21,6 +21,7 @@ import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
 import com.vaadin.flow.component.ItemLabelGenerator;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.grid.Grid;
@@ -32,13 +33,12 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Locale;
 import java.util.TreeSet;
 
 import static java.util.stream.Collectors.toCollection;
 
 @Component
-public class TrainDepartureDivController {
+public class TrainDepartureDivController extends DivGenerator {
     private final StationService stationService;
     private final StationRetriever stationRetriever;
 
@@ -48,24 +48,26 @@ public class TrainDepartureDivController {
         this.stationRetriever = stationRetriever;
     }
 
-    Div asDiv() {
-        Div div = new Div();
-        var label = new Label("See all departures");
+    @Override
+    public Div asDiv() {
+        var locale = UI.getCurrent().getLocale();
+        var div = new Div();
+        var label = new Label(translate("title.departures", locale));
         var stationComboBox = new ComboBox<Station>();
         stationComboBox.setItems(stationRetriever.getStationsFor(Country.BE));
         stationComboBox.setItemLabelGenerator((ItemLabelGenerator<Station>) Station::name);
         stationComboBox.setWidth("250px");
         stationComboBox.setId("stationComboBoxPage");
         label.setFor(stationComboBox);
-        var datePicker = new DatePicker(LocalDate.now().minusDays(1), new Locale("nl", "be"));
+        var datePicker = new DatePicker(LocalDate.now().minusDays(1), locale);
         datePicker.setId("datePickerPage");
         datePicker.setMin(StationService.START_DATE_SERVICE);
         datePicker.setMax(LocalDate.now());
         Grid<TrainDepartureVo> grid = new Grid<>();
-        grid.addColumn(TrainDepartureVo::getLocalTime).setHeader("Departure");
-        grid.addColumn(TrainDepartureVo::getPlatform).setHeader("Platform");
-        grid.addColumn(TrainDepartureVo::getVehicle).setHeader("Vehicle");
-        grid.addColumn(TrainDepartureVo::getDelay).setHeader("Delay (minutes)");
+        grid.addColumn(TrainDepartureVo::getLocalTime).setHeader(translate("general.time", locale));
+        grid.addColumn(TrainDepartureVo::getPlatform).setHeader(translate("general.platform", locale));
+        grid.addColumn(TrainDepartureVo::getVehicle).setHeader(translate("general.vehicle", locale));
+        grid.addColumn(TrainDepartureVo::getDelay).setHeader(translate("general.delay.minutes", locale));
 
         HorizontalLayout header = new HorizontalLayout(label, stationComboBox, datePicker);
         div.add(header, grid);
