@@ -40,7 +40,7 @@ public enum ResponseToBoardTranslator {
     public Board translateFrom(Response response) {
         ResultDetails resultDetails = response.getSvcResL()[0].getRes();
 
-        if (resultDetails.getCommon().getLocL().length == 0) {
+        if (resultDetails.getCommon() == null || resultDetails.getCommon().getLocL().length == 0) {
             throw aBoardNotFoundException("Board not found");
         }
         String extStationID = resultDetails.getCommon().getLocL()[0].getExtId();

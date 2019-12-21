@@ -96,6 +96,8 @@ class BoardHarvester {
             } catch (BoardRequestException ex) {
                 stationAvailabilityMonitor.negativeFeedbackFor(station);
                 LOGGER.error("Message occured during request", ex);
+            } catch (Exception ex) {
+                LOGGER.error("Error happened for {}", station, ex);
             }
         });
         LOGGER.info("Stop Harvest");
