@@ -14,6 +14,8 @@ import java.util.Map;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.statistic.StationStatistic;
 import be.bitbox.traindelay.tracker.core.statistic.StationStatisticDao;
+import be.bitbox.traindelay.tracker.core.statistic.YearlyStationStatistic;
+import static be.bitbox.traindelay.tracker.core.statistic.YearlyStationStatistic.yearlyStationStatisticFrom;
 import static java.util.stream.Collectors.toList;
 
 @Component
@@ -42,6 +44,11 @@ class DynamoStationStatisticDao implements StationStatisticDao {
     }
 
     @Override
+    public void saveYearly(StationStatistic stationStatistic) {
+        dynamoDBMapper.save(new DynamoYearlyStationStatistic(stationStatistic));
+    }
+
+    @Override
     public List<StationStatistic> getStationStatistic(StationId stationId, LocalDate from, LocalDate to) {
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":id", new AttributeValue().withS(stationId.getId()));
@@ -56,5 +63,14 @@ class DynamoStationStatisticDao implements StationStatisticDao {
                 .stream()
                 .map(DynamoStationStatistic::toStationStatistic)
                 .collect(toList());
+    }
+
+    @Override
+    public YearlyStationStatistic getYearlyStationStatistics() {
+        return yearlyStationStatisticFrom(dynamoDBMapper
+                .query(DynamoYearlyStationStatistic.class, new DynamoDBQueryExpression<>())
+                .stream()
+                .map(DynamoYearlyStationStatistic::toStationStatistic)
+                .collect(toList()));
     }
 }

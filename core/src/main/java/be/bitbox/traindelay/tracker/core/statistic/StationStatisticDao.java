@@ -11,5 +11,9 @@ public interface StationStatisticDao {
 
     void save(StationStatistic stationStatistic);
 
+    void saveYearly(StationStatistic stationStatistic);
+
     List<StationStatistic> getStationStatistic(StationId stationId, LocalDate from, LocalDate toIncluded);
+
+    YearlyStationStatistic getYearlyStationStatistics();
 }
