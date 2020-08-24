@@ -48,7 +48,7 @@ public class DynamoDepartureEventQuery {
         var query = dynamoDBMapper.query(DynamoDepartureEvent.class, queryExpression);
 
         if (query == null || query.isEmpty()) {
-            return Collections.emptyList();
+            return List.of();
         } else {
             return query
                     .stream()

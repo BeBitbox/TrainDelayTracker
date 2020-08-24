@@ -15,7 +15,8 @@
  */
 package be.bitbox.traindelay.tracker.application;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import be.bitbox.traindelay.tracker.application.local.LocalAmazonSQS;
+import be.bitbox.traindelay.tracker.application.local.LocalDynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
@@ -26,9 +27,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
-import be.bitbox.traindelay.tracker.application.local.LocalAmazonSQS;
-import be.bitbox.traindelay.tracker.application.local.LocalDynamoDBMapper;
 
 @Configuration
 @ComponentScan(basePackages = {"be.bitbox.traindelay.tracker"})
