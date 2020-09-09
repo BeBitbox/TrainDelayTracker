@@ -12,13 +12,15 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Component
+@SpringComponent
+@UIScope
 public class StationStaticsDayDivController extends DivGenerator {
     private final StatisticService statisticService;
     private final StationRetriever stationRetriever;

@@ -15,10 +15,12 @@
  */
 package be.bitbox.traindelay.tracker.application;
 
+import com.vaadin.flow.spring.annotation.EnableVaadin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@EnableVaadin("be.bitbox.traindelay.tracker.ui")
 public class TrainDelayTrackerApplication {
 
 	public static void main(String[] args) {

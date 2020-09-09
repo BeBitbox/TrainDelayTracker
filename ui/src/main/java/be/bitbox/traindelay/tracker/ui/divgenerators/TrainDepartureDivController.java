@@ -28,8 +28,9 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -37,7 +38,8 @@ import java.util.TreeSet;
 
 import static java.util.stream.Collectors.toCollection;
 
-@Component
+@SpringComponent
+@UIScope
 public class TrainDepartureDivController extends DivGenerator {
     private final StationService stationService;
     private final StationRetriever stationRetriever;

@@ -2,9 +2,11 @@ package be.bitbox.traindelay.tracker.ui.divgenerators;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.*;
-import org.springframework.stereotype.Component;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 
-@Component
+@SpringComponent
+@UIScope
 public class SupportDivGenerator extends DivGenerator {
 
     @Override

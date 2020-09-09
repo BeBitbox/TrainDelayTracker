@@ -18,7 +18,8 @@ import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,7 @@ import static java.util.Optional.ofNullable;
 @PWA(name = "Train traffic", shortName = "Train traffic")
 @StyleSheet("style.css")
 public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
+    private final static Logger LOGGER = LoggerFactory.getLogger(HomePageUI.class);
     private final Map<Tab, Supplier<Div>> tabOverview = new HashMap<>();
     private final Map<Tab, Div> divs = new HashMap<>();
     private final H1 titleH1;
@@ -40,10 +42,10 @@ public class HomePageUI extends VerticalLayout implements LocaleChangeObserver {
     private final Tab trainDeparturesTab;
     private final Tab supportTab;
 
-    @Autowired
     public HomePageUI(HomePageDivGenerator homePageDivGenerator,
                       TrainDepartureDivController trainDepartureDivController,
                       SupportDivGenerator supportDivGenerator) {
+        LOGGER.info("Initialize UI");
         overviewTab = new Tab();
         overviewTab.setId("overviewTab");
         trainDeparturesTab = new Tab();

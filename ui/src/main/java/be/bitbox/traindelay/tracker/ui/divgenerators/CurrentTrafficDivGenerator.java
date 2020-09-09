@@ -8,8 +8,9 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,8 @@ import java.util.Locale;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static java.util.stream.Collectors.toList;
 
-@Component
+@SpringComponent
+@UIScope
 public class CurrentTrafficDivGenerator extends DivGenerator {
     private final StationService stationService;
     private final StationRetriever stationRetriever;

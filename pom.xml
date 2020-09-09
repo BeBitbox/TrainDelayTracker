@@ -14,14 +14,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
-        <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
-        <jackson-databind.version>2.9.10.1</jackson-databind.version>
-        <spring-cloud-starter-netflix-hystrix.version>2.1.2.RELEASE</spring-cloud-starter-netflix-hystrix.version>
-        <spring-web.version>5.1.8.RELEASE</spring-web.version>
-        <vaadin-bom.version>13.0.9</vaadin-bom.version>
-        <guava.version>28.0-jre</guava.version>
-        <aws-java-sdk.version>1.11.584</aws-java-sdk.version>
-        <jcl-over-slf4j.version>1.7.26</jcl-over-slf4j.version>
+        <spring.boot.version>2.2.9.RELEASE</spring.boot.version>
+        <jackson-databind.version>2.11.2</jackson-databind.version>
+        <spring-cloud-starter-netflix-hystrix.version>2.2.4.RELEASE</spring-cloud-starter-netflix-hystrix.version>
+        <spring-web.version>5.2.8.RELEASE</spring-web.version>
+        <vaadin.version>14.3.4</vaadin.version>
+        <guava.version>29.0-jre</guava.version>
+        <aws-java-sdk.version>1.11.847</aws-java-sdk.version>
+        <jcl-over-slf4j.version>1.7.30</jcl-over-slf4j.version>
         <logback-classic.version>1.2.3</logback-classic.version>
     </properties>
 
@@ -86,7 +86,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
-                <version>${vaadin-bom.version}</version>
+                <version>${vaadin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

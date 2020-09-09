@@ -1,16 +1,14 @@
 package be.bitbox.traindelay.tracker.ui;
 
 import com.vaadin.flow.i18n.I18NProvider;
-import com.vaadin.flow.i18n.LocaleChangeEvent;
-import com.vaadin.flow.i18n.LocaleChangeObserver;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-@Component
+@SpringComponent
 public class BelgianProvider implements I18NProvider {
     private final ResourceBundle dutch;
     private final ResourceBundle french;

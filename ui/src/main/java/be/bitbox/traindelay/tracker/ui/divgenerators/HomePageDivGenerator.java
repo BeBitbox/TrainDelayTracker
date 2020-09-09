@@ -1,10 +1,12 @@
 package be.bitbox.traindelay.tracker.ui.divgenerators;
 
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+@SpringComponent
+@UIScope
 public class HomePageDivGenerator extends DivGenerator {
     private final CurrentTrafficDivGenerator currentTrafficDivGenerator;
     private final StationStaticsDayDivController stationStaticsDayDivController;
