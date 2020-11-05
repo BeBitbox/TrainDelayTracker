@@ -27,7 +27,7 @@ public class IRailTranslatorTest {
     private static final String VEHICLE = "BE.NMBS.IC3016";
     private static final String PLATFORM = "4";
 
-    private IRailTranslator IRailTranslator = be.bitbox.traindelay.tracker.irail.IRailTranslator.INSTANCE;
+    private final IRailTranslator IRailTranslator = be.bitbox.traindelay.tracker.irail.IRailTranslator.INSTANCE;
 
     @Test(expected = BoardTranslationException.class)
     public void translateFromNull_ShouldThrowExceptions() {

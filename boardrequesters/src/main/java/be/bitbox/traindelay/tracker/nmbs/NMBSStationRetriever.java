@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.function.Function;
 
@@ -64,7 +64,7 @@ public class NMBSStationRetriever implements StationRetriever {
 
     private List<Station> readInBelgianStations() {
         InputStream inputStream = NMBSStationRetriever.class.getResourceAsStream("stations.csv");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         List<Station> stationList = reader.lines()
                 .skip(1)
                 .map(TranslateCSVStringToStation())
@@ -95,7 +95,7 @@ public class NMBSStationRetriever implements StationRetriever {
             return csvStation;
         };
     }
-    private class CSVStation {
+    private static class CSVStation {
         private String URI, name, alternativeFr, alternativeNl, alternativeDe, alternativeEn, countryCode, longitude, latitude;
 
         Station translateToStation() {
@@ -123,8 +123,8 @@ public class NMBSStationRetriever implements StationRetriever {
 
         private GeoCoordinates getGeoCoordinatesFromLongitudeAndLatitude() {
             if (isNumeric(longitude) && isNumeric(latitude)) {
-                double x = Double.valueOf(longitude);
-                double y = Double.valueOf(latitude);
+                double x = Double.parseDouble(longitude);
+                double y = Double.parseDouble(latitude);
                 return aGeoCoordinates(x, y);
             }
             return null;

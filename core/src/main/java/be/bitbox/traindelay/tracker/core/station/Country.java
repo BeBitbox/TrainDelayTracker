@@ -27,4 +27,11 @@ public enum Country {
     public static Country translateFrom(String code) {
         return Country.valueOf(code.toUpperCase());
     }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

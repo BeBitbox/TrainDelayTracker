@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 public class NMBSBoardRequester implements BoardRequester {
 
@@ -40,6 +42,6 @@ public class NMBSBoardRequester implements BoardRequester {
     @Override
     public Board requestBoardFor(Station station) {
         ResponseEntity<Response> responseEntity = new NMBSRequestCommand(station, nmbsBaseUrl).execute();
-        return translator.translateFrom(responseEntity.getBody());
+        return translator.translateFrom(Objects.requireNonNull(responseEntity.getBody()));
     }
 }

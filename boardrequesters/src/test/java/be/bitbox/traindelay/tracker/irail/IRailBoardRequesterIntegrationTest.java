@@ -20,7 +20,6 @@ import be.bitbox.traindelay.tracker.core.board.BoardRequestException;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
-import be.bitbox.traindelay.tracker.core.station.StationId;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
@@ -32,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 public class IRailBoardRequesterIntegrationTest {
 
     @Test (expected = BoardRequestException.class)
-    public void retrieveBoard_fakeUrl() throws Exception {
+    public void retrieveBoard_fakeUrl() {
         BoardRequester requestManager = new IRailBoardRequester("https://fake/?id=");
         Station station = aStation(aStationId("BE.NMBS.008892106"), "fake", Country.BE);
         requestManager.requestBoardFor(station);

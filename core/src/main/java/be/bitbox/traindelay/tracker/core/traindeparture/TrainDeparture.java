@@ -16,6 +16,7 @@
 package be.bitbox.traindelay.tracker.core.traindeparture;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class TrainDeparture {
     private final LocalDateTime time;
@@ -81,8 +82,8 @@ public class TrainDeparture {
 
         TrainDeparture that = (TrainDeparture) o;
 
-        if (time != null ? !time.equals(that.time) : that.time != null) return false;
-        return vehicle != null ? vehicle.equals(that.vehicle) : that.vehicle == null;
+        if (!Objects.equals(time, that.time)) return false;
+        return Objects.equals(vehicle, that.vehicle);
     }
 
     @Override

@@ -52,12 +52,8 @@ public class StationStaticsDayDivController extends DivGenerator {
 
         StationStatisticGrid grid = createStationStatisticGrid(stationComboBox, datePicker);
 
-        stationComboBox.addValueChangeListener(e -> {
-            replaceOldGrid(div, stationComboBox, datePicker);
-        });
-        datePicker.addValueChangeListener(e -> {
-            replaceOldGrid(div, stationComboBox, datePicker);
-        });
+        stationComboBox.addValueChangeListener(e -> replaceOldGrid(div, stationComboBox, datePicker));
+        datePicker.addValueChangeListener(e -> replaceOldGrid(div, stationComboBox, datePicker));
 
         div.add(titleDiv, stationComboBox, datePicker, grid);
         return div;

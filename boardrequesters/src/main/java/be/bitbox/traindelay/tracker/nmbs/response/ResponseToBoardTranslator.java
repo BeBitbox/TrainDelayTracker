@@ -97,8 +97,8 @@ public enum ResponseToBoardTranslator {
     }
 
     private static class PlatformTranslator {
-        String platform;
-        boolean platformChange;
+        final String platform;
+        final boolean platformChange;
 
         PlatformTranslator(StopInformation stopInformation) {
             if (stopInformation.getdPlatfR() != null) {

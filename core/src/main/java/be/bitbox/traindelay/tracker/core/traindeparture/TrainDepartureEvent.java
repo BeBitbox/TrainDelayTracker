@@ -18,6 +18,7 @@ package be.bitbox.traindelay.tracker.core.traindeparture;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class TrainDepartureEvent {
     private LocalDateTime eventCreationTime;
@@ -144,13 +145,13 @@ public class TrainDepartureEvent {
         if (delay != that.delay) return false;
         if (canceled != that.canceled) return false;
         if (platformChange != that.platformChange) return false;
-        if (eventCreationTime != null ? !eventCreationTime.equals(that.eventCreationTime) : that.eventCreationTime != null)
+        if (!Objects.equals(eventCreationTime, that.eventCreationTime))
             return false;
-        if (stationId != null ? !stationId.equals(that.stationId) : that.stationId != null) return false;
-        if (expectedDepartureTime != null ? !expectedDepartureTime.equals(that.expectedDepartureTime) : that.expectedDepartureTime != null)
+        if (!Objects.equals(stationId, that.stationId)) return false;
+        if (!Objects.equals(expectedDepartureTime, that.expectedDepartureTime))
             return false;
-        if (vehicle != null ? !vehicle.equals(that.vehicle) : that.vehicle != null) return false;
-        return platform != null ? platform.equals(that.platform) : that.platform == null;
+        if (!Objects.equals(vehicle, that.vehicle)) return false;
+        return Objects.equals(platform, that.platform);
     }
 
     @Override

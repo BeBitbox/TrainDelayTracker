@@ -27,13 +27,9 @@ public class AWSTestClient {
         AWSCredentials credentials = getAwsCredentials();
         AmazonDynamoDB amazonDB = AmazonDynamoDBClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(getRegion())
+                .withRegion("")
                 .build();
         return new DynamoDBMapper(amazonDB);
-    }
-
-    private static String getRegion() {
-        return "";
     }
 
     private static AWSCredentials getAwsCredentials() {

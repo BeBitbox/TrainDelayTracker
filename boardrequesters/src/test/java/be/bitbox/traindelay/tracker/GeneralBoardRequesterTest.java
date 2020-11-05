@@ -9,7 +9,7 @@ import be.bitbox.traindelay.tracker.nmbs.NMBSBoardRequester;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +31,7 @@ public class GeneralBoardRequesterTest {
     @Mock
     private IRailBoardRequester iRailBoardRequester;
 
-    private Station station = aStation(aStationId("id"), "name", Country.BE);
+    private final Station station = aStation(aStationId("id"), "name", Country.BE);
 
     @Test
     public void normalBehavior() {

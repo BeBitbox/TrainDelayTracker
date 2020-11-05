@@ -1,7 +1,6 @@
 package be.bitbox.traindelay.tracker.core.statistic;
 
 import com.google.common.eventbus.EventBus;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,12 +13,8 @@ import java.util.List;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static be.bitbox.traindelay.tracker.core.statistic.DailyStatistic.DayStatisticBuilder.aDayStatistic;
 import static be.bitbox.traindelay.tracker.core.statistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StatisticServiceTest {
@@ -44,7 +39,7 @@ public class StatisticServiceTest {
 
         assertThat(actualStationStatic).isEqualTo(stationStatistic);
         verify(stationStatisticdDao).getStationStatistic(stationId, localDate);
-        verifyZeroInteractions(eventBus);
+        verifyNoInteractions(eventBus);
     }
 
     @Test

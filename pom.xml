@@ -19,7 +19,7 @@
         <spring-cloud-starter-netflix-hystrix.version>2.2.4.RELEASE</spring-cloud-starter-netflix-hystrix.version>
         <spring-web.version>5.2.8.RELEASE</spring-web.version>
         <vaadin.version>14.3.4</vaadin.version>
-        <guava.version>29.0-jre</guava.version>
+        <guava.version>30.0-jre</guava.version>
         <aws-java-sdk.version>1.11.847</aws-java-sdk.version>
         <jcl-over-slf4j.version>1.7.30</jcl-over-slf4j.version>
         <logback-classic.version>1.2.3</logback-classic.version>

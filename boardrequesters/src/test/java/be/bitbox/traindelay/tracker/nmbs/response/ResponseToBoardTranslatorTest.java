@@ -15,7 +15,7 @@ import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResponseToBoardTranslatorTest {
-    private ResponseToBoardTranslator translator = ResponseToBoardTranslator.INSTANCE;
+    private final ResponseToBoardTranslator translator = ResponseToBoardTranslator.INSTANCE;
 
     @Test
     public void translateNormalCase() throws IOException {

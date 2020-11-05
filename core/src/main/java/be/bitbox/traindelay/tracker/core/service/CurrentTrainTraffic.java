@@ -41,7 +41,7 @@ public class CurrentTrainTraffic {
     }
 
     public enum Fuss {
-        CALM, MEDIOCRE, BUSY;
+        CALM, MEDIOCRE, BUSY
     }
 
     public List<JsonTrainDeparture> getTrainDepartures() {

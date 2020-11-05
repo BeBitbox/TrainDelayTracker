@@ -117,10 +117,9 @@ public class Request {
 
     private class RequestData {
         private final JnyFilter[] JNY_FILTER = {new JnyFilter()};
-        private final Integer maxJny = 50;
         private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-        private StbLocation stbLocation = new StbLocation();
+        private final StbLocation stbLocation = new StbLocation();
 
         public String getDate() {
             return date.format(DATE_FORMAT);
@@ -135,7 +134,7 @@ public class Request {
         }
 
         public Integer getMaxJny() {
-            return maxJny;
+            return 50;
         }
     }
 

@@ -54,8 +54,7 @@ public class DynamoBoard {
 
     Board toBoard() {
         Board board = aBoardForStation(aStationId(stationId), time);
-        departures.stream()
-                .forEach(dynamoTrainDeparture ->  board.addDeparture(dynamoTrainDeparture.toTrainDeparture()));
+        departures.forEach(dynamoTrainDeparture -> board.addDeparture(dynamoTrainDeparture.toTrainDeparture()));
         return board;
     }
 
@@ -144,7 +143,7 @@ public class DynamoBoard {
             this.platformChange = platformChange;
         }
     }
-    
+
     public String getStationId() {
         return stationId;
     }

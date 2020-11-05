@@ -27,7 +27,7 @@ public class Board {
 
     private final StationId stationId;
     private final LocalDateTime time;
-    private List<TrainDeparture> departures;
+    private final List<TrainDeparture> departures;
 
     private Board(StationId stationId, LocalDateTime time) {
         this.stationId = stationId;

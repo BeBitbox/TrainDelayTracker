@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 public class JsonLocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
 

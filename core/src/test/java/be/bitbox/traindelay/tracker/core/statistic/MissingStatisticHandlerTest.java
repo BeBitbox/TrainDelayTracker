@@ -19,7 +19,7 @@ import static be.bitbox.traindelay.tracker.core.statistic.DailyStatistic.DayStat
 import static be.bitbox.traindelay.tracker.core.statistic.StationStatistic.StationStatisticBuilder.aStationStatistic;
 import static be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent.Builder.createTrainDepartureEvent;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -81,7 +81,7 @@ public class MissingStatisticHandlerTest {
                 .withDelays(4)
                 .build();
         verify(dailyStatisticDao).save(dailyStatistic);
-        verifyZeroInteractions(eventBus);
+        verifyNoInteractions(eventBus);
         verify(stationStatisticDao).getStationStatistic(station1.stationId(), localDate);
         verify(stationStatisticDao).getStationStatistic(station2.stationId(), localDate);
     }
@@ -108,7 +108,7 @@ public class MissingStatisticHandlerTest {
         MissingDailyStatisticEvent missingDailyStatisticEvent = new MissingDailyStatisticEvent(localDate);
         missingStatisticHandler.onCommandFor(missingDailyStatisticEvent);
 
-        verifyZeroInteractions(dailyStatisticDao);
+        verifyNoInteractions(dailyStatisticDao);
         verify(stationStatisticDao).getStationStatistic(station1.stationId(), localDate);
         verify(stationStatisticDao).getStationStatistic(station2.stationId(), localDate);
         verify(eventBus).post(new MissingStationStatisticEvent(station2.stationId(), localDate));
@@ -148,8 +148,8 @@ public class MissingStatisticHandlerTest {
         var missingStationStatisticEvent = new MissingStationStatisticEvent(stationId, date);
         missingStatisticHandler.onCommandFor(missingStationStatisticEvent);
 
-        verifyZeroInteractions(dailyStatisticDao);
-        verifyZeroInteractions(eventBus);
+        verifyNoInteractions(dailyStatisticDao);
+        verifyNoInteractions(eventBus);
         var expectedStationStatistic = aStationStatistic()
                 .withStationId(stationId)
                 .withDay(date)

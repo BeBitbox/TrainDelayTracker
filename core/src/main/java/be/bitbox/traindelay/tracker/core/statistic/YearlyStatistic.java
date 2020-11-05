@@ -5,11 +5,11 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class YearlyStatistic implements Statistic {
-    private int departures;
-    private int delays;
-    private int averageDelay;
-    private int cancellations;
-    private int platformChanges;
+    private final int departures;
+    private final int delays;
+    private final int averageDelay;
+    private final int cancellations;
+    private final int platformChanges;
 
     YearlyStatistic(List<DailyStatistic> dailyStatistics) {
         AtomicInteger departures = new AtomicInteger();

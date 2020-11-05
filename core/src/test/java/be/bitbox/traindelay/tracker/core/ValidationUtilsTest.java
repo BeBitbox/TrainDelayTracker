@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
 public class ValidationUtilsTest {
 
     @Test
-    public void isNumericValidationTest() throws Exception {
+    public void isNumericValidationTest() {
         assertThat(isNumeric(""), is(false));
         assertThat(isNumeric("a"), is(false));
         assertThat(isNumeric("78f"), is(false));

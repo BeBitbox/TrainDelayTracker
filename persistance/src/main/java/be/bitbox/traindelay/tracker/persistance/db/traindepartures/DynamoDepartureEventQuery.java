@@ -22,7 +22,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -73,8 +73,4 @@ public class StatisticService {
         }
         return expectedDates;
     }
-
-    private class FetchFromDatabase{
-
-    }
 }

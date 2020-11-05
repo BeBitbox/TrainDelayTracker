@@ -2,7 +2,6 @@ package be.bitbox.traindelay.tracker.nmbs;
 
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.station.Country;
-import be.bitbox.traindelay.tracker.nmbs.response.ResponseToBoardTranslator;
 import org.junit.Test;
 
 import static be.bitbox.traindelay.tracker.core.station.Station.aStation;

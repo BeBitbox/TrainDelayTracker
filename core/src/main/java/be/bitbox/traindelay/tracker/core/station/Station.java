@@ -15,6 +15,8 @@
  */
 package be.bitbox.traindelay.tracker.core.station;
 
+import java.util.Objects;
+
 import static be.bitbox.traindelay.tracker.core.ValidationUtils.checkNotEmpty;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -77,15 +79,15 @@ public class Station {
         if (!stationId.equals(station.stationId)) return false;
         if (!name.equals(station.name)) return false;
         if (country != station.country) return false;
-        if (alternativeFr != null ? !alternativeFr.equals(station.alternativeFr) : station.alternativeFr != null)
+        if (!Objects.equals(alternativeFr, station.alternativeFr))
             return false;
-        if (alternativeNl != null ? !alternativeNl.equals(station.alternativeNl) : station.alternativeNl != null)
+        if (!Objects.equals(alternativeNl, station.alternativeNl))
             return false;
-        if (alternativeDe != null ? !alternativeDe.equals(station.alternativeDe) : station.alternativeDe != null)
+        if (!Objects.equals(alternativeDe, station.alternativeDe))
             return false;
-        if (alternativeEn != null ? !alternativeEn.equals(station.alternativeEn) : station.alternativeEn != null)
+        if (!Objects.equals(alternativeEn, station.alternativeEn))
             return false;
-        return geoCoordinates != null ? geoCoordinates.equals(station.geoCoordinates) : station.geoCoordinates == null;
+        return Objects.equals(geoCoordinates, station.geoCoordinates);
     }
 
     @Override
