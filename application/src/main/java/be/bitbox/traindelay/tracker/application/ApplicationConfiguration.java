@@ -16,7 +16,8 @@
 package be.bitbox.traindelay.tracker.application;
 
 import be.bitbox.traindelay.tracker.application.local.LocalAmazonSQS;
-import be.bitbox.traindelay.tracker.application.local.LocalDynamoDBMapper;
+import com.amazonaws.client.builder.AwsClientBuilder;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
@@ -39,18 +40,25 @@ public class ApplicationConfiguration {
 
     @Bean
     @Profile("!local")
-    public IDynamoDBMapper getDynamoDBMapper() {
-        var amazonDynamoDB = AmazonDynamoDBClientBuilder
+    public AmazonDynamoDB getAmazonDBMapper() {
+        return AmazonDynamoDBClientBuilder
                 .standard()
                 .withRegion("eu-west-3")
                 .build();
-        return new DynamoDBMapper(amazonDynamoDB);
     }
 
     @Bean
     @Profile("local")
-    public IDynamoDBMapper getLocalDynamoDBMapper() {
-        return new LocalDynamoDBMapper();
+    public AmazonDynamoDB getLocalAmazonDBMapper() {
+        return AmazonDynamoDBClientBuilder
+                .standard()
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-2"))
+                .build();
+    }
+
+    @Bean
+    public IDynamoDBMapper getDynamoDBMapper(AmazonDynamoDB amazonDynamoDB) {
+        return new DynamoDBMapper(amazonDynamoDB);
     }
 
     @Bean
