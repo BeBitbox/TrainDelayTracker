@@ -16,6 +16,8 @@
 package be.bitbox.traindelay.tracker.application;
 
 import be.bitbox.traindelay.tracker.application.local.LocalAmazonSQS;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -52,6 +54,17 @@ public class ApplicationConfiguration {
     public AmazonDynamoDB getLocalAmazonDBMapper() {
         return AmazonDynamoDBClientBuilder
                 .standard()
+                .withCredentials(new AWSStaticCredentialsProvider(new AWSCredentials() {
+                    @Override
+                    public String getAWSAccessKeyId() {
+                        return "null";
+                    }
+
+                    @Override
+                    public String getAWSSecretKey() {
+                        return "null";
+                    }
+                }))
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-2"))
                 .build();
     }

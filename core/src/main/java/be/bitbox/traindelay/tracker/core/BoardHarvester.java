@@ -95,9 +95,15 @@ class BoardHarvester {
                 LOGGER.warn(ex.getMessage());
             } catch (BoardRequestException ex) {
                 stationAvailabilityMonitor.negativeFeedbackFor(station);
-                LOGGER.error("Message occured during request", ex);
+                LOGGER.error("Message occured during request {}", ex.getMessage());
             } catch (Exception ex) {
-                LOGGER.error("Error happened for {}", station, ex);
+                // TODO fix this properly
+                if (ex.getMessage().contains("short-circuited")) {
+                    LOGGER.error("Detected short-circuited error: {}{}", ex.getClass(), ex.getMessage());
+                    boardRequester.resetCircuitBreakers();
+                }
+
+                LOGGER.error("Error happened for {}: {}", station, ex.getMessage());
             }
         });
         LOGGER.info("Stop Harvest");

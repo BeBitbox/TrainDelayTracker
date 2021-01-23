@@ -45,7 +45,7 @@ public class DynamoStationStatistic {
     public DynamoStationStatistic() {
     }
 
-    DynamoStationStatistic(StationStatistic stationStatistic) {
+    public DynamoStationStatistic(StationStatistic stationStatistic) {
         this.stationId = stationStatistic.getStationId().getId();
         this.date = stationStatistic.getDay().toString();
         this.creationTime = Instant.now();

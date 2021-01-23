@@ -19,4 +19,6 @@ import be.bitbox.traindelay.tracker.core.station.Station;
 
 public interface BoardRequester {
     Board requestBoardFor(Station station);
+
+    default void resetCircuitBreakers() {}
 }

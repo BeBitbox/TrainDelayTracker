@@ -20,6 +20,8 @@ import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.nmbs.response.Response;
 import be.bitbox.traindelay.tracker.nmbs.response.ResponseToBoardTranslator;
+import com.netflix.hystrix.Hystrix;
+import com.netflix.hystrix.metric.consumer.HealthCountsStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +45,16 @@ public class NMBSBoardRequester implements BoardRequester {
     public Board requestBoardFor(Station station) {
         ResponseEntity<Response> responseEntity = new NMBSRequestCommand(station, nmbsBaseUrl).execute();
         return translator.translateFrom(Objects.requireNonNull(responseEntity.getBody()));
+    }
+
+    @Override
+    public void resetCircuitBreakers() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // IGNORE
+        }
+        Hystrix.reset();
+        HealthCountsStream.reset();
     }
 }
