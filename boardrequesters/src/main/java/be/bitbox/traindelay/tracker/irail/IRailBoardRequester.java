@@ -18,6 +18,8 @@ package be.bitbox.traindelay.tracker.irail;
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.Station;
+import com.netflix.hystrix.Hystrix;
+import com.netflix.hystrix.metric.consumer.HealthCountsStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -57,5 +59,16 @@ public class IRailBoardRequester implements BoardRequester {
         } catch (Exception ex) {
             throw aBoardRequestException("Error during request " + url, ex);
         }
+    }
+
+    @Override
+    public void resetCircuitBreakers() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // IGNORE
+        }
+        Hystrix.reset();
+        HealthCountsStream.reset();
     }
 }

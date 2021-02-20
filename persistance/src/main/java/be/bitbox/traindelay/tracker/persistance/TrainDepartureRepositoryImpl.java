@@ -11,21 +11,18 @@ import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
-import be.bitbox.traindelay.tracker.persistance.db.traindepartures.DynamoDepartureEventQuery;
-import be.bitbox.traindelay.tracker.persistance.messaging.traindepartures.ConsumeTrainDepartureSQS;
+import be.bitbox.traindelay.tracker.persistance.dynamodb.traindepartures.DynamoDepartureEventQuery;
 import be.bitbox.traindelay.tracker.persistance.messaging.traindepartures.RecentTrainDepartures;
 
 @Component
 public class TrainDepartureRepositoryImpl implements TrainDepartureRepository {
     private final DynamoDepartureEventQuery databaseTrainDepartures;
     private final RecentTrainDepartures recentTrainDepartures;
-    private final ConsumeTrainDepartureSQS consumeTrainDepartureSQS;
 
     @Autowired
-    public TrainDepartureRepositoryImpl(IDynamoDBMapper dynamoDBMapper, RecentTrainDepartures recentTrainDepartures, ConsumeTrainDepartureSQS consumeTrainDepartureSQS) {
+    public TrainDepartureRepositoryImpl(IDynamoDBMapper dynamoDBMapper, RecentTrainDepartures recentTrainDepartures) {
         databaseTrainDepartures = new DynamoDepartureEventQuery(dynamoDBMapper);
         this.recentTrainDepartures = recentTrainDepartures;
-        this.consumeTrainDepartureSQS = consumeTrainDepartureSQS;
     }
 
     @Override 
@@ -36,10 +33,5 @@ public class TrainDepartureRepositoryImpl implements TrainDepartureRepository {
     @Override
     public List<JsonTrainDeparture> listRecentTrainDepartures() {
         return recentTrainDepartures.list();
-    }
-
-    @Override
-    public void updateLatestTrainDepartures() {
-        consumeTrainDepartureSQS.updateLatestTrainDepartures();
     }
 }

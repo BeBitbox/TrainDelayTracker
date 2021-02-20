@@ -15,21 +15,14 @@
  */
 package be.bitbox.traindelay.tracker.application;
 
-import be.bitbox.traindelay.tracker.application.local.LocalAmazonSQS;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.google.common.eventbus.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 @Configuration
 @ComponentScan(basePackages = {"be.bitbox.traindelay.tracker"})
@@ -41,7 +34,6 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    @Profile("!local")
     public AmazonDynamoDB getAmazonDBMapper() {
         return AmazonDynamoDBClientBuilder
                 .standard()
@@ -50,42 +42,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    @Profile("local")
-    public AmazonDynamoDB getLocalAmazonDBMapper() {
-        return AmazonDynamoDBClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(new AWSCredentials() {
-                    @Override
-                    public String getAWSAccessKeyId() {
-                        return "null";
-                    }
-
-                    @Override
-                    public String getAWSSecretKey() {
-                        return "null";
-                    }
-                }))
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-2"))
-                .build();
-    }
-
-    @Bean
     public IDynamoDBMapper getDynamoDBMapper(AmazonDynamoDB amazonDynamoDB) {
         return new DynamoDBMapper(amazonDynamoDB);
-    }
-
-    @Bean
-    @Profile("!local")
-    public AmazonSQS getAmazonSQS() {
-        return AmazonSQSClientBuilder
-                .standard()
-                .withRegion("eu-west-3")
-                .build();
-    }
-
-    @Bean
-    @Profile("local")
-    public AmazonSQS getLocalAmazonSQS() {
-        return new LocalAmazonSQS();
     }
 }

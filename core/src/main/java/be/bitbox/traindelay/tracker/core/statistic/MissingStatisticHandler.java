@@ -35,7 +35,7 @@ public class MissingStatisticHandler {
     }
 
     public void onCommandFor(MissingDailyStatisticEvent missingDailyStatisticEvent) {
-        LOGGER.info("Treating missing event {} like a princess", missingDailyStatisticEvent);
+        LOGGER.info("Treating missing dailyEvent {} like a princess", missingDailyStatisticEvent);
         var stations = stationRetriever.getStationsFor(Country.BE);
         var stationMissing = false;
         var collectedStationStatistic = new ArrayList<StationStatistic>();
@@ -56,7 +56,7 @@ public class MissingStatisticHandler {
     }
 
     public void onCommandFor(MissingStationStatisticEvent missingStationStatisticEvent) {
-        LOGGER.info("Treating missing event {} like a princess", missingStationStatisticEvent);
+        LOGGER.info("Treating missing StationEvent {} like a princess", missingStationStatisticEvent);
 
         var departures = trainDepartureRepository.listTrainDepartureFor(missingStationStatisticEvent.getStationId(), missingStationStatisticEvent.getLocalDate());
         stationStatisticDao.save(new StationStatistic(departures, missingStationStatisticEvent));

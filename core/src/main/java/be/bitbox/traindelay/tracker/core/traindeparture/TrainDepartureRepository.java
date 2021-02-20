@@ -26,6 +26,4 @@ public interface TrainDepartureRepository {
     List<TrainDepartureEvent> listTrainDepartureFor(StationId stationId, LocalDate date);
     
     List<JsonTrainDeparture> listRecentTrainDepartures();
-
-    void updateLatestTrainDepartures();
 }

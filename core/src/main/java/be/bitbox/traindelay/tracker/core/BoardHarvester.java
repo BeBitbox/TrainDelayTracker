@@ -70,7 +70,6 @@ class BoardHarvester {
             harvest();
         } else {
             LOGGER.info("Lock not obtained");
-            trainDepartureRepository.updateLatestTrainDepartures();
         }
     }
 

@@ -79,7 +79,6 @@ public class BoardHarvesterTest {
         verify(stationAvailabilityMonitor, never()).getTrainStations();
         verify(eventBus, never()).post(any());
         verify(boardDao, never()).getLastBoardFor(any());
-        verify(trainDepartureRepository).updateLatestTrainDepartures();
     }
 
     @Test
@@ -99,7 +98,6 @@ public class BoardHarvesterTest {
         verify(boardDao, times(2)).saveBoard(any());
         verify(boardDao).getLastBoardFor(id1);
         verify(boardDao).getLastBoardFor(id2);
-        verify(trainDepartureRepository, never()).updateLatestTrainDepartures();
     }
 
     @Test

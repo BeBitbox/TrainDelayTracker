@@ -8,6 +8,6 @@ final class TestJsonFileReader {
     private TestJsonFileReader() {}
 
     static String readJson() throws IOException {
-        return IOUtils.toString(PublishTrainDeparturesSQSTest.class.getResourceAsStream("expectedFormat.json"));
+        return IOUtils.toString(TestJsonFileReader.class.getResourceAsStream("expectedFormat.json"));
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Bitbox : TrainDelayTracker
+ * Copyright 2018 Bitbox : TrainDelayTracker
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.application;
+package be.bitbox.traindelay.tracker.persistance.dynamodb;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 
-@SpringBootApplication
-public class TrainDelayTrackerApplication {
+import java.time.LocalDateTime;
 
-    public static void main(String[] args) {
-        SpringApplication.run(TrainDelayTrackerApplication.class, args);
+public class LocalDateTimeConverter implements DynamoDBTypeConverter<String, LocalDateTime> {
+
+    @Override
+    public String convert(final LocalDateTime time) {
+        return time.toString();
+    }
+
+    @Override
+    public LocalDateTime unconvert(final String stringValue) {
+        return LocalDateTime.parse(stringValue);
     }
 }

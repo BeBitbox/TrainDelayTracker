@@ -1,5 +1,6 @@
 package be.bitbox.traindelay.tracker.persistance.db.traindepartures;
 
+import be.bitbox.traindelay.tracker.persistance.dynamodb.traindepartures.DynamoDepartureEventQuery;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.junit.Ignore;
 import org.junit.Test;

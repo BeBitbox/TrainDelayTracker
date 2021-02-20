@@ -7,6 +7,8 @@ import be.bitbox.traindelay.tracker.core.board.BoardRequester;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.irail.IRailBoardRequester;
 import be.bitbox.traindelay.tracker.nmbs.NMBSBoardRequester;
+import com.netflix.hystrix.Hystrix;
+import com.netflix.hystrix.metric.consumer.HealthCountsStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,16 @@ public class GeneralBoardRequester implements BoardRequester {
             board = iRailBoardRequester.requestBoardFor(station);
         }
         return board;
+    }
+
+    @Override
+    public void resetCircuitBreakers() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // IGNORE
+        }
+        Hystrix.reset();
+        HealthCountsStream.reset();
     }
 }
