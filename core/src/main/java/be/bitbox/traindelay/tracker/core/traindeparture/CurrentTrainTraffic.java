@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.core.service;
+package be.bitbox.traindelay.tracker.core.traindeparture;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,7 +8,7 @@ public class CurrentTrainTraffic {
     private final Fuss fuss;
     private final int averageDelay;
     
-    CurrentTrainTraffic(List<JsonTrainDeparture> trainDepartures) {
+    public CurrentTrainTraffic(List<JsonTrainDeparture> trainDepartures) {
         this.trainDepartures = trainDepartures;
         this.fuss = determineFussiness();
         this.averageDelay = determineAverageDelay();

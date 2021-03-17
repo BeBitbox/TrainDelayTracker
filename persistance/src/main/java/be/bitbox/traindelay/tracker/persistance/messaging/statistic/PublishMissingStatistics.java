@@ -2,7 +2,7 @@ package be.bitbox.traindelay.tracker.persistance.messaging.statistic;
 
 import be.bitbox.traindelay.tracker.core.statistic.MissingDailyStatisticEvent;
 import be.bitbox.traindelay.tracker.core.statistic.MissingStationStatisticEvent;
-import be.bitbox.traindelay.tracker.core.statistic.MissingStatisticHandler;
+import be.bitbox.traindelay.tracker.core.service.MissingStatisticHandler;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.slf4j.Logger;

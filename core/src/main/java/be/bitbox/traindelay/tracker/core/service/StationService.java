@@ -1,7 +1,10 @@
 package be.bitbox.traindelay.tracker.core.service;
 
 import be.bitbox.traindelay.tracker.core.station.*;
+import be.bitbox.traindelay.tracker.core.traindeparture.CurrentTrainTraffic;
+import be.bitbox.traindelay.tracker.core.traindeparture.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
+import be.bitbox.traindelay.tracker.core.util.InvalidDateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

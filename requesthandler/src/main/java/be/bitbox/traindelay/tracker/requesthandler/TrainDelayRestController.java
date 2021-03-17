@@ -1,7 +1,7 @@
 package be.bitbox.traindelay.tracker.requesthandler;
 
-import be.bitbox.traindelay.tracker.core.service.CurrentTrainTraffic;
-import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
+import be.bitbox.traindelay.tracker.core.traindeparture.CurrentTrainTraffic;
+import be.bitbox.traindelay.tracker.core.traindeparture.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.service.StationService;
 import be.bitbox.traindelay.tracker.core.station.StationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

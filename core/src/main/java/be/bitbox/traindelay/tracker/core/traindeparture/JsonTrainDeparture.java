@@ -1,6 +1,5 @@
-package be.bitbox.traindelay.tracker.core.service;
+package be.bitbox.traindelay.tracker.core.traindeparture;
 
-import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.util.JsonLocalDateTimeDeserializer;
 import be.bitbox.traindelay.tracker.core.util.JsonLocalDateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

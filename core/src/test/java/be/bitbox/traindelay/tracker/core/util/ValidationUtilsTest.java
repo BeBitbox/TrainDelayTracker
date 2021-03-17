@@ -1,8 +1,8 @@
-package be.bitbox.traindelay.tracker.core;
+package be.bitbox.traindelay.tracker.core.util;
 
 import org.junit.Test;
 
-import static be.bitbox.traindelay.tracker.core.ValidationUtils.isNumeric;
+import static be.bitbox.traindelay.tracker.core.util.ValidationUtils.isNumeric;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

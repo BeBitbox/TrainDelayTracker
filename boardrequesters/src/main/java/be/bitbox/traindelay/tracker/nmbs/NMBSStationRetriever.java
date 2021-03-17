@@ -27,8 +27,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.function.Function;
 
-import static be.bitbox.traindelay.tracker.core.ValidationUtils.checkNotEmpty;
-import static be.bitbox.traindelay.tracker.core.ValidationUtils.isNumeric;
+import static be.bitbox.traindelay.tracker.core.util.ValidationUtils.checkNotEmpty;
+import static be.bitbox.traindelay.tracker.core.util.ValidationUtils.isNumeric;
 import static be.bitbox.traindelay.tracker.core.station.GeoCoordinates.aGeoCoordinates;
 import static be.bitbox.traindelay.tracker.core.station.Station.aStation;
 import static be.bitbox.traindelay.tracker.core.station.StationId.aStationId;

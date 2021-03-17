@@ -15,7 +15,7 @@ public class DailyStatistic implements Statistic {
 
     private DailyStatistic() {}
 
-    DailyStatistic(List<StationStatistic> stationStatistics) {
+    public DailyStatistic(List<StationStatistic> stationStatistics) {
         AtomicInteger departures = new AtomicInteger();
         AtomicInteger delays = new AtomicInteger();
         AtomicInteger platformChanges = new AtomicInteger();

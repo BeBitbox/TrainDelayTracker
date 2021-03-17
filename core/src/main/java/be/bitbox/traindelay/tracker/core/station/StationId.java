@@ -1,6 +1,6 @@
 package be.bitbox.traindelay.tracker.core.station;
 
-import static be.bitbox.traindelay.tracker.core.ValidationUtils.checkNotEmpty;
+import static be.bitbox.traindelay.tracker.core.util.ValidationUtils.checkNotEmpty;
 
 public class StationId {
 

@@ -11,7 +11,7 @@ public class YearlyStatistic implements Statistic {
     private final int cancellations;
     private final int platformChanges;
 
-    YearlyStatistic(List<DailyStatistic> dailyStatistics) {
+    public YearlyStatistic(List<DailyStatistic> dailyStatistics) {
         AtomicInteger departures = new AtomicInteger();
         AtomicInteger delays = new AtomicInteger();
         AtomicInteger platformChanges = new AtomicInteger();

@@ -4,6 +4,7 @@ import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.StationNotFoundException;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
+import be.bitbox.traindelay.tracker.core.util.InvalidDateException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

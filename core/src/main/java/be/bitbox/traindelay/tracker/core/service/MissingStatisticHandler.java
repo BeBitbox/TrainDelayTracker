@@ -1,8 +1,9 @@
-package be.bitbox.traindelay.tracker.core.statistic;
+package be.bitbox.traindelay.tracker.core.service;
 
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
 import be.bitbox.traindelay.tracker.core.station.StationRetriever;
+import be.bitbox.traindelay.tracker.core.statistic.*;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;
 import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;

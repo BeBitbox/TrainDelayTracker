@@ -1,12 +1,14 @@
 package be.bitbox.traindelay.tracker.core.service;
 
+import be.bitbox.traindelay.tracker.core.traindeparture.CurrentTrainTraffic;
+import be.bitbox.traindelay.tracker.core.traindeparture.JsonTrainDeparture;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture.Builder.aJsonTrainDeparture;
+import static be.bitbox.traindelay.tracker.core.traindeparture.JsonTrainDeparture.Builder.aJsonTrainDeparture;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CurrentTrainTrafficTest {

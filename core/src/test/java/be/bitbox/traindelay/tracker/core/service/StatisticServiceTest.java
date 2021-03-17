@@ -1,5 +1,7 @@
-package be.bitbox.traindelay.tracker.core.statistic;
+package be.bitbox.traindelay.tracker.core.service;
 
+import be.bitbox.traindelay.tracker.core.service.StatisticService;
+import be.bitbox.traindelay.tracker.core.statistic.*;
 import com.google.common.eventbus.EventBus;
 import org.junit.Test;
 import org.junit.runner.RunWith;

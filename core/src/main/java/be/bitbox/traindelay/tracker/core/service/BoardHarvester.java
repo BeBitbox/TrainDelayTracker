@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.core;
+package be.bitbox.traindelay.tracker.core.service;
 
+import be.bitbox.traindelay.tracker.core.LockingDao;
 import be.bitbox.traindelay.tracker.core.board.*;
 import be.bitbox.traindelay.tracker.core.station.Station;
-import be.bitbox.traindelay.tracker.core.station.StationAvailabilityMonitor;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDeparture;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
@@ -46,7 +46,6 @@ class BoardHarvester {
     private final Map<StationId, Board> lastBoards;
     private final BoardDao boardDao;
     private final LockingDao lockingDao;
-    private final TrainDepartureRepository trainDepartureRepository;
 
     @Autowired
     BoardHarvester(BoardRequester boardRequester,
@@ -60,7 +59,6 @@ class BoardHarvester {
         this.eventBus = eventBus;
         this.boardDao = boardDao;
         this.lockingDao = lockingDao;
-        this.trainDepartureRepository = trainDepartureRepository;
         lastBoards = new HashMap<>();
     }
 

@@ -1,6 +1,6 @@
 package be.bitbox.traindelay.tracker.persistance.messaging.traindepartures;
 
-import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
+import be.bitbox.traindelay.tracker.core.traindeparture.JsonTrainDeparture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

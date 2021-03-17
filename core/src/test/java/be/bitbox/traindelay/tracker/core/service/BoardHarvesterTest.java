@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.core;
+package be.bitbox.traindelay.tracker.core.service;
 
+import be.bitbox.traindelay.tracker.core.LockingDao;
 import be.bitbox.traindelay.tracker.core.board.Board;
 import be.bitbox.traindelay.tracker.core.board.BoardDao;
 import be.bitbox.traindelay.tracker.core.board.BoardRequester;
+import be.bitbox.traindelay.tracker.core.service.BoardHarvester;
 import be.bitbox.traindelay.tracker.core.station.Country;
 import be.bitbox.traindelay.tracker.core.station.Station;
-import be.bitbox.traindelay.tracker.core.station.StationAvailabilityMonitor;
+import be.bitbox.traindelay.tracker.core.service.StationAvailabilityMonitor;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;

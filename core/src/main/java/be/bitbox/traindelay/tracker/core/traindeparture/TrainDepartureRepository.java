@@ -15,7 +15,6 @@
  */
 package be.bitbox.traindelay.tracker.core.traindeparture;
 
-import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 
 import java.time.LocalDate;

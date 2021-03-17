@@ -1,5 +1,6 @@
 package be.bitbox.traindelay.tracker.core.station;
 
+import be.bitbox.traindelay.tracker.core.service.StationAvailabilityMonitor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

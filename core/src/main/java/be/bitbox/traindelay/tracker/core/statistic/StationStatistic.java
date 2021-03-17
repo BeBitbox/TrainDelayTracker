@@ -16,7 +16,7 @@ public class StationStatistic implements Statistic {
     private int cancellations;
     private int platformChanges;
 
-    StationStatistic(List<TrainDepartureEvent> trainDepartureEvents, MissingStationStatisticEvent missingStationStatisticEvent) {
+    public StationStatistic(List<TrainDepartureEvent> trainDepartureEvents, MissingStationStatisticEvent missingStationStatisticEvent) {
         departures = trainDepartureEvents.size();
         stationId = missingStationStatisticEvent.getStationId();
         day = missingStationStatisticEvent.getLocalDate();

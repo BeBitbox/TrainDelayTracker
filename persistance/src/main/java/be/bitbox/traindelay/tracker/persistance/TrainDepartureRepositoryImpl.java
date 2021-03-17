@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.List;
 
-import be.bitbox.traindelay.tracker.core.service.JsonTrainDeparture;
+import be.bitbox.traindelay.tracker.core.traindeparture.JsonTrainDeparture;
 import be.bitbox.traindelay.tracker.core.station.StationId;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureEvent;
 import be.bitbox.traindelay.tracker.core.traindeparture.TrainDepartureRepository;

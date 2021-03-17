@@ -1,4 +1,4 @@
-package be.bitbox.traindelay.tracker.core.service;
+package be.bitbox.traindelay.tracker.core.util;
 
 public class InvalidDateException extends RuntimeException {
 

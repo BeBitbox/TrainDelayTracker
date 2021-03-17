@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.bitbox.traindelay.tracker.core.station;
+package be.bitbox.traindelay.tracker.core.service;
 
+import be.bitbox.traindelay.tracker.core.station.Country;
+import be.bitbox.traindelay.tracker.core.station.Station;
+import be.bitbox.traindelay.tracker.core.station.StationRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

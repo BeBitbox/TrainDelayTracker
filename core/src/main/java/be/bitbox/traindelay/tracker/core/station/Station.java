@@ -17,7 +17,7 @@ package be.bitbox.traindelay.tracker.core.station;
 
 import java.util.Objects;
 
-import static be.bitbox.traindelay.tracker.core.ValidationUtils.checkNotEmpty;
+import static be.bitbox.traindelay.tracker.core.util.ValidationUtils.checkNotEmpty;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class Station {
